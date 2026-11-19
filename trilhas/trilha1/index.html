@@ -1,0 +1,572 @@
+<!DOCTYPE html>
+<html lang="pt-BR" class="dark">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Trilha 1: Introducao a Automacao com IA | FIA 2026</title>
+  <meta name="description" content="Construa uma base solida de conhecimento sobre IA - Alfabetizacao, Pensamento em Sistemas, Context Engineering e Memoria">
+
+  <!-- Tailwind CSS -->
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script>
+    tailwind.config = {
+      darkMode: 'class',
+      theme: {
+        extend: {
+          colors: {
+            primary: '#10B981',
+            accent: '#34D399'
+          }
+        }
+      }
+    }
+  </script>
+
+  <!-- Google Fonts -->
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+
+  <style>
+    body { font-family: 'Inter', sans-serif; }
+
+    .module-card {
+      transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+    }
+
+    .module-card:hover {
+      transform: translateY(-4px);
+    }
+
+    @keyframes fadeIn {
+      from { opacity: 0; transform: translateY(20px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+
+    .animate-fade-in {
+      animation: fadeIn 0.6s ease-out forwards;
+    }
+
+    .delay-100 { animation-delay: 0.1s; }
+    .delay-200 { animation-delay: 0.2s; }
+    .delay-300 { animation-delay: 0.3s; }
+    .delay-400 { animation-delay: 0.4s; }
+  </style>
+</head>
+<body class="bg-neutral-50 dark:bg-neutral-900 text-neutral-900 dark:text-neutral-100 min-h-screen transition-colors duration-300">
+
+  <!-- Navegacao -->
+  <nav class="sticky top-0 z-50 bg-white/95 dark:bg-neutral-900/95 backdrop-blur-sm border-b border-neutral-200 dark:border-neutral-700">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+      <div class="flex justify-between items-center h-16">
+        <div class="flex items-center space-x-3">
+          <a href="../../index.html" class="text-2xl font-bold bg-gradient-to-r from-blue-600 to-purple-600 bg-clip-text text-transparent">
+            FIA 2026
+          </a>
+          <span class="text-neutral-300 dark:text-neutral-600">|</span>
+          <a href="https://inema.club" target="_blank" class="text-sm text-sky-500 hover:text-sky-400 transition-colors font-medium">inema.club</a>
+        </div>
+
+        <!-- Desktop Menu -->
+        <div class="hidden md:flex items-center space-x-6">
+          <a href="../../index.html#trilhas" class="text-neutral-600 dark:text-neutral-300 hover:text-blue-600 dark:hover:text-blue-400 transition-colors">Inicio</a>
+          <a href="../trilha1/index.html" class="text-emerald-600 dark:text-emerald-400 font-semibold border-b-2 border-emerald-500">Trilha 1</a>
+          <a href="../trilha2/index.html" class="text-neutral-600 dark:text-neutral-300 hover:text-blue-600 dark:hover:text-blue-400 transition-colors">Trilha 2</a>
+          <a href="../trilha3/index.html" class="text-neutral-600 dark:text-neutral-300 hover:text-purple-600 dark:hover:text-purple-400 transition-colors">Trilha 3</a>
+
+          <button id="theme-toggle" class="p-2 rounded-lg bg-neutral-100 dark:bg-neutral-700 hover:bg-neutral-200 dark:hover:bg-neutral-600 transition-colors">
+            <svg id="theme-toggle-dark-icon" class="hidden w-5 h-5 text-neutral-700" fill="currentColor" viewBox="0 0 20 20">
+              <path d="M17.293 13.293A8 8 0 016.707 2.707a8.001 8.001 0 1010.586 10.586z"></path>
+            </svg>
+            <svg id="theme-toggle-light-icon" class="hidden w-5 h-5 text-yellow-400" fill="currentColor" viewBox="0 0 20 20">
+              <path d="M10 2a1 1 0 011 1v1a1 1 0 11-2 0V3a1 1 0 011-1zm4 8a4 4 0 11-8 0 4 4 0 018 0zm-.464 4.95l.707.707a1 1 0 001.414-1.414l-.707-.707a1 1 0 00-1.414 1.414zm2.12-10.607a1 1 0 010 1.414l-.706.707a1 1 0 11-1.414-1.414l.707-.707a1 1 0 011.414 0zM17 11a1 1 0 100-2h-1a1 1 0 100 2h1zm-7 4a1 1 0 011 1v1a1 1 0 11-2 0v-1a1 1 0 011-1zM5.05 6.464A1 1 0 106.465 5.05l-.708-.707a1 1 0 00-1.414 1.414l.707.707zm1.414 8.486l-.707.707a1 1 0 01-1.414-1.414l.707-.707a1 1 0 011.414 1.414zM4 11a1 1 0 100-2H3a1 1 0 000 2h1z" fill-rule="evenodd" clip-rule="evenodd"></path>
+            </svg>
+          </button>
+        </div>
+
+        <!-- Mobile Menu Button -->
+        <div class="md:hidden flex items-center space-x-2">
+          <button id="theme-toggle-mobile" class="p-2 rounded-lg bg-neutral-100 dark:bg-neutral-700">
+            <svg class="w-5 h-5 text-neutral-700 dark:text-yellow-400" fill="currentColor" viewBox="0 0 20 20">
+              <path d="M10 2a1 1 0 011 1v1a1 1 0 11-2 0V3a1 1 0 011-1zm4 8a4 4 0 11-8 0 4 4 0 018 0z"></path>
+            </svg>
+          </button>
+          <button id="mobile-menu-btn" class="p-2 rounded-lg hover:bg-neutral-100 dark:hover:bg-neutral-700">
+            <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16"></path>
+            </svg>
+          </button>
+        </div>
+      </div>
+
+      <!-- Mobile Menu -->
+      <div id="mobile-menu" class="hidden md:hidden pb-4">
+        <div class="flex flex-col space-y-2">
+          <a href="../../index.html" class="px-4 py-2 text-neutral-600 dark:text-neutral-300 hover:bg-neutral-100 dark:hover:bg-neutral-700 rounded-lg">Inicio</a>
+          <a href="../trilha1/index.html" class="px-4 py-2 bg-emerald-100 dark:bg-emerald-900/30 text-emerald-700 dark:text-emerald-400 rounded-lg font-semibold">Trilha 1 - Introducao</a>
+          <a href="../trilha2/index.html" class="px-4 py-2 text-neutral-600 dark:text-neutral-300 hover:bg-neutral-100 dark:hover:bg-neutral-700 rounded-lg">Trilha 2 - Fundamentos</a>
+          <a href="../trilha3/index.html" class="px-4 py-2 text-neutral-600 dark:text-neutral-300 hover:bg-neutral-100 dark:hover:bg-neutral-700 rounded-lg">Trilha 3 - Avancado</a>
+        </div>
+      </div>
+    </div>
+  </nav>
+
+  <!-- Main Content -->
+  <main class="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 py-12">
+
+    <!-- Header -->
+    <div class="text-center mb-12 animate-fade-in">
+      <span class="inline-block px-4 py-2 bg-emerald-100 dark:bg-emerald-900/30 text-emerald-600 dark:text-emerald-400 rounded-full text-sm font-semibold mb-4">
+        TRILHA 1 - INTRODUCAO
+      </span>
+      <h1 class="text-4xl sm:text-5xl font-bold mb-4">Introducao a Automacao com IA</h1>
+      <p class="text-xl text-neutral-600 dark:text-neutral-400 max-w-2xl mx-auto">
+        Construa uma base de conhecimento solida e atemporal, focada em principios e sistemas
+      </p>
+    </div>
+
+    <!-- Stats Banner -->
+    <div class="grid grid-cols-3 gap-4 mb-12 animate-fade-in delay-100">
+      <div class="bg-white dark:bg-neutral-800 rounded-xl p-4 text-center border border-neutral-200 dark:border-neutral-700 shadow-sm">
+        <div class="text-2xl font-bold text-emerald-500">7-10</div>
+        <div class="text-xs text-neutral-600 dark:text-neutral-400">Dias</div>
+      </div>
+      <div class="bg-white dark:bg-neutral-800 rounded-xl p-4 text-center border border-neutral-200 dark:border-neutral-700 shadow-sm">
+        <div class="text-2xl font-bold text-emerald-500">4</div>
+        <div class="text-xs text-neutral-600 dark:text-neutral-400">Modulos</div>
+      </div>
+      <div class="bg-white dark:bg-neutral-800 rounded-xl p-4 text-center border border-neutral-200 dark:border-neutral-700 shadow-sm">
+        <div class="text-2xl font-bold text-emerald-500">3</div>
+        <div class="text-xs text-neutral-600 dark:text-neutral-400">Entregaveis</div>
+      </div>
+    </div>
+
+    <!-- Imagem de Principios -->
+    <div class="mb-12 animate-fade-in delay-200">
+      <img src="../../assets/images/principios_fundamentais.png" alt="Principios Fundamentais da Automacao com IA" class="w-full rounded-2xl shadow-lg border border-neutral-200 dark:border-neutral-700">
+    </div>
+
+    <!-- Modulo 1: Alfabetizacao em IA -->
+    <section class="mb-12 animate-fade-in delay-200">
+      <div class="module-card bg-gradient-to-br from-emerald-50 to-white dark:from-emerald-900/20 dark:to-neutral-800 rounded-2xl p-8 border border-emerald-200 dark:border-emerald-700 shadow-lg">
+        <div class="flex items-center mb-6">
+          <div class="w-16 h-16 bg-emerald-500 rounded-full flex items-center justify-center text-white font-bold text-2xl mr-4">
+            1
+          </div>
+          <div>
+            <h2 class="text-2xl font-bold text-emerald-600 dark:text-emerald-400">Alfabetizacao em IA</h2>
+            <p class="text-neutral-600 dark:text-neutral-400">O Que Realmente Acontece?</p>
+          </div>
+        </div>
+
+        <div class="space-y-6">
+          <p class="text-neutral-700 dark:text-neutral-300 text-lg">
+            Antes de automatizar qualquer coisa, precisamos entender a natureza da ferramenta. Modelos de Linguagem Grandes (LLMs) como GPT-4, Claude 3 e Gemini 2.5 nao "pensam" ou "entendem" como humanos. Eles sao <strong>motores de previsao de tokens</strong> extremamente sofisticados.
+          </p>
+
+          <!-- Box de Conceito -->
+          <div class="bg-emerald-100/50 dark:bg-emerald-900/30 rounded-xl p-6 border-l-4 border-emerald-500">
+            <h3 class="font-bold text-emerald-700 dark:text-emerald-400 mb-2">Conceito-chave</h3>
+            <p class="text-neutral-700 dark:text-neutral-300">
+              A IA preve a proxima palavra (ou token) mais provavel em uma sequencia, com base nos padroes que aprendeu em um vasto conjunto de dados de treinamento. Ela nao possui crencas, consciencia ou intencao.
+            </p>
+          </div>
+
+          <!-- Comportamentos Tipicos -->
+          <div class="bg-white dark:bg-neutral-800/50 rounded-xl p-6">
+            <h3 class="font-bold text-neutral-900 dark:text-neutral-100 mb-4">Comportamentos que precisamos gerenciar:</h3>
+            <div class="space-y-4">
+              <div class="flex items-start">
+                <span class="w-8 h-8 bg-red-100 dark:bg-red-900/30 rounded-full flex items-center justify-center text-red-600 dark:text-red-400 mr-3 flex-shrink-0">!</span>
+                <div>
+                  <h4 class="font-semibold text-neutral-900 dark:text-neutral-100">Confiante e Errada</h4>
+                  <p class="text-neutral-600 dark:text-neutral-400 text-sm">A IA pode gerar informacoes incorretas com a mesma autoridade de informacoes corretas</p>
+                </div>
+              </div>
+              <div class="flex items-start">
+                <span class="w-8 h-8 bg-yellow-100 dark:bg-yellow-900/30 rounded-full flex items-center justify-center text-yellow-600 dark:text-yellow-400 mr-3 flex-shrink-0">!</span>
+                <div>
+                  <h4 class="font-semibold text-neutral-900 dark:text-neutral-100">Esquecimento de Contexto</h4>
+                  <p class="text-neutral-600 dark:text-neutral-400 text-sm">A "memoria" da IA e limitada a janela de contexto da conversa atual</p>
+                </div>
+              </div>
+              <div class="flex items-start">
+                <span class="w-8 h-8 bg-orange-100 dark:bg-orange-900/30 rounded-full flex items-center justify-center text-orange-600 dark:text-orange-400 mr-3 flex-shrink-0">!</span>
+                <div>
+                  <h4 class="font-semibold text-neutral-900 dark:text-neutral-100">Mistura de Informacoes</h4>
+                  <p class="text-neutral-600 dark:text-neutral-400 text-sm">Pode combinar fatos de diferentes fontes de forma incoerente ("alucinacao")</p>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <!-- Exercicio Pratico -->
+          <div class="bg-blue-50 dark:bg-blue-900/20 rounded-xl p-6 border border-blue-200 dark:border-blue-700">
+            <h3 class="font-bold text-blue-700 dark:text-blue-400 mb-3">Exercicio Pratico</h3>
+            <ol class="space-y-2 text-neutral-700 dark:text-neutral-300">
+              <li class="flex items-start">
+                <span class="font-bold text-blue-600 mr-2">1.</span>
+                Abra seu assistente de IA preferido
+              </li>
+              <li class="flex items-start">
+                <span class="font-bold text-blue-600 mr-2">2.</span>
+                Peca para ele explicar um topico que voce domina profundamente
+              </li>
+              <li class="flex items-start">
+                <span class="font-bold text-blue-600 mr-2">3.</span>
+                Identifique onde a resposta e generica, onde inventa detalhes e que informacao crucial faltou
+              </li>
+              <li class="flex items-start">
+                <span class="font-bold text-blue-600 mr-2">4.</span>
+                Anote: <em>"Que contexto faltou para a resposta ser perfeita?"</em>
+              </li>
+            </ol>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Modulo 2: Pensamento em Sistemas -->
+    <section class="mb-12 animate-fade-in delay-300">
+      <div class="module-card bg-white dark:bg-neutral-800 rounded-2xl p-8 border border-neutral-200 dark:border-neutral-700 shadow-lg">
+        <div class="flex items-center mb-6">
+          <div class="w-16 h-16 bg-emerald-500 rounded-full flex items-center justify-center text-white font-bold text-2xl mr-4">
+            2
+          </div>
+          <div>
+            <h2 class="text-2xl font-bold text-neutral-900 dark:text-neutral-100">Pensamento em Sistemas</h2>
+            <p class="text-neutral-600 dark:text-neutral-400">A Saida do "Chat"</p>
+          </div>
+        </div>
+
+        <div class="space-y-6">
+          <p class="text-neutral-700 dark:text-neutral-300 text-lg">
+            O erro mais comum de quem comeca em IA e ficar preso na interface de chat. Para automacao, precisamos pensar em <strong>fluxos e sistemas</strong>.
+          </p>
+
+          <!-- Modelo Mental -->
+          <div class="bg-neutral-100 dark:bg-neutral-700/50 rounded-xl p-6">
+            <h3 class="font-bold text-neutral-900 dark:text-neutral-100 mb-4">O modelo mental e sempre:</h3>
+            <div class="grid md:grid-cols-3 gap-4">
+              <div class="bg-white dark:bg-neutral-800 rounded-lg p-4 text-center border border-emerald-200 dark:border-emerald-700">
+                <div class="text-3xl mb-2">1</div>
+                <h4 class="font-bold text-emerald-600 dark:text-emerald-400 mb-1">Entrada</h4>
+                <p class="text-sm text-neutral-600 dark:text-neutral-400">O que inicia o processo? (email, formulario, mensagem)</p>
+              </div>
+              <div class="bg-white dark:bg-neutral-800 rounded-lg p-4 text-center border border-blue-200 dark:border-blue-700">
+                <div class="text-3xl mb-2">2</div>
+                <h4 class="font-bold text-blue-600 dark:text-blue-400 mb-1">Processamento</h4>
+                <p class="text-sm text-neutral-600 dark:text-neutral-400">Que decisoes e transformacoes precisam acontecer?</p>
+              </div>
+              <div class="bg-white dark:bg-neutral-800 rounded-lg p-4 text-center border border-purple-200 dark:border-purple-700">
+                <div class="text-3xl mb-2">3</div>
+                <h4 class="font-bold text-purple-600 dark:text-purple-400 mb-1">Saida</h4>
+                <p class="text-sm text-neutral-600 dark:text-neutral-400">Qual e o resultado final? (resposta, tarefa, registro)</p>
+              </div>
+            </div>
+          </div>
+
+          <!-- Principio -->
+          <div class="bg-emerald-100/50 dark:bg-emerald-900/30 rounded-xl p-6 border-l-4 border-emerald-500">
+            <h3 class="font-bold text-emerald-700 dark:text-emerald-400 mb-2">Principio Norteador</h3>
+            <p class="text-neutral-700 dark:text-neutral-300 text-lg">
+              Pare de pensar em "conversar com a IA" e comece a pensar em <strong>"desenhar um fluxo onde a IA executa uma etapa especifica"</strong>.
+            </p>
+          </div>
+
+          <!-- Exercicio -->
+          <div class="bg-blue-50 dark:bg-blue-900/20 rounded-xl p-6 border border-blue-200 dark:border-blue-700">
+            <h3 class="font-bold text-blue-700 dark:text-blue-400 mb-3">Exercicio Pratico</h3>
+            <ul class="space-y-2 text-neutral-700 dark:text-neutral-300">
+              <li class="flex items-start">
+                <span class="text-blue-600 mr-2">*</span>
+                Mapeie um processo simples do seu dia a dia (ex: responder a um pedido de orcamento)
+              </li>
+              <li class="flex items-start">
+                <span class="text-blue-600 mr-2">*</span>
+                Descreva: Qual e a <strong>Entrada</strong>? Quais sao as etapas do <strong>Processamento</strong>? Qual e a <strong>Saida</strong>?
+              </li>
+              <li class="flex items-start">
+                <span class="text-blue-600 mr-2">*</span>
+                Identifique o maior <strong>Gargalo</strong>: Onde o processo e mais lento ou mais propenso a erros?
+              </li>
+            </ul>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Modulo 3: Context Engineering -->
+    <section class="mb-12 animate-fade-in delay-400">
+      <div class="module-card bg-gradient-to-br from-emerald-50 to-white dark:from-emerald-900/20 dark:to-neutral-800 rounded-2xl p-8 border border-emerald-200 dark:border-emerald-700 shadow-lg">
+        <div class="flex items-center mb-6">
+          <div class="w-16 h-16 bg-emerald-500 rounded-full flex items-center justify-center text-white font-bold text-2xl mr-4">
+            3
+          </div>
+          <div>
+            <h2 class="text-2xl font-bold text-emerald-600 dark:text-emerald-400">A Evolucao</h2>
+            <p class="text-neutral-600 dark:text-neutral-400">De Prompt a Context Engineering</p>
+          </div>
+        </div>
+
+        <div class="space-y-6">
+          <!-- Comparacao -->
+          <div class="grid md:grid-cols-2 gap-6">
+            <div class="bg-neutral-100 dark:bg-neutral-700/50 rounded-xl p-6">
+              <h3 class="font-bold text-neutral-900 dark:text-neutral-100 mb-3">Prompt Engineering</h3>
+              <p class="text-neutral-600 dark:text-neutral-400">
+                A arte de escrever instrucoes claras para a IA executar uma <strong>tarefa unica</strong>.
+              </p>
+            </div>
+            <div class="bg-emerald-100 dark:bg-emerald-900/30 rounded-xl p-6">
+              <h3 class="font-bold text-emerald-700 dark:text-emerald-400 mb-3">Context Engineering</h3>
+              <p class="text-neutral-600 dark:text-neutral-400">
+                A ciencia de projetar sistemas que fornecem a IA a informacao certa, no momento certo, de forma <strong>continua</strong>.
+              </p>
+            </div>
+          </div>
+
+          <p class="text-neutral-700 dark:text-neutral-300 text-lg">
+            Para automacao, o prompt e apenas uma parte do contexto. A verdadeira habilidade esta em gerenciar todo o ecossistema de informacoes que a IA acessa.
+          </p>
+
+          <!-- Tipos de Contexto -->
+          <div class="mb-6">
+            <img src="../../assets/images/tipos_contexto.png" alt="5 Tipos de Contexto em Sistemas de IA" class="w-full rounded-xl shadow-lg border border-neutral-200 dark:border-neutral-700">
+          </div>
+
+          <!-- Estrutura do Prompt -->
+          <div class="bg-white dark:bg-neutral-800/50 rounded-xl p-6 border border-neutral-200 dark:border-neutral-700">
+            <h3 class="font-bold text-neutral-900 dark:text-neutral-100 mb-4">Estrutura de um Prompt Fundamental:</h3>
+            <div class="space-y-4">
+              <div class="flex items-start">
+                <span class="px-3 py-1 bg-emerald-100 dark:bg-emerald-900/30 text-emerald-700 dark:text-emerald-400 rounded font-mono text-sm mr-3">Papel</span>
+                <code class="text-sm text-neutral-600 dark:text-neutral-400">"Voce e um assistente de marketing especializado em midias sociais."</code>
+              </div>
+              <div class="flex items-start">
+                <span class="px-3 py-1 bg-blue-100 dark:bg-blue-900/30 text-blue-700 dark:text-blue-400 rounded font-mono text-sm mr-3">Objetivo</span>
+                <code class="text-sm text-neutral-600 dark:text-neutral-400">"Seu objetivo e criar tres opcoes de posts para o Instagram."</code>
+              </div>
+              <div class="flex items-start">
+                <span class="px-3 py-1 bg-purple-100 dark:bg-purple-900/30 text-purple-700 dark:text-purple-400 rounded font-mono text-sm mr-3">Contexto</span>
+                <code class="text-sm text-neutral-600 dark:text-neutral-400">"O post e sobre o lancamento de um curso de IA. Publico-alvo: gestores de PMEs."</code>
+              </div>
+              <div class="flex items-start">
+                <span class="px-3 py-1 bg-red-100 dark:bg-red-900/30 text-red-700 dark:text-red-400 rounded font-mono text-sm mr-3">Restricoes</span>
+                <code class="text-sm text-neutral-600 dark:text-neutral-400">"Nao use girias. Tom profissional. Maximo 280 caracteres."</code>
+              </div>
+              <div class="flex items-start">
+                <span class="px-3 py-1 bg-orange-100 dark:bg-orange-900/30 text-orange-700 dark:text-orange-400 rounded font-mono text-sm mr-3">Formato</span>
+                <code class="text-sm text-neutral-600 dark:text-neutral-400">"Responda com uma lista numerada."</code>
+              </div>
+            </div>
+          </div>
+
+          <!-- Exercicio -->
+          <div class="bg-blue-50 dark:bg-blue-900/20 rounded-xl p-6 border border-blue-200 dark:border-blue-700">
+            <h3 class="font-bold text-blue-700 dark:text-blue-400 mb-3">Exercicio Pratico</h3>
+            <p class="text-neutral-700 dark:text-neutral-300">
+              Pegue a tarefa que voce mapeou no Modulo 2. Escreva um <strong>"Prompt Mestre"</strong> para a etapa de "Processamento" que voce identificou, usando a estrutura acima.
+            </p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Modulo 4: Memoria e Seguranca -->
+    <section class="mb-12">
+      <div class="module-card bg-white dark:bg-neutral-800 rounded-2xl p-8 border border-neutral-200 dark:border-neutral-700 shadow-lg">
+        <div class="flex items-center mb-6">
+          <div class="w-16 h-16 bg-emerald-500 rounded-full flex items-center justify-center text-white font-bold text-2xl mr-4">
+            4
+          </div>
+          <div>
+            <h2 class="text-2xl font-bold text-neutral-900 dark:text-neutral-100">Memoria e Seguranca</h2>
+            <p class="text-neutral-600 dark:text-neutral-400">Os Pilares da Confianca</p>
+          </div>
+        </div>
+
+        <div class="space-y-6">
+          <p class="text-neutral-700 dark:text-neutral-300 text-lg">
+            Dois dos maiores desafios da IA em negocios sao o <strong>esquecimento</strong> e o <strong>risco</strong>.
+          </p>
+
+          <!-- RAG -->
+          <div class="bg-purple-50 dark:bg-purple-900/20 rounded-xl p-6 border border-purple-200 dark:border-purple-700">
+            <h3 class="font-bold text-purple-700 dark:text-purple-400 mb-3">Memoria: O Conceito de RAG</h3>
+            <p class="text-neutral-700 dark:text-neutral-300 mb-4">
+              <strong>Retrieval-Augmented Generation (RAG)</strong> e uma tecnica para dar uma "memoria externa" a IA. Em vez de depender apenas de seu treinamento, a IA aprende a consultar uma base de conhecimento confiavel <strong>antes</strong> de responder.
+            </p>
+            <div class="bg-white dark:bg-neutral-800 rounded-lg p-4">
+              <p class="text-sm text-neutral-600 dark:text-neutral-400 italic">
+                <strong>Conceito Simples:</strong> E como ensinar um estagiario a sempre consultar o manual da empresa antes de responder a um cliente.
+              </p>
+            </div>
+          </div>
+
+          <!-- Exercicio RAG -->
+          <div class="bg-neutral-100 dark:bg-neutral-700/50 rounded-xl p-6">
+            <h3 class="font-bold text-neutral-900 dark:text-neutral-100 mb-3">Exercicio Pratico (Conceitual)</h3>
+            <ol class="space-y-2 text-neutral-700 dark:text-neutral-300">
+              <li><span class="font-bold text-emerald-600">1.</span> Crie uma pasta no seu computador chamada <code class="bg-neutral-200 dark:bg-neutral-600 px-2 py-1 rounded">BASE_DE_CONHECIMENTO</code></li>
+              <li><span class="font-bold text-emerald-600">2.</span> Adicione documentos que representem seu negocio: PDF com precos, descricao de servicos, FAQ</li>
+              <li><span class="font-bold text-emerald-600">3.</span> Mentalize: "Para qualquer pergunta sobre o negocio, a IA deve primeiro 'olhar' aqui"</li>
+            </ol>
+          </div>
+
+          <!-- Seguranca -->
+          <div class="bg-red-50 dark:bg-red-900/20 rounded-xl p-6 border border-red-200 dark:border-red-700">
+            <h3 class="font-bold text-red-700 dark:text-red-400 mb-3">Seguranca e Qualidade</h3>
+            <p class="text-neutral-700 dark:text-neutral-300 mb-4">
+              Confianca cega em IA e uma receita para o desastre. Precisamos de um framework de seguranca desde o primeiro dia.
+            </p>
+          </div>
+
+          <!-- Checklist de Seguranca -->
+          <div class="bg-white dark:bg-neutral-800/50 rounded-xl p-6 border border-neutral-200 dark:border-neutral-700">
+            <h3 class="font-bold text-neutral-900 dark:text-neutral-100 mb-4">Checklist de Qualidade (5 perguntas essenciais):</h3>
+            <div class="space-y-3">
+              <label class="flex items-start cursor-pointer">
+                <input type="checkbox" class="mt-1 mr-3 w-5 h-5 accent-emerald-500">
+                <span class="text-neutral-700 dark:text-neutral-300">A resposta envolve dados sensiveis de clientes?</span>
+              </label>
+              <label class="flex items-start cursor-pointer">
+                <input type="checkbox" class="mt-1 mr-3 w-5 h-5 accent-emerald-500">
+                <span class="text-neutral-700 dark:text-neutral-300">A informacao precisa ser validada por um humano (preco, prazo)?</span>
+              </label>
+              <label class="flex items-start cursor-pointer">
+                <input type="checkbox" class="mt-1 mr-3 w-5 h-5 accent-emerald-500">
+                <span class="text-neutral-700 dark:text-neutral-300">A fonte desta informacao e confiavel?</span>
+              </label>
+              <label class="flex items-start cursor-pointer">
+                <input type="checkbox" class="mt-1 mr-3 w-5 h-5 accent-emerald-500">
+                <span class="text-neutral-700 dark:text-neutral-300">Qual o impacto se esta informacao estiver errada?</span>
+              </label>
+              <label class="flex items-start cursor-pointer">
+                <input type="checkbox" class="mt-1 mr-3 w-5 h-5 accent-emerald-500">
+                <span class="text-neutral-700 dark:text-neutral-300">A resposta esta alinhada com o tom de voz da minha marca?</span>
+              </label>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Entregaveis -->
+    <section class="mb-12">
+      <div class="bg-gradient-to-br from-emerald-500 to-teal-600 rounded-2xl p-8 text-white shadow-lg">
+        <h2 class="text-2xl font-bold mb-6 text-center">Entregaveis da Trilha 1</h2>
+        <div class="grid md:grid-cols-3 gap-6">
+          <div class="bg-white/10 backdrop-blur-sm rounded-xl p-6 text-center">
+            <div class="text-4xl mb-3">1</div>
+            <h4 class="font-bold mb-2">Prompt Mestre</h4>
+            <p class="text-sm text-white/80">Reutilizavel para suas automacoes</p>
+          </div>
+          <div class="bg-white/10 backdrop-blur-sm rounded-xl p-6 text-center">
+            <div class="text-4xl mb-3">2</div>
+            <h4 class="font-bold mb-2">Checklist de Qualidade</h4>
+            <p class="text-sm text-white/80">5-10 itens de verificacao</p>
+          </div>
+          <div class="bg-white/10 backdrop-blur-sm rounded-xl p-6 text-center">
+            <div class="text-4xl mb-3">3</div>
+            <h4 class="font-bold mb-2">Base de Conhecimento</h4>
+            <p class="text-sm text-white/80">Organizada por topicos</p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- CTA Final -->
+    <section class="mb-12">
+      <div class="bg-emerald-50 dark:bg-emerald-900/20 rounded-2xl p-8 border border-emerald-200 dark:border-emerald-700 text-center">
+        <h2 class="text-2xl font-bold text-emerald-700 dark:text-emerald-400 mb-4">Parabens!</h2>
+        <p class="text-neutral-700 dark:text-neutral-300 mb-6 max-w-2xl mx-auto">
+          Voce agora tem a base conceitual para parar de perseguir ferramentas e comecar a construir sistemas de IA inteligentes e robustos. Na proxima trilha, vamos aprofundar esses conceitos e construir nossa primeira automacao real.
+        </p>
+        <div class="flex flex-col sm:flex-row gap-4 justify-center">
+          <a href="../../index.html" class="inline-flex items-center justify-center px-6 py-3 bg-neutral-200 dark:bg-neutral-700 text-neutral-700 dark:text-neutral-300 rounded-lg font-semibold hover:bg-neutral-300 dark:hover:bg-neutral-600 transition-colors">
+            <svg class="w-4 h-4 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 19l-7-7 7-7"></path>
+            </svg>
+            Voltar ao Curso
+          </a>
+          <a href="modulos.html" class="inline-flex items-center justify-center px-6 py-3 bg-emerald-500 text-white rounded-lg font-semibold hover:bg-emerald-600 transition-colors">
+            <svg class="w-4 h-4 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 10h16M4 14h16M4 18h16"></path>
+            </svg>
+            Ver Modulos Detalhados
+          </a>
+          <a href="../trilha2/index.html" class="inline-flex items-center justify-center px-6 py-3 bg-blue-500 text-white rounded-lg font-semibold hover:bg-blue-600 transition-colors">
+            Proxima: Trilha 2
+            <svg class="w-4 h-4 ml-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"></path>
+            </svg>
+          </a>
+        </div>
+      </div>
+    </section>
+
+  </main>
+
+  <!-- Footer -->
+  <footer class="bg-neutral-100 dark:bg-neutral-800 border-t border-neutral-200 dark:border-neutral-700 py-8">
+    <div class="max-w-4xl mx-auto px-4 text-center">
+      <p class="text-neutral-500 dark:text-neutral-400 text-sm">
+        FIA 2026 - Trilha 1: Introducao a Automacao com IA
+      </p>
+      <p class="text-neutral-400 dark:text-neutral-500 text-xs mt-2"><a href="https://inema.club" target="_blank" class="text-sky-400 hover:text-sky-300 transition-colors">inema.club</a></p>
+    </div>
+  </footer>
+
+  <!-- JavaScript -->
+  <script>
+    // Theme Toggle
+    const themeToggleBtn = document.getElementById('theme-toggle');
+    const themeToggleDarkIcon = document.getElementById('theme-toggle-dark-icon');
+    const themeToggleLightIcon = document.getElementById('theme-toggle-light-icon');
+
+    if (localStorage.getItem('color-theme') === 'light' ||
+        (!('color-theme' in localStorage) && !window.matchMedia('(prefers-color-scheme: dark)').matches)) {
+      document.documentElement.classList.remove('dark');
+      themeToggleDarkIcon.classList.remove('hidden');
+    } else {
+      document.documentElement.classList.add('dark');
+      themeToggleLightIcon.classList.remove('hidden');
+    }
+
+    themeToggleBtn.addEventListener('click', function() {
+      themeToggleDarkIcon.classList.toggle('hidden');
+      themeToggleLightIcon.classList.toggle('hidden');
+
+      if (document.documentElement.classList.contains('dark')) {
+        document.documentElement.classList.remove('dark');
+        localStorage.setItem('color-theme', 'light');
+      } else {
+        document.documentElement.classList.add('dark');
+        localStorage.setItem('color-theme', 'dark');
+      }
+    });
+
+    // Mobile Menu Toggle
+    const mobileMenuBtn = document.getElementById('mobile-menu-btn');
+    const mobileMenu = document.getElementById('mobile-menu');
+    const themeToggleMobile = document.getElementById('theme-toggle-mobile');
+
+    if (mobileMenuBtn && mobileMenu) {
+      mobileMenuBtn.addEventListener('click', function() {
+        mobileMenu.classList.toggle('hidden');
+      });
+    }
+
+    if (themeToggleMobile) {
+      themeToggleMobile.addEventListener('click', function() {
+        if (document.documentElement.classList.contains('dark')) {
+          document.documentElement.classList.remove('dark');
+          localStorage.setItem('color-theme', 'light');
+        } else {
+          document.documentElement.classList.add('dark');
+          localStorage.setItem('color-theme', 'dark');
+        }
+      });
+    }
+  </script>
+</body>
+</html>

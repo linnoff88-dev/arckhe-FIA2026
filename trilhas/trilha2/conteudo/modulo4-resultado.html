@@ -1,0 +1,407 @@
+<!DOCTYPE html>
+<html lang="pt-BR" class="dark">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Modulo 4: Resultado de Negocio | FIA 2026</title>
+  <meta name="description" content="Resultado de Negocio - Identifique gargalos, defina metricas e estabeleca linha de base.">
+
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script>
+    tailwind.config = {
+      darkMode: 'class',
+      theme: {
+        extend: {
+          colors: {
+            primary: '#3B82F6',
+            accent: '#60A5FA'
+          }
+        }
+      }
+    }
+  </script>
+
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+
+  <style>
+    body { font-family: 'Inter', sans-serif; }
+    .prose h2 { margin-top: 2rem; margin-bottom: 1rem; }
+    .prose h3 { margin-top: 1.5rem; margin-bottom: 0.75rem; }
+    .prose p { margin-bottom: 1rem; }
+    .prose ul { margin-bottom: 1rem; padding-left: 1.5rem; }
+    .prose li { margin-bottom: 0.5rem; }
+  </style>
+</head>
+<body class="bg-neutral-50 dark:bg-neutral-900 text-neutral-900 dark:text-neutral-100 min-h-screen">
+
+  <!-- Navegacao -->
+  <nav class="sticky top-0 z-50 bg-white/95 dark:bg-neutral-900/95 backdrop-blur-sm border-b border-neutral-200 dark:border-neutral-700">
+    <div class="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8">
+      <div class="flex justify-between items-center h-16">
+        <a href="../modulos.html" class="flex items-center space-x-2 text-neutral-600 dark:text-neutral-400 hover:text-primary transition-colors">
+          <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 19l-7-7 7-7"></path>
+          </svg>
+          <span>Voltar para Modulos</span>
+        </a>
+        <div class="flex items-center space-x-4">
+          <span class="text-blue-500 font-semibold hidden sm:block">Modulo 04</span>
+          <a href="https://inema.club" target="_blank" class="text-xs text-sky-500 hover:text-sky-400 transition-colors hidden sm:block">inema.club</a>
+          <button id="theme-toggle" class="p-2 rounded-lg bg-neutral-100 dark:bg-neutral-700 hover:bg-neutral-200 dark:hover:bg-neutral-600 transition-colors">
+            <svg id="theme-toggle-dark-icon" class="hidden w-5 h-5 text-neutral-700" fill="currentColor" viewBox="0 0 20 20">
+              <path d="M17.293 13.293A8 8 0 016.707 2.707a8.001 8.001 0 1010.586 10.586z"></path>
+            </svg>
+            <svg id="theme-toggle-light-icon" class="hidden w-5 h-5 text-yellow-400" fill="currentColor" viewBox="0 0 20 20">
+              <path d="M10 2a1 1 0 011 1v1a1 1 0 11-2 0V3a1 1 0 011-1zm4 8a4 4 0 11-8 0 4 4 0 018 0zm-.464 4.95l.707.707a1 1 0 001.414-1.414l-.707-.707a1 1 0 00-1.414 1.414zm2.12-10.607a1 1 0 010 1.414l-.706.707a1 1 0 11-1.414-1.414l.707-.707a1 1 0 011.414 0zM17 11a1 1 0 100-2h-1a1 1 0 100 2h1zm-7 4a1 1 0 011 1v1a1 1 0 11-2 0v-1a1 1 0 011-1zM5.05 6.464A1 1 0 106.465 5.05l-.708-.707a1 1 0 00-1.414 1.414l.707.707zm1.414 8.486l-.707.707a1 1 0 01-1.414-1.414l.707-.707a1 1 0 011.414 1.414zM4 11a1 1 0 100-2H3a1 1 0 000 2h1z" fill-rule="evenodd" clip-rule="evenodd"></path>
+            </svg>
+          </button>
+        </div>
+      </div>
+    </div>
+  </nav>
+
+  <!-- Main Content -->
+  <main class="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 py-12">
+
+    <!-- Header -->
+    <div class="mb-12">
+      <div class="flex items-center gap-4 mb-6">
+        <div class="w-16 h-16 bg-blue-500 rounded-2xl flex items-center justify-center text-white font-bold text-2xl shadow-lg">04</div>
+        <div>
+          <span class="text-blue-500 font-semibold text-sm">TRILHA 2 - IMPLEMENTACAO</span>
+          <h1 class="text-3xl sm:text-4xl font-bold">Resultado de Negocio</h1>
+        </div>
+      </div>
+      <p class="text-xl text-neutral-600 dark:text-neutral-400">Identifique o gargalo, defina a metrica, estabeleca linha de base e meta.</p>
+    </div>
+
+    <!-- Content -->
+    <article class="prose prose-lg dark:prose-invert max-w-none">
+
+      <!-- Intro Box -->
+      <div class="bg-blue-50 dark:bg-blue-900/20 p-6 rounded-2xl border border-blue-200 dark:border-blue-800 mb-8">
+        <p class="text-lg text-neutral-700 dark:text-neutral-300 m-0">
+          Tecnologia so tem valor se gerar resultado de negocio. Nao comece pela ferramenta ("vamos usar IA!"), comece pelo gargalo ("onde estamos perdendo dinheiro/tempo?"). O metodo: <strong>Cachorro abanando o rabo → Identifique o Gargalo → Defina a Metrica → Linha de Base e Meta</strong>.
+        </p>
+      </div>
+
+      <!-- Principio do Cachorro -->
+      <section class="mb-10">
+        <h2 class="text-2xl font-bold text-neutral-900 dark:text-neutral-100 flex items-center">
+          <span class="w-8 h-8 bg-blue-500 rounded-lg flex items-center justify-center text-white text-sm font-bold mr-3">1</span>
+          Principio do Cachorro Abanando o Rabo
+        </h2>
+
+        <div class="bg-white dark:bg-neutral-800 p-6 rounded-xl border border-neutral-200 dark:border-neutral-700 shadow-sm">
+          <div class="bg-blue-100 dark:bg-blue-900/30 p-4 rounded-lg mb-4">
+            <p class="font-semibold text-blue-700 dark:text-blue-400 m-0">Conceito-chave:</p>
+            <p class="text-neutral-700 dark:text-neutral-300 m-0 mt-2">"Nao deixe a tecnologia abanar o negocio. O negocio abana a tecnologia." Voce nao adota IA porque e cool. Voce adota IA porque ela resolve um problema especifico que esta custando caro.</p>
+          </div>
+
+          <div class="grid md:grid-cols-2 gap-4 mb-4">
+            <div class="bg-red-50 dark:bg-red-900/20 p-4 rounded-xl border-l-4 border-red-500">
+              <h4 class="font-bold text-red-700 dark:text-red-400 mb-2 flex items-center">
+                <svg class="w-5 h-5 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"></path>
+                </svg>
+                Abordagem Errada
+              </h4>
+              <p class="text-neutral-700 dark:text-neutral-300 text-sm m-0">"Vamos implementar IA no atendimento porque todo mundo esta fazendo."</p>
+            </div>
+
+            <div class="bg-green-50 dark:bg-green-900/20 p-4 rounded-xl border-l-4 border-green-500">
+              <h4 class="font-bold text-green-700 dark:text-green-400 mb-2 flex items-center">
+                <svg class="w-5 h-5 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"></path>
+                </svg>
+                Abordagem Certa
+              </h4>
+              <p class="text-neutral-700 dark:text-neutral-300 text-sm m-0">"Nosso time gasta 40% do tempo respondendo perguntas repetitivas. Isso custa R$20k/mes. Vamos resolver com IA."</p>
+            </div>
+          </div>
+
+          <div class="bg-amber-50 dark:bg-amber-900/20 p-4 rounded-lg">
+            <p class="text-sm text-neutral-700 dark:text-neutral-300 m-0"><strong>Pergunta Diagnostica:</strong> Se essa automacao falhar amanha, quanto dinheiro/tempo voce perde? Se a resposta for "nenhum", nao e prioridade.</p>
+          </div>
+        </div>
+      </section>
+
+      <!-- Identifique o Gargalo -->
+      <section class="mb-10">
+        <h2 class="text-2xl font-bold text-neutral-900 dark:text-neutral-100 flex items-center">
+          <span class="w-8 h-8 bg-blue-500 rounded-lg flex items-center justify-center text-white text-sm font-bold mr-3">2</span>
+          Identifique o Gargalo Real
+        </h2>
+
+        <div class="bg-white dark:bg-neutral-800 p-6 rounded-xl border border-neutral-200 dark:border-neutral-700 shadow-sm">
+          <p class="text-neutral-600 dark:text-neutral-400 mb-4">
+            Gargalo e o ponto do processo que limita o output total. Segundo a Teoria das Restricoes (TOC), melhorar qualquer coisa que NAO seja o gargalo e ilusao de progresso.
+          </p>
+
+          <div class="bg-gradient-to-r from-red-100 via-amber-100 to-green-100 dark:from-red-900/20 dark:via-amber-900/20 dark:to-green-900/20 p-5 rounded-xl mb-4">
+            <h4 class="font-bold text-neutral-900 dark:text-neutral-100 mb-3">Como Identificar o Gargalo:</h4>
+            <ol class="text-sm text-neutral-700 dark:text-neutral-300 space-y-2 m-0 pl-5">
+              <li><strong>Mapeie o processo ponta-a-ponta:</strong> De onde comeca ate onde termina (ex: lead entra → qualificacao → demo → proposta → fechamento).</li>
+              <li><strong>Meca o tempo de cada etapa:</strong> Quanto tempo leva cada passo? Onde a fila cresce?</li>
+              <li><strong>Identifique onde acumula trabalho:</strong> O gargalo sempre tem backlog crescente.</li>
+              <li><strong>Calcule o custo do gargalo:</strong> Quanto custa (em tempo/dinheiro) esse atraso?</li>
+            </ol>
+          </div>
+
+          <div class="space-y-3">
+            <div class="bg-blue-50 dark:bg-blue-900/20 p-4 rounded-xl">
+              <h4 class="font-bold text-blue-700 dark:text-blue-400 mb-1">Exemplo: Vendas</h4>
+              <p class="text-neutral-700 dark:text-neutral-300 text-sm m-0">Gargalo: Vendedores gastam 60% do tempo qualificando leads ruins. Apenas 15% dos leads viram oportunidades.</p>
+            </div>
+
+            <div class="bg-purple-50 dark:bg-purple-900/20 p-4 rounded-xl">
+              <h4 class="font-bold text-purple-700 dark:text-purple-400 mb-1">Exemplo: Suporte</h4>
+              <p class="text-neutral-700 dark:text-neutral-300 text-sm m-0">Gargalo: 70% dos tickets sao duvidas basicas que poderiam ser self-service. Time gasta 4h/dia respondendo "como resetar senha?".</p>
+            </div>
+
+            <div class="bg-green-50 dark:bg-green-900/20 p-4 rounded-xl">
+              <h4 class="font-bold text-green-700 dark:text-green-400 mb-1">Exemplo: Operacoes</h4>
+              <p class="text-neutral-700 dark:text-neutral-300 text-sm m-0">Gargalo: Data entry manual de notas fiscais leva 2h/dia por pessoa. Erro humano causa retrabalho em 20% dos casos.</p>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- Defina a Metrica -->
+      <section class="mb-10">
+        <h2 class="text-2xl font-bold text-neutral-900 dark:text-neutral-100 flex items-center">
+          <span class="w-8 h-8 bg-blue-500 rounded-lg flex items-center justify-center text-white text-sm font-bold mr-3">3</span>
+          Defina a Metrica de Sucesso
+        </h2>
+
+        <div class="bg-white dark:bg-neutral-800 p-6 rounded-xl border border-neutral-200 dark:border-neutral-700 shadow-sm">
+          <p class="text-neutral-600 dark:text-neutral-400 mb-4">
+            "O que nao e medido nao e gerenciado." Escolha UMA metrica principal (North Star) e ate 3 metricas secundarias.
+          </p>
+
+          <div class="bg-blue-100 dark:bg-blue-900/30 p-4 rounded-lg mb-4">
+            <p class="font-semibold text-blue-700 dark:text-blue-400 m-0 mb-2">Caracteristicas de uma Boa Metrica:</p>
+            <ul class="text-sm text-neutral-700 dark:text-neutral-300 m-0 pl-5 space-y-1">
+              <li><strong>Mensuravel:</strong> Pode ser medida objetivamente (nao "satisfacao", mas "NPS")</li>
+              <li><strong>Acionavel:</strong> Voce pode influenciar diretamente com suas acoes</li>
+              <li><strong>Relevante:</strong> Conectada ao resultado financeiro/estrategico</li>
+              <li><strong>Simples:</strong> Todos entendem sem precisar de explicacao</li>
+            </ul>
+          </div>
+
+          <div class="grid gap-3">
+            <div class="flex items-start">
+              <div class="w-10 h-10 bg-green-100 dark:bg-green-900/30 rounded-lg flex items-center justify-center mr-3 flex-shrink-0">
+                <svg class="w-5 h-5 text-green-600 dark:text-green-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 8c-1.657 0-3 .895-3 2s1.343 2 3 2 3 .895 3 2-1.343 2-3 2m0-8c1.11 0 2.08.402 2.599 1M12 8V7m0 1v8m0 0v1m0-1c-1.11 0-2.08-.402-2.599-1M21 12a9 9 0 11-18 0 9 9 0 0118 0z"></path>
+                </svg>
+              </div>
+              <div>
+                <h4 class="font-semibold text-neutral-900 dark:text-neutral-100">Metricas de Eficiencia</h4>
+                <p class="text-neutral-600 dark:text-neutral-400 text-sm m-0">Tempo economizado, custo reduzido, tickets resolvidos/hora.</p>
+              </div>
+            </div>
+
+            <div class="flex items-start">
+              <div class="w-10 h-10 bg-purple-100 dark:bg-purple-900/30 rounded-lg flex items-center justify-center mr-3 flex-shrink-0">
+                <svg class="w-5 h-5 text-purple-600 dark:text-purple-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 19v-6a2 2 0 00-2-2H5a2 2 0 00-2 2v6a2 2 0 002 2h2a2 2 0 002-2zm0 0V9a2 2 0 012-2h2a2 2 0 012 2v10m-6 0a2 2 0 002 2h2a2 2 0 002-2m0 0V5a2 2 0 012-2h2a2 2 0 012 2v14a2 2 0 01-2 2h-2a2 2 0 01-2-2z"></path>
+                </svg>
+              </div>
+              <div>
+                <h4 class="font-semibold text-neutral-900 dark:text-neutral-100">Metricas de Qualidade</h4>
+                <p class="text-neutral-600 dark:text-neutral-400 text-sm m-0">Taxa de erro, retrabalho evitado, precisao da classificacao.</p>
+              </div>
+            </div>
+
+            <div class="flex items-start">
+              <div class="w-10 h-10 bg-blue-100 dark:bg-blue-900/30 rounded-lg flex items-center justify-center mr-3 flex-shrink-0">
+                <svg class="w-5 h-5 text-blue-600 dark:text-blue-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 7h8m0 0v8m0-8l-8 8-4-4-6 6"></path>
+                </svg>
+              </div>
+              <div>
+                <h4 class="font-semibold text-neutral-900 dark:text-neutral-100">Metricas de Crescimento</h4>
+                <p class="text-neutral-600 dark:text-neutral-400 text-sm m-0">Leads qualificados/mes, conversao de demo para fechamento, ARR incremental.</p>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- Linha de Base e Meta -->
+      <section class="mb-10">
+        <h2 class="text-2xl font-bold text-neutral-900 dark:text-neutral-100 flex items-center">
+          <span class="w-8 h-8 bg-blue-500 rounded-lg flex items-center justify-center text-white text-sm font-bold mr-3">4</span>
+          Linha de Base e Meta
+        </h2>
+
+        <div class="bg-white dark:bg-neutral-800 p-6 rounded-xl border border-neutral-200 dark:border-neutral-700 shadow-sm">
+          <p class="text-neutral-600 dark:text-neutral-400 mb-4">
+            Antes de implementar qualquer automacao, meca o estado atual (baseline). Sem baseline, voce nao pode provar ROI.
+          </p>
+
+          <div class="bg-gradient-to-br from-neutral-100 to-neutral-200 dark:from-neutral-800 dark:to-neutral-700 p-5 rounded-xl mb-4">
+            <h4 class="font-bold text-neutral-900 dark:text-neutral-100 mb-3">Framework de Medicao:</h4>
+
+            <div class="space-y-3">
+              <div class="bg-white dark:bg-neutral-900 p-4 rounded-lg">
+                <p class="font-semibold text-blue-700 dark:text-blue-400 text-sm mb-1">1. LINHA DE BASE (Antes)</p>
+                <p class="text-neutral-700 dark:text-neutral-300 text-xs m-0">Meca por 2-4 semanas ANTES de implementar. Exemplo: "Tempo medio para qualificar 1 lead: 18 minutos"</p>
+              </div>
+
+              <div class="bg-white dark:bg-neutral-900 p-4 rounded-lg">
+                <p class="font-semibold text-purple-700 dark:text-purple-400 text-sm mb-1">2. META (Objetivo)</p>
+                <p class="text-neutral-700 dark:text-neutral-300 text-xs m-0">Seja especifico e realista. Exemplo: "Reduzir para 5 minutos (72% de reducao)"</p>
+              </div>
+
+              <div class="bg-white dark:bg-neutral-900 p-4 rounded-lg">
+                <p class="font-semibold text-green-700 dark:text-green-400 text-sm mb-1">3. RESULTADO (Depois)</p>
+                <p class="text-neutral-700 dark:text-neutral-300 text-xs m-0">Meca por 2-4 semanas DEPOIS. Compare com baseline. Exemplo: "Tempo medio agora: 6 minutos (67% de reducao)"</p>
+              </div>
+            </div>
+          </div>
+
+          <div class="bg-green-50 dark:bg-green-900/20 p-5 rounded-xl border border-green-200 dark:border-green-800">
+            <h4 class="font-bold text-green-700 dark:text-green-400 mb-2">Caso Real: Automacao de Qualificacao de Leads</h4>
+            <div class="text-sm text-neutral-700 dark:text-neutral-300 space-y-2">
+              <p class="m-0"><strong>Baseline:</strong> 200 leads/mes, 18 min/lead, 60h/mes de trabalho manual, custo: R$9.000</p>
+              <p class="m-0"><strong>Meta:</strong> Reduzir para 5 min/lead, economizar 43h/mes, custo: R$6.500</p>
+              <p class="m-0"><strong>Resultado:</strong> 6 min/lead, economizou 40h/mes, custo: R$6.800 (economia de R$2.200/mes)</p>
+              <p class="m-0"><strong>ROI:</strong> Investimento de R$3.000 (setup). Payback em 1.4 meses.</p>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- Exercicio Pratico -->
+      <section class="mb-10">
+        <h2 class="text-2xl font-bold text-neutral-900 dark:text-neutral-100 flex items-center">
+          <span class="w-8 h-8 bg-blue-500 rounded-lg flex items-center justify-center text-white text-sm font-bold mr-3">5</span>
+          Exercicio Pratico
+        </h2>
+
+        <div class="bg-gradient-to-br from-blue-500 to-indigo-600 p-6 rounded-2xl text-white shadow-xl">
+          <h3 class="text-xl font-bold mb-4 text-white">Diagnostique seu Primeiro Gargalo</h3>
+
+          <div class="space-y-4">
+            <div class="flex items-start">
+              <span class="w-8 h-8 bg-white/20 rounded-full flex items-center justify-center text-sm font-bold mr-3 flex-shrink-0">1</span>
+              <p class="m-0">Escolha UM processo que voce executa regularmente (vendas, suporte, operacoes, marketing).</p>
+            </div>
+
+            <div class="flex items-start">
+              <span class="w-8 h-8 bg-white/20 rounded-full flex items-center justify-center text-sm font-bold mr-3 flex-shrink-0">2</span>
+              <p class="m-0">Mapeie as etapas e identifique onde mais tempo/dinheiro e perdido.</p>
+            </div>
+
+            <div class="flex items-start">
+              <span class="w-8 h-8 bg-white/20 rounded-full flex items-center justify-center text-sm font-bold mr-3 flex-shrink-0">3</span>
+              <p class="m-0">Defina a metrica principal: "Reduzir X de [baseline] para [meta] em [prazo]".</p>
+            </div>
+
+            <div class="flex items-start">
+              <span class="w-8 h-8 bg-white/20 rounded-full flex items-center justify-center text-sm font-bold mr-3 flex-shrink-0">4</span>
+              <p class="m-0">Meca a linha de base por 1 semana. Anote os numeros reais, nao estimativas.</p>
+            </div>
+          </div>
+
+          <div class="mt-6 p-4 bg-white/10 rounded-xl">
+            <p class="text-sm m-0"><strong>Objetivo:</strong> Ter um caso de negocio concreto para sua primeira automacao. Numeros reais vencem opiniao toda vez.</p>
+          </div>
+        </div>
+      </section>
+
+      <!-- Resumo -->
+      <section class="mb-10">
+        <div class="bg-neutral-100 dark:bg-neutral-800 p-6 rounded-2xl">
+          <h3 class="text-xl font-bold mb-4 text-neutral-900 dark:text-neutral-100">Resumo do Modulo</h3>
+          <ul class="space-y-2 m-0 p-0 list-none">
+            <li class="flex items-center text-neutral-700 dark:text-neutral-300">
+              <svg class="w-5 h-5 text-blue-500 mr-3 flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"></path>
+              </svg>
+              Cachorro abanando o rabo: negocio primeiro, tecnologia depois
+            </li>
+            <li class="flex items-center text-neutral-700 dark:text-neutral-300">
+              <svg class="w-5 h-5 text-blue-500 mr-3 flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"></path>
+              </svg>
+              Identifique o gargalo real usando TOC (Teoria das Restricoes)
+            </li>
+            <li class="flex items-center text-neutral-700 dark:text-neutral-300">
+              <svg class="w-5 h-5 text-blue-500 mr-3 flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"></path>
+              </svg>
+              Defina UMA metrica principal mensuravel e acionavel
+            </li>
+            <li class="flex items-center text-neutral-700 dark:text-neutral-300">
+              <svg class="w-5 h-5 text-blue-500 mr-3 flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"></path>
+              </svg>
+              Baseline → Meta → Resultado: sem baseline, nao ha ROI comprovavel
+            </li>
+          </ul>
+        </div>
+      </section>
+
+    </article>
+
+    <!-- Navigation -->
+    <div class="flex justify-between items-center mt-12 pt-8 border-t border-neutral-200 dark:border-neutral-700">
+      <a href="modulo3-automacao.html" class="flex items-center text-neutral-600 dark:text-neutral-400 hover:text-blue-500 transition-colors">
+        <svg class="w-5 h-5 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 19l-7-7 7-7"></path>
+        </svg>
+        Modulo Anterior
+      </a>
+      <a href="../modulos.html" class="flex items-center px-6 py-3 bg-blue-500 text-white rounded-lg font-semibold hover:bg-blue-600 transition-colors">
+        Voltar para Modulos
+        <svg class="w-5 h-5 ml-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 12l2-2m0 0l7-7 7 7M5 10v10a1 1 0 001 1h3m10-11l2 2m-2-2v10a1 1 0 01-1 1h-3m-6 0a1 1 0 001-1v-4a1 1 0 011-1h2a1 1 0 011 1v4a1 1 0 001 1m-6 0h6"></path>
+        </svg>
+      </a>
+    </div>
+
+  </main>
+
+  <!-- Footer -->
+  <footer class="bg-neutral-100 dark:bg-neutral-800 border-t border-neutral-200 dark:border-neutral-700 py-8 mt-12">
+    <div class="max-w-4xl mx-auto px-4 text-center">
+      <p class="text-neutral-500 dark:text-neutral-400 text-sm">
+        FIA 2026 - Trilha 2: Implementacao - Modulo 4: Resultado de Negocio
+      </p>
+      <p class="text-neutral-400 dark:text-neutral-500 text-xs mt-2"><a href="https://inema.club" target="_blank" class="text-sky-400 hover:text-sky-300 transition-colors">inema.club</a></p>
+    </div>
+  </footer>
+
+  <!-- JavaScript -->
+  <script>
+    // Theme Toggle
+    const themeToggleBtn = document.getElementById('theme-toggle');
+    const themeToggleDarkIcon = document.getElementById('theme-toggle-dark-icon');
+    const themeToggleLightIcon = document.getElementById('theme-toggle-light-icon');
+
+    if (localStorage.getItem('color-theme') === 'light' ||
+        (!('color-theme' in localStorage) && !window.matchMedia('(prefers-color-scheme: dark)').matches)) {
+      document.documentElement.classList.remove('dark');
+      themeToggleDarkIcon.classList.remove('hidden');
+    } else {
+      document.documentElement.classList.add('dark');
+      themeToggleLightIcon.classList.remove('hidden');
+    }
+
+    themeToggleBtn.addEventListener('click', function() {
+      themeToggleDarkIcon.classList.toggle('hidden');
+      themeToggleLightIcon.classList.toggle('hidden');
+      if (document.documentElement.classList.contains('dark')) {
+        document.documentElement.classList.remove('dark');
+        localStorage.setItem('color-theme', 'light');
+      } else {
+        document.documentElement.classList.add('dark');
+        localStorage.setItem('color-theme', 'dark');
+      }
+    });
+  </script>
+</body>
+</html>

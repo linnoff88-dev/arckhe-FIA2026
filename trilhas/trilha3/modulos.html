@@ -1,0 +1,551 @@
+<!DOCTYPE html>
+<html lang="pt-BR" class="dark">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Modulos - Trilha 3: Avancado | FIA 2026</title>
+  <meta name="description" content="Modulos da Trilha 3 - Arquitetura de Sistemas, Agentes Autonomos, Orquestracao Multiagente e IA como Ativo">
+
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script>
+    tailwind.config = {
+      darkMode: 'class',
+      theme: {
+        extend: {
+          colors: {
+            primary: '#8B5CF6',
+            accent: '#A78BFA'
+          }
+        }
+      }
+    }
+  </script>
+
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+
+  <style>
+    body { font-family: 'Inter', sans-serif; }
+    .module-card { transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1); }
+    .module-card:hover { transform: translateY(-4px); box-shadow: 0 0 30px rgba(139, 92, 246, 0.15); }
+    .topic-button { transition: all 0.2s ease; }
+    .topic-button:hover { background-color: rgba(139, 92, 246, 0.1); }
+    .topic-arrow { transition: transform 0.3s ease; }
+    .topic-arrow.rotate-180 { transform: rotate(180deg); }
+    .topic-content { animation: fadeIn 0.3s ease; }
+    @keyframes fadeIn { from { opacity: 0; transform: translateY(-10px); } to { opacity: 1; transform: translateY(0); } }
+    .modal { display: none; position: fixed; z-index: 100; left: 0; top: 0; width: 100%; height: 100%; background-color: rgba(0,0,0,0.7); backdrop-filter: blur(4px); }
+    .modal.active { display: flex; align-items: center; justify-content: center; }
+    .modal-content { background-color: white; margin: auto; width: 90%; max-width: 900px; max-height: 90vh; border-radius: 1rem; overflow: hidden; box-shadow: 0 25px 50px rgba(0,0,0,0.3); }
+    .dark .modal-content { background-color: #1f2937; }
+    .modal-header { padding: 1.5rem 2rem; border-bottom: 1px solid #e5e7eb; display: flex; justify-content: space-between; align-items: center; }
+    .dark .modal-header { border-bottom-color: #374151; }
+    .modal-body { padding: 2rem; overflow-y: auto; max-height: calc(90vh - 80px); }
+    .close-modal { color: #9ca3af; font-size: 2rem; font-weight: 700; cursor: pointer; line-height: 1; }
+    .close-modal:hover { color: #ef4444; }
+  </style>
+</head>
+<body class="bg-neutral-50 dark:bg-neutral-900 text-neutral-900 dark:text-neutral-100 min-h-screen">
+
+  <!-- Navegacao -->
+  <nav class="sticky top-0 z-50 bg-white/95 dark:bg-neutral-900/95 backdrop-blur-sm border-b border-neutral-200 dark:border-neutral-700">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+      <div class="flex justify-between items-center h-16">
+        <div class="flex items-center space-x-3">
+          <a href="../../index.html" class="text-2xl font-bold bg-gradient-to-r from-blue-600 to-purple-600 bg-clip-text text-transparent">
+            FIA 2026
+          </a>
+          <span class="text-neutral-300 dark:text-neutral-600">|</span>
+          <a href="https://inema.club" target="_blank" class="text-sm text-sky-500 hover:text-sky-400 transition-colors font-medium">inema.club</a>
+        </div>
+
+        <!-- Desktop Menu -->
+        <div class="hidden md:flex items-center space-x-6">
+          <a href="../../index.html#trilhas" class="text-neutral-600 dark:text-neutral-300 hover:text-blue-600 dark:hover:text-blue-400 transition-colors">Inicio</a>
+          <a href="../trilha1/modulos.html" class="text-neutral-600 dark:text-neutral-300 hover:text-emerald-600 dark:hover:text-emerald-400 transition-colors">Trilha 1</a>
+          <a href="../trilha2/modulos.html" class="text-neutral-600 dark:text-neutral-300 hover:text-blue-600 dark:hover:text-blue-400 transition-colors">Trilha 2</a>
+          <a href="../trilha3/modulos.html" class="text-purple-600 dark:text-purple-400 font-semibold border-b-2 border-purple-500">Trilha 3</a>
+
+          <button id="theme-toggle" class="p-2 rounded-lg bg-neutral-100 dark:bg-neutral-700 hover:bg-neutral-200 dark:hover:bg-neutral-600 transition-colors">
+            <svg id="theme-toggle-dark-icon" class="hidden w-5 h-5 text-neutral-700" fill="currentColor" viewBox="0 0 20 20">
+              <path d="M17.293 13.293A8 8 0 016.707 2.707a8.001 8.001 0 1010.586 10.586z"></path>
+            </svg>
+            <svg id="theme-toggle-light-icon" class="hidden w-5 h-5 text-yellow-400" fill="currentColor" viewBox="0 0 20 20">
+              <path d="M10 2a1 1 0 011 1v1a1 1 0 11-2 0V3a1 1 0 011-1zm4 8a4 4 0 11-8 0 4 4 0 018 0zm-.464 4.95l.707.707a1 1 0 001.414-1.414l-.707-.707a1 1 0 00-1.414 1.414zm2.12-10.607a1 1 0 010 1.414l-.706.707a1 1 0 11-1.414-1.414l.707-.707a1 1 0 011.414 0zM17 11a1 1 0 100-2h-1a1 1 0 100 2h1zm-7 4a1 1 0 011 1v1a1 1 0 11-2 0v-1a1 1 0 011-1zM5.05 6.464A1 1 0 106.465 5.05l-.708-.707a1 1 0 00-1.414 1.414l.707.707zm1.414 8.486l-.707.707a1 1 0 01-1.414-1.414l.707-.707a1 1 0 011.414 1.414zM4 11a1 1 0 100-2H3a1 1 0 000 2h1z" fill-rule="evenodd" clip-rule="evenodd"></path>
+            </svg>
+          </button>
+        </div>
+
+        <!-- Mobile Menu Button -->
+        <div class="md:hidden flex items-center space-x-2">
+          <button id="theme-toggle-mobile" class="p-2 rounded-lg bg-neutral-100 dark:bg-neutral-700">
+            <svg class="w-5 h-5 text-neutral-700 dark:text-yellow-400" fill="currentColor" viewBox="0 0 20 20">
+              <path d="M10 2a1 1 0 011 1v1a1 1 0 11-2 0V3a1 1 0 011-1zm4 8a4 4 0 11-8 0 4 4 0 018 0z"></path>
+            </svg>
+          </button>
+          <button id="mobile-menu-btn" class="p-2 rounded-lg hover:bg-neutral-100 dark:hover:bg-neutral-700">
+            <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16"></path>
+            </svg>
+          </button>
+        </div>
+      </div>
+
+      <!-- Mobile Menu -->
+      <div id="mobile-menu" class="hidden md:hidden pb-4">
+        <div class="flex flex-col space-y-2">
+          <a href="../../index.html" class="px-4 py-2 text-neutral-600 dark:text-neutral-300 hover:bg-neutral-100 dark:hover:bg-neutral-700 rounded-lg">Inicio</a>
+          <a href="../trilha1/modulos.html" class="px-4 py-2 text-neutral-600 dark:text-neutral-300 hover:bg-neutral-100 dark:hover:bg-neutral-700 rounded-lg">Trilha 1 - Introducao</a>
+          <a href="../trilha2/modulos.html" class="px-4 py-2 text-neutral-600 dark:text-neutral-300 hover:bg-neutral-100 dark:hover:bg-neutral-700 rounded-lg">Trilha 2 - Fundamentos</a>
+          <a href="../trilha3/modulos.html" class="px-4 py-2 bg-purple-100 dark:bg-purple-900/30 text-purple-700 dark:text-purple-400 rounded-lg font-semibold">Trilha 3 - Avancado</a>
+        </div>
+      </div>
+    </div>
+  </nav>
+
+  <!-- Main Content -->
+  <main class="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 py-12">
+
+    <!-- Header -->
+    <div class="text-center mb-12">
+      <span class="inline-block px-4 py-2 bg-purple-100 dark:bg-purple-900/30 text-purple-600 dark:text-purple-400 rounded-full text-sm font-semibold mb-4">
+        TRILHA 3 - AVANCADO
+      </span>
+      <h1 class="text-4xl sm:text-5xl font-bold mb-4">Modulos da Trilha</h1>
+      <p class="text-xl text-neutral-600 dark:text-neutral-400">4 modulos para construir sistemas autonomos e escalaveis</p>
+    </div>
+
+    <!-- Modulo 1 -->
+    <div class="module-card bg-white dark:bg-neutral-800 rounded-2xl p-6 mb-6 border border-neutral-200 dark:border-neutral-700 shadow-lg">
+      <div class="flex items-center mb-4">
+        <div class="w-14 h-14 bg-purple-500 rounded-xl flex items-center justify-center text-white font-bold text-xl mr-4">01</div>
+        <div>
+          <h2 class="text-xl font-bold text-neutral-900 dark:text-neutral-100">Arquitetura de Sistemas de IA</h2>
+          <p class="text-neutral-500 dark:text-neutral-400 text-sm">As 4 Camadas de um Sistema Robusto</p>
+        </div>
+        <div class="ml-auto"><span class="px-3 py-1 bg-purple-100 dark:bg-purple-900/30 text-purple-600 dark:text-purple-400 rounded-full text-xs font-semibold">4 topicos</span></div>
+      </div>
+
+      <div class="space-y-2 mb-6">
+        <div class="topic-item">
+          <button class="topic-button w-full flex items-center justify-between px-4 py-3 bg-neutral-50 dark:bg-neutral-700/50 rounded-lg text-left">
+            <span class="font-medium text-neutral-800 dark:text-neutral-200">Camada de Orquestracao</span>
+            <svg class="topic-arrow w-5 h-5 text-neutral-400" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"></path></svg>
+          </button>
+          <div class="topic-content hidden mt-2 ml-4 p-4 bg-purple-50 dark:bg-purple-900/20 rounded-lg border-l-4 border-purple-500">
+            <p class="text-sm text-neutral-700 dark:text-neutral-300 mb-2"><strong class="text-purple-600">O que e:</strong> O cerebro do sistema que define o fluxo e decide qual agente usar.</p>
+            <p class="text-sm text-neutral-700 dark:text-neutral-300"><strong class="text-purple-600">Ferramentas:</strong> n8n, LangGraph, Temporal, CrewAI</p>
+          </div>
+        </div>
+
+        <div class="topic-item">
+          <button class="topic-button w-full flex items-center justify-between px-4 py-3 bg-neutral-50 dark:bg-neutral-700/50 rounded-lg text-left">
+            <span class="font-medium text-neutral-800 dark:text-neutral-200">Camada de Inteligencia</span>
+            <svg class="topic-arrow w-5 h-5 text-neutral-400" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"></path></svg>
+          </button>
+          <div class="topic-content hidden mt-2 ml-4 p-4 bg-purple-50 dark:bg-purple-900/20 rounded-lg border-l-4 border-purple-500">
+            <p class="text-sm text-neutral-700 dark:text-neutral-300 mb-2"><strong class="text-purple-600">O que e:</strong> Onde as decisoes sao tomadas - os modelos de linguagem.</p>
+            <p class="text-sm text-neutral-700 dark:text-neutral-300"><strong class="text-purple-600">Opcoes:</strong> GPT-4, Claude 3, Gemini, Llama 3, modelos fine-tuned</p>
+          </div>
+        </div>
+
+        <div class="topic-item">
+          <button class="topic-button w-full flex items-center justify-between px-4 py-3 bg-neutral-50 dark:bg-neutral-700/50 rounded-lg text-left">
+            <span class="font-medium text-neutral-800 dark:text-neutral-200">Camada de Memoria</span>
+            <svg class="topic-arrow w-5 h-5 text-neutral-400" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"></path></svg>
+          </button>
+          <div class="topic-content hidden mt-2 ml-4 p-4 bg-purple-50 dark:bg-purple-900/20 rounded-lg border-l-4 border-purple-500">
+            <p class="text-sm text-neutral-700 dark:text-neutral-300 mb-2"><strong class="text-purple-600">O que e:</strong> RAG, bancos de dados, historico de interacoes.</p>
+            <p class="text-sm text-neutral-700 dark:text-neutral-300"><strong class="text-purple-600">Ferramentas:</strong> Pinecone, Chroma, Weaviate, PostgreSQL + pgvector</p>
+          </div>
+        </div>
+
+        <div class="topic-item">
+          <button class="topic-button w-full flex items-center justify-between px-4 py-3 bg-neutral-50 dark:bg-neutral-700/50 rounded-lg text-left">
+            <span class="font-medium text-neutral-800 dark:text-neutral-200">Camada de Interface</span>
+            <svg class="topic-arrow w-5 h-5 text-neutral-400" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"></path></svg>
+          </button>
+          <div class="topic-content hidden mt-2 ml-4 p-4 bg-purple-50 dark:bg-purple-900/20 rounded-lg border-l-4 border-purple-500">
+            <p class="text-sm text-neutral-700 dark:text-neutral-300 mb-2"><strong class="text-purple-600">O que e:</strong> Como humanos interagem - chat, dashboard, API.</p>
+            <p class="text-sm text-neutral-700 dark:text-neutral-300"><strong class="text-purple-600">Ferramentas:</strong> Lovable, v0, React, Next.js, Streamlit</p>
+          </div>
+        </div>
+      </div>
+
+      <div class="flex flex-wrap gap-3">
+        <button onclick="openModal('modal-m1')" class="flex items-center px-4 py-2 bg-purple-100 dark:bg-purple-900/30 text-purple-700 dark:text-purple-400 rounded-lg font-medium hover:bg-purple-200 dark:hover:bg-purple-900/50 transition-colors">
+          <svg class="w-4 h-4 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 12a3 3 0 11-6 0 3 3 0 016 0z"></path><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M2.458 12C3.732 7.943 7.523 5 12 5c4.478 0 8.268 2.943 9.542 7-1.274 4.057-5.064 7-9.542 7-4.477 0-8.268-2.943-9.542-7z"></path></svg>
+          Ver em Modal
+        </button>
+        <a href="conteudo/modulo1-arquitetura.html" class="flex items-center px-4 py-2 bg-purple-500 text-white rounded-lg font-medium hover:bg-purple-600 transition-colors">
+          <svg class="w-4 h-4 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 6H6a2 2 0 00-2 2v10a2 2 0 002 2h10a2 2 0 002-2v-4M14 4h6m0 0v6m0-6L10 14"></path></svg>
+          Pagina Completa
+        </a>
+      </div>
+    </div>
+
+    <!-- Modulo 2 -->
+    <div class="module-card bg-white dark:bg-neutral-800 rounded-2xl p-6 mb-6 border border-neutral-200 dark:border-neutral-700 shadow-lg">
+      <div class="flex items-center mb-4">
+        <div class="w-14 h-14 bg-purple-500 rounded-xl flex items-center justify-center text-white font-bold text-xl mr-4">02</div>
+        <div>
+          <h2 class="text-xl font-bold text-neutral-900 dark:text-neutral-100">Agentes Autonomos</h2>
+          <p class="text-neutral-500 dark:text-neutral-400 text-sm">Seus Primeiros Trabalhadores Digitais</p>
+        </div>
+        <div class="ml-auto"><span class="px-3 py-1 bg-purple-100 dark:bg-purple-900/30 text-purple-600 dark:text-purple-400 rounded-full text-xs font-semibold">5 topicos</span></div>
+      </div>
+
+      <div class="space-y-2 mb-6">
+        <div class="topic-item">
+          <button class="topic-button w-full flex items-center justify-between px-4 py-3 bg-neutral-50 dark:bg-neutral-700/50 rounded-lg text-left">
+            <span class="font-medium text-neutral-800 dark:text-neutral-200">Objetivo Claro</span>
+            <svg class="topic-arrow w-5 h-5 text-neutral-400" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"></path></svg>
+          </button>
+          <div class="topic-content hidden mt-2 ml-4 p-4 bg-purple-50 dark:bg-purple-900/20 rounded-lg border-l-4 border-purple-500">
+            <p class="text-sm text-neutral-700 dark:text-neutral-300"><strong class="text-purple-600">Exemplo:</strong> "Qualificar todos os novos leads que chegam via site"</p>
+          </div>
+        </div>
+
+        <div class="topic-item">
+          <button class="topic-button w-full flex items-center justify-between px-4 py-3 bg-neutral-50 dark:bg-neutral-700/50 rounded-lg text-left">
+            <span class="font-medium text-neutral-800 dark:text-neutral-200">Memoria Propria</span>
+            <svg class="topic-arrow w-5 h-5 text-neutral-400" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"></path></svg>
+          </button>
+          <div class="topic-content hidden mt-2 ml-4 p-4 bg-purple-50 dark:bg-purple-900/20 rounded-lg border-l-4 border-purple-500">
+            <p class="text-sm text-neutral-700 dark:text-neutral-300">Acesso a historico de acoes e resultados anteriores.</p>
+          </div>
+        </div>
+
+        <div class="topic-item">
+          <button class="topic-button w-full flex items-center justify-between px-4 py-3 bg-neutral-50 dark:bg-neutral-700/50 rounded-lg text-left">
+            <span class="font-medium text-neutral-800 dark:text-neutral-200">Capacidade de Planejar</span>
+            <svg class="topic-arrow w-5 h-5 text-neutral-400" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"></path></svg>
+          </button>
+          <div class="topic-content hidden mt-2 ml-4 p-4 bg-purple-50 dark:bg-purple-900/20 rounded-lg border-l-4 border-purple-500">
+            <p class="text-sm text-neutral-700 dark:text-neutral-300">Quebrar objetivo complexo em passos menores.</p>
+          </div>
+        </div>
+
+        <div class="topic-item">
+          <button class="topic-button w-full flex items-center justify-between px-4 py-3 bg-neutral-50 dark:bg-neutral-700/50 rounded-lg text-left">
+            <span class="font-medium text-neutral-800 dark:text-neutral-200">Capacidade de Agir</span>
+            <svg class="topic-arrow w-5 h-5 text-neutral-400" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"></path></svg>
+          </button>
+          <div class="topic-content hidden mt-2 ml-4 p-4 bg-purple-50 dark:bg-purple-900/20 rounded-lg border-l-4 border-purple-500">
+            <p class="text-sm text-neutral-700 dark:text-neutral-300">Usar ferramentas: enviar email, consultar CRM, chamar APIs.</p>
+          </div>
+        </div>
+
+        <div class="topic-item">
+          <button class="topic-button w-full flex items-center justify-between px-4 py-3 bg-neutral-50 dark:bg-neutral-700/50 rounded-lg text-left">
+            <span class="font-medium text-neutral-800 dark:text-neutral-200">Capacidade de Pedir Ajuda</span>
+            <svg class="topic-arrow w-5 h-5 text-neutral-400" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"></path></svg>
+          </button>
+          <div class="topic-content hidden mt-2 ml-4 p-4 bg-purple-50 dark:bg-purple-900/20 rounded-lg border-l-4 border-purple-500">
+            <p class="text-sm text-neutral-700 dark:text-neutral-300">Escalar para humano quando nao consegue resolver.</p>
+          </div>
+        </div>
+      </div>
+
+      <div class="flex flex-wrap gap-3">
+        <button onclick="openModal('modal-m2')" class="flex items-center px-4 py-2 bg-purple-100 dark:bg-purple-900/30 text-purple-700 dark:text-purple-400 rounded-lg font-medium hover:bg-purple-200 dark:hover:bg-purple-900/50 transition-colors">
+          <svg class="w-4 h-4 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 12a3 3 0 11-6 0 3 3 0 016 0z"></path><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M2.458 12C3.732 7.943 7.523 5 12 5c4.478 0 8.268 2.943 9.542 7-1.274 4.057-5.064 7-9.542 7-4.477 0-8.268-2.943-9.542-7z"></path></svg>
+          Ver em Modal
+        </button>
+        <a href="conteudo/modulo2-agentes.html" class="flex items-center px-4 py-2 bg-purple-500 text-white rounded-lg font-medium hover:bg-purple-600 transition-colors">
+          <svg class="w-4 h-4 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 6H6a2 2 0 00-2 2v10a2 2 0 002 2h10a2 2 0 002-2v-4M14 4h6m0 0v6m0-6L10 14"></path></svg>
+          Pagina Completa
+        </a>
+      </div>
+    </div>
+
+    <!-- Modulo 3 -->
+    <div class="module-card bg-white dark:bg-neutral-800 rounded-2xl p-6 mb-6 border border-neutral-200 dark:border-neutral-700 shadow-lg">
+      <div class="flex items-center mb-4">
+        <div class="w-14 h-14 bg-purple-500 rounded-xl flex items-center justify-center text-white font-bold text-xl mr-4">03</div>
+        <div>
+          <h2 class="text-xl font-bold text-neutral-900 dark:text-neutral-100">Orquestracao Multiagente</h2>
+          <p class="text-neutral-500 dark:text-neutral-400 text-sm">Equipes de Agentes Especializados</p>
+        </div>
+        <div class="ml-auto"><span class="px-3 py-1 bg-purple-100 dark:bg-purple-900/30 text-purple-600 dark:text-purple-400 rounded-full text-xs font-semibold">4 topicos</span></div>
+      </div>
+
+      <div class="space-y-2 mb-6">
+        <div class="topic-item">
+          <button class="topic-button w-full flex items-center justify-between px-4 py-3 bg-neutral-50 dark:bg-neutral-700/50 rounded-lg text-left">
+            <span class="font-medium text-neutral-800 dark:text-neutral-200">Padrao Manager → Workers</span>
+            <svg class="topic-arrow w-5 h-5 text-neutral-400" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"></path></svg>
+          </button>
+          <div class="topic-content hidden mt-2 ml-4 p-4 bg-purple-50 dark:bg-purple-900/20 rounded-lg border-l-4 border-purple-500">
+            <p class="text-sm text-neutral-700 dark:text-neutral-300">Agente Gerente distribui tarefas para agentes especializados (pesquisa, escrita, formatacao).</p>
+          </div>
+        </div>
+
+        <div class="topic-item">
+          <button class="topic-button w-full flex items-center justify-between px-4 py-3 bg-neutral-50 dark:bg-neutral-700/50 rounded-lg text-left">
+            <span class="font-medium text-neutral-800 dark:text-neutral-200">Agente Verificador (QA)</span>
+            <svg class="topic-arrow w-5 h-5 text-neutral-400" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"></path></svg>
+          </button>
+          <div class="topic-content hidden mt-2 ml-4 p-4 bg-purple-50 dark:bg-purple-900/20 rounded-lg border-l-4 border-purple-500">
+            <p class="text-sm text-neutral-700 dark:text-neutral-300">Revisa trabalho dos outros contra checklist de qualidade antes da saida final.</p>
+          </div>
+        </div>
+
+        <div class="topic-item">
+          <button class="topic-button w-full flex items-center justify-between px-4 py-3 bg-neutral-50 dark:bg-neutral-700/50 rounded-lg text-left">
+            <span class="font-medium text-neutral-800 dark:text-neutral-200">Agente Roteador</span>
+            <svg class="topic-arrow w-5 h-5 text-neutral-400" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"></path></svg>
+          </button>
+          <div class="topic-content hidden mt-2 ml-4 p-4 bg-purple-50 dark:bg-purple-900/20 rounded-lg border-l-4 border-purple-500">
+            <p class="text-sm text-neutral-700 dark:text-neutral-300">Porteiro que decide para qual equipe ou agente enviar cada solicitacao.</p>
+          </div>
+        </div>
+
+        <div class="topic-item">
+          <button class="topic-button w-full flex items-center justify-between px-4 py-3 bg-neutral-50 dark:bg-neutral-700/50 rounded-lg text-left">
+            <span class="font-medium text-neutral-800 dark:text-neutral-200">Exercicio: Fluxo de Proposta</span>
+            <svg class="topic-arrow w-5 h-5 text-neutral-400" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"></path></svg>
+          </button>
+          <div class="topic-content hidden mt-2 ml-4 p-4 bg-purple-50 dark:bg-purple-900/20 rounded-lg border-l-4 border-purple-500">
+            <p class="text-sm text-neutral-700 dark:text-neutral-300 mb-1"><strong>1.</strong> Agente de Pesquisa - dados da empresa</p>
+            <p class="text-sm text-neutral-700 dark:text-neutral-300 mb-1"><strong>2.</strong> Agente de Conteudo - escreve proposta</p>
+            <p class="text-sm text-neutral-700 dark:text-neutral-300 mb-1"><strong>3.</strong> Agente de QA - revisa erros</p>
+            <p class="text-sm text-neutral-700 dark:text-neutral-300"><strong>4.</strong> Escalacao para vendedor</p>
+          </div>
+        </div>
+      </div>
+
+      <div class="flex flex-wrap gap-3">
+        <button onclick="openModal('modal-m3')" class="flex items-center px-4 py-2 bg-purple-100 dark:bg-purple-900/30 text-purple-700 dark:text-purple-400 rounded-lg font-medium hover:bg-purple-200 dark:hover:bg-purple-900/50 transition-colors">
+          <svg class="w-4 h-4 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 12a3 3 0 11-6 0 3 3 0 016 0z"></path><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M2.458 12C3.732 7.943 7.523 5 12 5c4.478 0 8.268 2.943 9.542 7-1.274 4.057-5.064 7-9.542 7-4.477 0-8.268-2.943-9.542-7z"></path></svg>
+          Ver em Modal
+        </button>
+        <a href="conteudo/modulo3-multiagente.html" class="flex items-center px-4 py-2 bg-purple-500 text-white rounded-lg font-medium hover:bg-purple-600 transition-colors">
+          <svg class="w-4 h-4 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 6H6a2 2 0 00-2 2v10a2 2 0 002 2h10a2 2 0 002-2v-4M14 4h6m0 0v6m0-6L10 14"></path></svg>
+          Pagina Completa
+        </a>
+      </div>
+    </div>
+
+    <!-- Modulo 4 -->
+    <div class="module-card bg-white dark:bg-neutral-800 rounded-2xl p-6 mb-6 border border-neutral-200 dark:border-neutral-700 shadow-lg">
+      <div class="flex items-center mb-4">
+        <div class="w-14 h-14 bg-purple-500 rounded-xl flex items-center justify-center text-white font-bold text-xl mr-4">04</div>
+        <div>
+          <h2 class="text-xl font-bold text-neutral-900 dark:text-neutral-100">IA como Ativo de Negocio</h2>
+          <p class="text-neutral-500 dark:text-neutral-400 text-sm">Transformando Sistemas em Vantagem Competitiva</p>
+        </div>
+        <div class="ml-auto"><span class="px-3 py-1 bg-purple-100 dark:bg-purple-900/30 text-purple-600 dark:text-purple-400 rounded-full text-xs font-semibold">3 topicos</span></div>
+      </div>
+
+      <div class="space-y-2 mb-6">
+        <div class="topic-item">
+          <button class="topic-button w-full flex items-center justify-between px-4 py-3 bg-neutral-50 dark:bg-neutral-700/50 rounded-lg text-left">
+            <span class="font-medium text-neutral-800 dark:text-neutral-200">Reducao de Custo Operacional</span>
+            <svg class="topic-arrow w-5 h-5 text-neutral-400" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"></path></svg>
+          </button>
+          <div class="topic-content hidden mt-2 ml-4 p-4 bg-purple-50 dark:bg-purple-900/20 rounded-lg border-l-4 border-purple-500">
+            <p class="text-sm text-neutral-700 dark:text-neutral-300">Automatizar processos inteiros, liberando equipes para trabalhos de maior valor.</p>
+          </div>
+        </div>
+
+        <div class="topic-item">
+          <button class="topic-button w-full flex items-center justify-between px-4 py-3 bg-neutral-50 dark:bg-neutral-700/50 rounded-lg text-left">
+            <span class="font-medium text-neutral-800 dark:text-neutral-200">Aumento de Velocidade e Qualidade</span>
+            <svg class="topic-arrow w-5 h-5 text-neutral-400" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"></path></svg>
+          </button>
+          <div class="topic-content hidden mt-2 ml-4 p-4 bg-purple-50 dark:bg-purple-900/20 rounded-lg border-l-4 border-purple-500">
+            <p class="text-sm text-neutral-700 dark:text-neutral-300">Responder clientes 24/7, gerar propostas em minutos em vez de dias.</p>
+          </div>
+        </div>
+
+        <div class="topic-item">
+          <button class="topic-button w-full flex items-center justify-between px-4 py-3 bg-neutral-50 dark:bg-neutral-700/50 rounded-lg text-left">
+            <span class="font-medium text-neutral-800 dark:text-neutral-200">Novos Produtos e Servicos</span>
+            <svg class="topic-arrow w-5 h-5 text-neutral-400" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"></path></svg>
+          </button>
+          <div class="topic-content hidden mt-2 ml-4 p-4 bg-purple-50 dark:bg-purple-900/20 rounded-lg border-l-4 border-purple-500">
+            <p class="text-sm text-neutral-700 dark:text-neutral-300">Oferecer "concierges de IA" ou sistemas de analise que antes eram inviaveis.</p>
+          </div>
+        </div>
+      </div>
+
+      <div class="flex flex-wrap gap-3">
+        <button onclick="openModal('modal-m4')" class="flex items-center px-4 py-2 bg-purple-100 dark:bg-purple-900/30 text-purple-700 dark:text-purple-400 rounded-lg font-medium hover:bg-purple-200 dark:hover:bg-purple-900/50 transition-colors">
+          <svg class="w-4 h-4 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 12a3 3 0 11-6 0 3 3 0 016 0z"></path><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M2.458 12C3.732 7.943 7.523 5 12 5c4.478 0 8.268 2.943 9.542 7-1.274 4.057-5.064 7-9.542 7-4.477 0-8.268-2.943-9.542-7z"></path></svg>
+          Ver em Modal
+        </button>
+        <a href="conteudo/modulo4-ativo.html" class="flex items-center px-4 py-2 bg-purple-500 text-white rounded-lg font-medium hover:bg-purple-600 transition-colors">
+          <svg class="w-4 h-4 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 6H6a2 2 0 00-2 2v10a2 2 0 002 2h10a2 2 0 002-2v-4M14 4h6m0 0v6m0-6L10 14"></path></svg>
+          Pagina Completa
+        </a>
+      </div>
+    </div>
+
+    <!-- CTA -->
+    <div class="text-center mt-12">
+      <a href="index.html" class="inline-flex items-center px-6 py-3 bg-purple-500 text-white rounded-lg font-semibold hover:bg-purple-600 transition-colors">
+        <svg class="w-5 h-5 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 19l-7-7 7-7"></path></svg>
+        Voltar para Trilha 3
+      </a>
+    </div>
+
+  </main>
+
+  <!-- MODAIS -->
+  <div id="modal-m1" class="modal">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h2 class="text-2xl font-bold text-neutral-900 dark:text-neutral-100">01 - Arquitetura de Sistemas de IA</h2>
+        <button class="close-modal" onclick="closeModal('modal-m1')">&times;</button>
+      </div>
+      <div class="modal-body">
+        <p class="text-lg text-neutral-700 dark:text-neutral-300 mb-4">Um sistema robusto e desacoplado em 4 camadas que permite trocar componentes sem quebrar o sistema.</p>
+        <div class="grid md:grid-cols-2 gap-4">
+          <div class="bg-purple-50 dark:bg-purple-900/20 p-4 rounded-lg"><h4 class="font-bold text-purple-700 dark:text-purple-400">Orquestracao</h4><p class="text-sm text-neutral-600 dark:text-neutral-400">Cerebro do sistema</p></div>
+          <div class="bg-purple-50 dark:bg-purple-900/20 p-4 rounded-lg"><h4 class="font-bold text-purple-700 dark:text-purple-400">Inteligencia</h4><p class="text-sm text-neutral-600 dark:text-neutral-400">Modelos LLM</p></div>
+          <div class="bg-purple-50 dark:bg-purple-900/20 p-4 rounded-lg"><h4 class="font-bold text-purple-700 dark:text-purple-400">Memoria</h4><p class="text-sm text-neutral-600 dark:text-neutral-400">RAG e dados</p></div>
+          <div class="bg-purple-50 dark:bg-purple-900/20 p-4 rounded-lg"><h4 class="font-bold text-purple-700 dark:text-purple-400">Interface</h4><p class="text-sm text-neutral-600 dark:text-neutral-400">UI humana</p></div>
+        </div>
+        <div class="mt-6 text-center"><a href="conteudo/modulo1-arquitetura.html" class="inline-flex items-center px-6 py-3 bg-purple-500 text-white rounded-lg font-semibold hover:bg-purple-600 transition-colors">Ver Conteudo Completo <svg class="w-4 h-4 ml-2" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"></path></svg></a></div>
+      </div>
+    </div>
+  </div>
+
+  <div id="modal-m2" class="modal">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h2 class="text-2xl font-bold text-neutral-900 dark:text-neutral-100">02 - Agentes Autonomos</h2>
+        <button class="close-modal" onclick="closeModal('modal-m2')">&times;</button>
+      </div>
+      <div class="modal-body">
+        <p class="text-lg text-neutral-700 dark:text-neutral-300 mb-4">Um agente nao e um chatbot. E um sistema com objetivo, memoria, capacidade de planejar e agir.</p>
+        <div class="bg-purple-50 dark:bg-purple-900/20 p-4 rounded-lg border-l-4 border-purple-500">
+          <h4 class="font-bold text-purple-700 dark:text-purple-400 mb-2">5 Caracteristicas de um Agente</h4>
+          <ul class="text-sm text-neutral-700 dark:text-neutral-300 space-y-1">
+            <li>* Objetivo Claro - missao especifica</li>
+            <li>* Memoria Propria - historico de acoes</li>
+            <li>* Capacidade de Planejar - quebrar em passos</li>
+            <li>* Capacidade de Agir - usar ferramentas</li>
+            <li>* Capacidade de Pedir Ajuda - escalar para humano</li>
+          </ul>
+        </div>
+        <div class="mt-6 text-center"><a href="conteudo/modulo2-agentes.html" class="inline-flex items-center px-6 py-3 bg-purple-500 text-white rounded-lg font-semibold hover:bg-purple-600 transition-colors">Ver Conteudo Completo <svg class="w-4 h-4 ml-2" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"></path></svg></a></div>
+      </div>
+    </div>
+  </div>
+
+  <div id="modal-m3" class="modal">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h2 class="text-2xl font-bold text-neutral-900 dark:text-neutral-100">03 - Orquestracao Multiagente</h2>
+        <button class="close-modal" onclick="closeModal('modal-m3')">&times;</button>
+      </div>
+      <div class="modal-body">
+        <p class="text-lg text-neutral-700 dark:text-neutral-300 mb-4">Escalabilidade vem da orquestracao de multiplos agentes especializados que funcionam como equipe.</p>
+        <div class="space-y-3">
+          <div class="bg-purple-50 dark:bg-purple-900/20 p-3 rounded-lg"><h4 class="font-bold text-purple-700 dark:text-purple-400">Manager → Workers</h4><p class="text-sm text-neutral-600 dark:text-neutral-400">Gerente distribui tarefas</p></div>
+          <div class="bg-purple-50 dark:bg-purple-900/20 p-3 rounded-lg"><h4 class="font-bold text-purple-700 dark:text-purple-400">Agente QA</h4><p class="text-sm text-neutral-600 dark:text-neutral-400">Revisa qualidade</p></div>
+          <div class="bg-purple-50 dark:bg-purple-900/20 p-3 rounded-lg"><h4 class="font-bold text-purple-700 dark:text-purple-400">Agente Roteador</h4><p class="text-sm text-neutral-600 dark:text-neutral-400">Direciona solicitacoes</p></div>
+        </div>
+        <div class="mt-6 text-center"><a href="conteudo/modulo3-multiagente.html" class="inline-flex items-center px-6 py-3 bg-purple-500 text-white rounded-lg font-semibold hover:bg-purple-600 transition-colors">Ver Conteudo Completo <svg class="w-4 h-4 ml-2" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"></path></svg></a></div>
+      </div>
+    </div>
+  </div>
+
+  <div id="modal-m4" class="modal">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h2 class="text-2xl font-bold text-neutral-900 dark:text-neutral-100">04 - IA como Ativo de Negocio</h2>
+        <button class="close-modal" onclick="closeModal('modal-m4')">&times;</button>
+      </div>
+      <div class="modal-body">
+        <p class="text-lg text-neutral-700 dark:text-neutral-300 mb-4">Sistemas de IA construidos no SEU contexto se tornam vantagem competitiva dificil de copiar.</p>
+        <div class="bg-gradient-to-r from-purple-100 to-pink-100 dark:from-purple-900/30 dark:to-pink-900/30 p-4 rounded-lg">
+          <h4 class="font-bold text-purple-700 dark:text-purple-400 mb-2">Perguntas Estrategicas</h4>
+          <ul class="text-sm text-neutral-700 dark:text-neutral-300 space-y-2">
+            <li><strong>1.</strong> Reduz custo, aumenta velocidade ou qualidade?</li>
+            <li><strong>2.</strong> Poderia se tornar um novo servico vendavel?</li>
+            <li><strong>3.</strong> Qual e o "fosso" competitivo deste sistema?</li>
+          </ul>
+        </div>
+        <div class="mt-6 text-center"><a href="conteudo/modulo4-ativo.html" class="inline-flex items-center px-6 py-3 bg-purple-500 text-white rounded-lg font-semibold hover:bg-purple-600 transition-colors">Ver Conteudo Completo <svg class="w-4 h-4 ml-2" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"></path></svg></a></div>
+      </div>
+    </div>
+  </div>
+
+  <footer class="bg-neutral-100 dark:bg-neutral-800 border-t border-neutral-200 dark:border-neutral-700 py-8 mt-12">
+    <div class="max-w-4xl mx-auto px-4 text-center">
+      <p class="text-neutral-500 dark:text-neutral-400 text-sm">FIA 2026 - Trilha 3: Avancado - Modulos</p>
+      <p class="text-neutral-400 dark:text-neutral-500 text-xs mt-2"><a href="https://inema.club" target="_blank" class="text-sky-400 hover:text-sky-300 transition-colors">inema.club</a></p>
+    </div>
+  </footer>
+
+  <script>
+    const themeToggleBtn = document.getElementById('theme-toggle');
+    const themeToggleDarkIcon = document.getElementById('theme-toggle-dark-icon');
+    const themeToggleLightIcon = document.getElementById('theme-toggle-light-icon');
+
+    if (localStorage.getItem('color-theme') === 'light' || (!('color-theme' in localStorage) && !window.matchMedia('(prefers-color-scheme: dark)').matches)) {
+      document.documentElement.classList.remove('dark');
+      themeToggleDarkIcon.classList.remove('hidden');
+    } else {
+      document.documentElement.classList.add('dark');
+      themeToggleLightIcon.classList.remove('hidden');
+    }
+
+    themeToggleBtn.addEventListener('click', function() {
+      themeToggleDarkIcon.classList.toggle('hidden');
+      themeToggleLightIcon.classList.toggle('hidden');
+      if (document.documentElement.classList.contains('dark')) {
+        document.documentElement.classList.remove('dark');
+        localStorage.setItem('color-theme', 'light');
+      } else {
+        document.documentElement.classList.add('dark');
+        localStorage.setItem('color-theme', 'dark');
+      }
+    });
+
+    // Mobile Menu Toggle
+    const mobileMenuBtn = document.getElementById('mobile-menu-btn');
+    const mobileMenu = document.getElementById('mobile-menu');
+    const themeToggleMobile = document.getElementById('theme-toggle-mobile');
+
+    if (mobileMenuBtn && mobileMenu) {
+      mobileMenuBtn.addEventListener('click', function() {
+        mobileMenu.classList.toggle('hidden');
+      });
+    }
+
+    if (themeToggleMobile) {
+      themeToggleMobile.addEventListener('click', function() {
+        if (document.documentElement.classList.contains('dark')) {
+          document.documentElement.classList.remove('dark');
+          localStorage.setItem('color-theme', 'light');
+        } else {
+          document.documentElement.classList.add('dark');
+          localStorage.setItem('color-theme', 'dark');
+        }
+      });
+    }
+
+    document.addEventListener('click', function(e) {
+      const topicButton = e.target.closest('.topic-button');
+      if (topicButton) {
+        const topicItem = topicButton.closest('.topic-item');
+        const content = topicItem.querySelector('.topic-content');
+        const arrow = topicButton.querySelector('.topic-arrow');
+        const moduleCard = topicItem.closest('.module-card');
+        moduleCard.querySelectorAll('.topic-content').forEach(c => { if (c !== content) c.classList.add('hidden'); });
+        moduleCard.querySelectorAll('.topic-arrow').forEach(a => { if (a !== arrow) a.classList.remove('rotate-180'); });
+        content.classList.toggle('hidden');
+        arrow.classList.toggle('rotate-180');
+      }
+    });
+
+    function openModal(modalId) { document.getElementById(modalId).classList.add('active'); document.body.style.overflow = 'hidden'; }
+    function closeModal(modalId) { document.getElementById(modalId).classList.remove('active'); document.body.style.overflow = 'auto'; }
+    document.querySelectorAll('.modal').forEach(modal => { modal.addEventListener('click', function(e) { if (e.target === this) { this.classList.remove('active'); document.body.style.overflow = 'auto'; } }); });
+    document.addEventListener('keydown', function(e) { if (e.key === 'Escape') { document.querySelectorAll('.modal.active').forEach(modal => { modal.classList.remove('active'); document.body.style.overflow = 'auto'; }); } });
+  </script>
+</body>
+</html>

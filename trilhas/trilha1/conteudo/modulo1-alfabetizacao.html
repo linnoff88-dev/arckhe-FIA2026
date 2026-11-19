@@ -1,0 +1,312 @@
+<!DOCTYPE html>
+<html lang="pt-BR" class="dark">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Modulo 1: Alfabetizacao em IA | FIA 2026</title>
+  <meta name="description" content="Alfabetizacao em IA - O Que Realmente Acontece? Entenda como funcionam os LLMs.">
+
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script>
+    tailwind.config = {
+      darkMode: 'class',
+      theme: {
+        extend: {
+          colors: {
+            primary: '#10B981',
+            accent: '#34D399'
+          }
+        }
+      }
+    }
+  </script>
+
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+
+  <style>
+    body { font-family: 'Inter', sans-serif; }
+    .prose h2 { margin-top: 2rem; margin-bottom: 1rem; }
+    .prose h3 { margin-top: 1.5rem; margin-bottom: 0.75rem; }
+    .prose p { margin-bottom: 1rem; }
+    .prose ul { margin-bottom: 1rem; padding-left: 1.5rem; }
+    .prose li { margin-bottom: 0.5rem; }
+  </style>
+</head>
+<body class="bg-neutral-50 dark:bg-neutral-900 text-neutral-900 dark:text-neutral-100 min-h-screen">
+
+  <!-- Navegacao -->
+  <nav class="sticky top-0 z-50 bg-white/95 dark:bg-neutral-900/95 backdrop-blur-sm border-b border-neutral-200 dark:border-neutral-700">
+    <div class="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8">
+      <div class="flex justify-between items-center h-16">
+        <a href="../modulos.html" class="flex items-center space-x-2 text-neutral-600 dark:text-neutral-400 hover:text-primary transition-colors">
+          <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 19l-7-7 7-7"></path>
+          </svg>
+          <span>Voltar para Modulos</span>
+        </a>
+        <div class="flex items-center space-x-4">
+          <span class="text-emerald-500 font-semibold hidden sm:block">Modulo 01</span>
+          <a href="https://inema.club" target="_blank" class="text-xs text-sky-500 hover:text-sky-400 transition-colors hidden sm:block">inema.club</a>
+          <button id="theme-toggle" class="p-2 rounded-lg bg-neutral-100 dark:bg-neutral-700 hover:bg-neutral-200 dark:hover:bg-neutral-600 transition-colors">
+            <svg id="theme-toggle-dark-icon" class="hidden w-5 h-5 text-neutral-700" fill="currentColor" viewBox="0 0 20 20">
+              <path d="M17.293 13.293A8 8 0 016.707 2.707a8.001 8.001 0 1010.586 10.586z"></path>
+            </svg>
+            <svg id="theme-toggle-light-icon" class="hidden w-5 h-5 text-yellow-400" fill="currentColor" viewBox="0 0 20 20">
+              <path d="M10 2a1 1 0 011 1v1a1 1 0 11-2 0V3a1 1 0 011-1zm4 8a4 4 0 11-8 0 4 4 0 018 0zm-.464 4.95l.707.707a1 1 0 001.414-1.414l-.707-.707a1 1 0 00-1.414 1.414zm2.12-10.607a1 1 0 010 1.414l-.706.707a1 1 0 11-1.414-1.414l.707-.707a1 1 0 011.414 0zM17 11a1 1 0 100-2h-1a1 1 0 100 2h1zm-7 4a1 1 0 011 1v1a1 1 0 11-2 0v-1a1 1 0 011-1zM5.05 6.464A1 1 0 106.465 5.05l-.708-.707a1 1 0 00-1.414 1.414l.707.707zm1.414 8.486l-.707.707a1 1 0 01-1.414-1.414l.707-.707a1 1 0 011.414 1.414zM4 11a1 1 0 100-2H3a1 1 0 000 2h1z" fill-rule="evenodd" clip-rule="evenodd"></path>
+            </svg>
+          </button>
+        </div>
+      </div>
+    </div>
+  </nav>
+
+  <!-- Main Content -->
+  <main class="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 py-12">
+
+    <!-- Header -->
+    <div class="mb-12">
+      <div class="flex items-center gap-4 mb-6">
+        <div class="w-16 h-16 bg-emerald-500 rounded-2xl flex items-center justify-center text-white font-bold text-2xl shadow-lg">01</div>
+        <div>
+          <span class="text-emerald-500 font-semibold text-sm">TRILHA 1 - INTRODUCAO</span>
+          <h1 class="text-3xl sm:text-4xl font-bold">Alfabetizacao em IA</h1>
+        </div>
+      </div>
+      <p class="text-xl text-neutral-600 dark:text-neutral-400">O Que Realmente Acontece? Entenda a natureza das ferramentas antes de automatizar.</p>
+    </div>
+
+    <!-- Content -->
+    <article class="prose prose-lg dark:prose-invert max-w-none">
+
+      <!-- Intro Box -->
+      <div class="bg-emerald-50 dark:bg-emerald-900/20 p-6 rounded-2xl border border-emerald-200 dark:border-emerald-800 mb-8">
+        <p class="text-lg text-neutral-700 dark:text-neutral-300 m-0">
+          Antes de automatizar qualquer coisa, precisamos entender a natureza da ferramenta. Modelos de Linguagem Grandes (LLMs) como o GPT-4, Claude 3 e Gemini 2.5 nao "pensam" ou "entendem" como humanos. Eles sao <strong>motores de previsao de tokens</strong> extremamente sofisticados.
+        </p>
+      </div>
+
+      <!-- O que sao LLMs -->
+      <section class="mb-10">
+        <h2 class="text-2xl font-bold text-neutral-900 dark:text-neutral-100 flex items-center">
+          <span class="w-8 h-8 bg-emerald-500 rounded-lg flex items-center justify-center text-white text-sm font-bold mr-3">1</span>
+          O que sao LLMs e como funcionam
+        </h2>
+
+        <div class="bg-white dark:bg-neutral-800 p-6 rounded-xl border border-neutral-200 dark:border-neutral-700 shadow-sm">
+          <div class="bg-emerald-100 dark:bg-emerald-900/30 p-4 rounded-lg mb-4">
+            <p class="font-semibold text-emerald-700 dark:text-emerald-400 m-0">Conceito-chave:</p>
+            <p class="text-neutral-700 dark:text-neutral-300 m-0 mt-2">A IA preve a proxima palavra (ou token) mais provavel em uma sequencia, com base nos padroes que aprendeu em um vasto conjunto de dados de treinamento. Ela nao possui crencas, consciencia ou intencao.</p>
+          </div>
+
+          <p class="text-neutral-600 dark:text-neutral-400">
+            Quando voce faz uma pergunta a um LLM, ele analisa os padroes estatisticos de bilhoes de textos que leu durante o treinamento e gera a resposta mais "provavel" baseada nesses padroes. E uma maquina de probabilidades, nao um ser pensante.
+          </p>
+        </div>
+      </section>
+
+      <!-- Comportamentos Tipicos -->
+      <section class="mb-10">
+        <h2 class="text-2xl font-bold text-neutral-900 dark:text-neutral-100 flex items-center">
+          <span class="w-8 h-8 bg-emerald-500 rounded-lg flex items-center justify-center text-white text-sm font-bold mr-3">2</span>
+          Comportamentos Tipicos da IA
+        </h2>
+
+        <p class="text-neutral-600 dark:text-neutral-400 mb-4">Isso leva a alguns comportamentos tipicos que precisamos gerenciar:</p>
+
+        <div class="grid gap-4">
+          <div class="bg-red-50 dark:bg-red-900/20 p-5 rounded-xl border-l-4 border-red-500">
+            <h4 class="font-bold text-red-700 dark:text-red-400 mb-2">Confiante e Errada</h4>
+            <p class="text-neutral-700 dark:text-neutral-300 m-0">A IA pode gerar informacoes incorretas com a mesma autoridade e fluidez de informacoes corretas. Ela nao sabe que esta errada porque nao "sabe" nada - apenas preve tokens.</p>
+          </div>
+
+          <div class="bg-amber-50 dark:bg-amber-900/20 p-5 rounded-xl border-l-4 border-amber-500">
+            <h4 class="font-bold text-amber-700 dark:text-amber-400 mb-2">Esquecimento de Contexto</h4>
+            <p class="text-neutral-700 dark:text-neutral-300 m-0">A "memoria" da IA e limitada a janela de contexto da conversa atual. Fora isso, ela esquece tudo. Cada nova conversa comeca do zero.</p>
+          </div>
+
+          <div class="bg-purple-50 dark:bg-purple-900/20 p-5 rounded-xl border-l-4 border-purple-500">
+            <h4 class="font-bold text-purple-700 dark:text-purple-400 mb-2">Mistura de Informacoes (Alucinacao)</h4>
+            <p class="text-neutral-700 dark:text-neutral-300 m-0">Pode combinar fatos de diferentes fontes de forma incoerente, um fenomeno conhecido como "alucinacao". A IA nao distingue entre o que e verdade e o que apenas parece verdade.</p>
+          </div>
+        </div>
+      </section>
+
+      <!-- Limitacoes Tecnicas -->
+      <section class="mb-10">
+        <h2 class="text-2xl font-bold text-neutral-900 dark:text-neutral-100 flex items-center">
+          <span class="w-8 h-8 bg-emerald-500 rounded-lg flex items-center justify-center text-white text-sm font-bold mr-3">3</span>
+          Limitacoes e Riscos
+        </h2>
+
+        <div class="bg-white dark:bg-neutral-800 p-6 rounded-xl border border-neutral-200 dark:border-neutral-700 shadow-sm">
+          <div class="space-y-4">
+            <div class="flex items-start">
+              <div class="w-10 h-10 bg-blue-100 dark:bg-blue-900/30 rounded-lg flex items-center justify-center mr-4 flex-shrink-0">
+                <svg class="w-5 h-5 text-blue-600 dark:text-blue-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m5.618-4.016A11.955 11.955 0 0112 2.944a11.955 11.955 0 01-8.618 3.04A12.02 12.02 0 003 9c0 5.591 3.824 10.29 9 11.622 5.176-1.332 9-6.03 9-11.622 0-1.042-.133-2.052-.382-3.016z"></path>
+                </svg>
+              </div>
+              <div>
+                <h4 class="font-semibold text-neutral-900 dark:text-neutral-100">Context Rot</h4>
+                <p class="text-neutral-600 dark:text-neutral-400 m-0">Conforme aumenta o numero de tokens na conversa, a capacidade de recall (lembrar detalhes anteriores) diminui significativamente.</p>
+              </div>
+            </div>
+
+            <div class="flex items-start">
+              <div class="w-10 h-10 bg-blue-100 dark:bg-blue-900/30 rounded-lg flex items-center justify-center mr-4 flex-shrink-0">
+                <svg class="w-5 h-5 text-blue-600 dark:text-blue-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 10V3L4 14h7v7l9-11h-7z"></path>
+                </svg>
+              </div>
+              <div>
+                <h4 class="font-semibold text-neutral-900 dark:text-neutral-100">Attention Budget</h4>
+                <p class="text-neutral-600 dark:text-neutral-400 m-0">LLMs tem um "orcamento de atencao" limitado que se esgota com mais tokens. Quanto mais contexto, menos foco em cada parte.</p>
+              </div>
+            </div>
+
+            <div class="flex items-start">
+              <div class="w-10 h-10 bg-blue-100 dark:bg-blue-900/30 rounded-lg flex items-center justify-center mr-4 flex-shrink-0">
+                <svg class="w-5 h-5 text-blue-600 dark:text-blue-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 11H5m14 0a2 2 0 012 2v6a2 2 0 01-2 2H5a2 2 0 01-2-2v-6a2 2 0 012-2m14 0V9a2 2 0 00-2-2M5 11V9a2 2 0 012-2m0 0V5a2 2 0 012-2h6a2 2 0 012 2v2M7 7h10"></path>
+                </svg>
+              </div>
+              <div>
+                <h4 class="font-semibold text-neutral-900 dark:text-neutral-100">Arquitetura Transformer</h4>
+                <p class="text-neutral-600 dark:text-neutral-400 m-0">Transformers criam n^2 relacoes para n tokens, criando uma tensao constante entre tamanho do contexto e capacidade de foco.</p>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- Exercicio Pratico -->
+      <section class="mb-10">
+        <h2 class="text-2xl font-bold text-neutral-900 dark:text-neutral-100 flex items-center">
+          <span class="w-8 h-8 bg-emerald-500 rounded-lg flex items-center justify-center text-white text-sm font-bold mr-3">4</span>
+          Exercicio Pratico
+        </h2>
+
+        <div class="bg-gradient-to-br from-emerald-500 to-teal-600 p-6 rounded-2xl text-white shadow-xl">
+          <h3 class="text-xl font-bold mb-4 text-white">Teste seus conhecimentos na pratica</h3>
+
+          <div class="space-y-4">
+            <div class="flex items-start">
+              <span class="w-8 h-8 bg-white/20 rounded-full flex items-center justify-center text-sm font-bold mr-3 flex-shrink-0">1</span>
+              <p class="m-0">Abra seu assistente de IA preferido (ChatGPT, Claude, Gemini, etc).</p>
+            </div>
+
+            <div class="flex items-start">
+              <span class="w-8 h-8 bg-white/20 rounded-full flex items-center justify-center text-sm font-bold mr-3 flex-shrink-0">2</span>
+              <p class="m-0">Peca para ele explicar um topico que voce domina profundamente (seu hobby, sua profissao, um projeto especifico).</p>
+            </div>
+
+            <div class="flex items-start">
+              <span class="w-8 h-8 bg-white/20 rounded-full flex items-center justify-center text-sm font-bold mr-3 flex-shrink-0">3</span>
+              <p class="m-0">Identifique onde a resposta e generica, onde ela inventa um detalhe e que informacao crucial faltou.</p>
+            </div>
+
+            <div class="flex items-start">
+              <span class="w-8 h-8 bg-white/20 rounded-full flex items-center justify-center text-sm font-bold mr-3 flex-shrink-0">4</span>
+              <p class="m-0">Anote a reflexao: <strong>"Que contexto faltou para a resposta ser perfeita?"</strong></p>
+            </div>
+          </div>
+
+          <div class="mt-6 p-4 bg-white/10 rounded-xl">
+            <p class="text-sm m-0"><strong>Objetivo:</strong> Este exercicio ajuda a calibrar suas expectativas sobre a IA e entender a importancia de fornecer contexto adequado.</p>
+          </div>
+        </div>
+      </section>
+
+      <!-- Resumo -->
+      <section class="mb-10">
+        <div class="bg-neutral-100 dark:bg-neutral-800 p-6 rounded-2xl">
+          <h3 class="text-xl font-bold mb-4 text-neutral-900 dark:text-neutral-100">Resumo do Modulo</h3>
+          <ul class="space-y-2 m-0 p-0 list-none">
+            <li class="flex items-center text-neutral-700 dark:text-neutral-300">
+              <svg class="w-5 h-5 text-emerald-500 mr-3 flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"></path>
+              </svg>
+              LLMs sao motores de previsao de tokens, nao mentes pensantes
+            </li>
+            <li class="flex items-center text-neutral-700 dark:text-neutral-300">
+              <svg class="w-5 h-5 text-emerald-500 mr-3 flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"></path>
+              </svg>
+              A IA pode ser confiante e errada ao mesmo tempo
+            </li>
+            <li class="flex items-center text-neutral-700 dark:text-neutral-300">
+              <svg class="w-5 h-5 text-emerald-500 mr-3 flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"></path>
+              </svg>
+              Memoria limitada a janela de contexto atual
+            </li>
+            <li class="flex items-center text-neutral-700 dark:text-neutral-300">
+              <svg class="w-5 h-5 text-emerald-500 mr-3 flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"></path>
+              </svg>
+              Fornecer contexto adequado e essencial para bons resultados
+            </li>
+          </ul>
+        </div>
+      </section>
+
+    </article>
+
+    <!-- Navigation -->
+    <div class="flex justify-between items-center mt-12 pt-8 border-t border-neutral-200 dark:border-neutral-700">
+      <a href="../modulos.html" class="flex items-center text-neutral-600 dark:text-neutral-400 hover:text-emerald-500 transition-colors">
+        <svg class="w-5 h-5 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 19l-7-7 7-7"></path>
+        </svg>
+        Voltar para Modulos
+      </a>
+      <a href="modulo2-sistemas.html" class="flex items-center px-6 py-3 bg-emerald-500 text-white rounded-lg font-semibold hover:bg-emerald-600 transition-colors">
+        Proximo Modulo
+        <svg class="w-5 h-5 ml-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"></path>
+        </svg>
+      </a>
+    </div>
+
+  </main>
+
+  <!-- Footer -->
+  <footer class="bg-neutral-100 dark:bg-neutral-800 border-t border-neutral-200 dark:border-neutral-700 py-8 mt-12">
+    <div class="max-w-4xl mx-auto px-4 text-center">
+      <p class="text-neutral-500 dark:text-neutral-400 text-sm">
+        FIA 2026 - Trilha 1: Introducao - Modulo 1: Alfabetizacao em IA
+      </p>
+      <p class="text-neutral-400 dark:text-neutral-500 text-xs mt-2"><a href="https://inema.club" target="_blank" class="text-sky-400 hover:text-sky-300 transition-colors">inema.club</a></p>
+    </div>
+  </footer>
+
+  <!-- JavaScript -->
+  <script>
+    // Theme Toggle
+    const themeToggleBtn = document.getElementById('theme-toggle');
+    const themeToggleDarkIcon = document.getElementById('theme-toggle-dark-icon');
+    const themeToggleLightIcon = document.getElementById('theme-toggle-light-icon');
+
+    if (localStorage.getItem('color-theme') === 'light' ||
+        (!('color-theme' in localStorage) && !window.matchMedia('(prefers-color-scheme: dark)').matches)) {
+      document.documentElement.classList.remove('dark');
+      themeToggleDarkIcon.classList.remove('hidden');
+    } else {
+      document.documentElement.classList.add('dark');
+      themeToggleLightIcon.classList.remove('hidden');
+    }
+
+    themeToggleBtn.addEventListener('click', function() {
+      themeToggleDarkIcon.classList.toggle('hidden');
+      themeToggleLightIcon.classList.toggle('hidden');
+      if (document.documentElement.classList.contains('dark')) {
+        document.documentElement.classList.remove('dark');
+        localStorage.setItem('color-theme', 'light');
+      } else {
+        document.documentElement.classList.add('dark');
+        localStorage.setItem('color-theme', 'dark');
+      }
+    });
+  </script>
+</body>
+</html>

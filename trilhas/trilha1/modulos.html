@@ -1,0 +1,860 @@
+<!DOCTYPE html>
+<html lang="pt-BR" class="dark">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Modulos - Trilha 1: Introducao | FIA 2026</title>
+  <meta name="description" content="Modulos da Trilha 1 - Alfabetizacao em IA, Pensamento em Sistemas, Context Engineering e Memoria">
+
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script>
+    tailwind.config = {
+      darkMode: 'class',
+      theme: {
+        extend: {
+          colors: {
+            primary: '#10B981',
+            accent: '#34D399'
+          }
+        }
+      }
+    }
+  </script>
+
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+
+  <style>
+    body { font-family: 'Inter', sans-serif; }
+
+    .module-card {
+      transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+    }
+    .module-card:hover {
+      transform: translateY(-4px);
+      box-shadow: 0 0 30px rgba(16, 185, 129, 0.15);
+    }
+
+    .topic-button {
+      transition: all 0.2s ease;
+    }
+    .topic-button:hover {
+      background-color: rgba(16, 185, 129, 0.1);
+    }
+
+    .topic-arrow {
+      transition: transform 0.3s ease;
+    }
+    .topic-arrow.rotate-180 {
+      transform: rotate(180deg);
+    }
+
+    .topic-content {
+      animation: fadeIn 0.3s ease;
+    }
+
+    @keyframes fadeIn {
+      from { opacity: 0; transform: translateY(-10px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+
+    /* Modal */
+    .modal {
+      display: none;
+      position: fixed;
+      z-index: 100;
+      left: 0;
+      top: 0;
+      width: 100%;
+      height: 100%;
+      background-color: rgba(0,0,0,0.7);
+      backdrop-filter: blur(4px);
+    }
+    .modal.active {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+    .modal-content {
+      background-color: white;
+      margin: auto;
+      width: 90%;
+      max-width: 900px;
+      max-height: 90vh;
+      border-radius: 1rem;
+      overflow: hidden;
+      box-shadow: 0 25px 50px rgba(0,0,0,0.3);
+    }
+    .dark .modal-content {
+      background-color: #1f2937;
+    }
+    .modal-header {
+      padding: 1.5rem 2rem;
+      border-bottom: 1px solid #e5e7eb;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+    .dark .modal-header {
+      border-bottom-color: #374151;
+    }
+    .modal-body {
+      padding: 2rem;
+      overflow-y: auto;
+      max-height: calc(90vh - 80px);
+    }
+    .close-modal {
+      color: #9ca3af;
+      font-size: 2rem;
+      font-weight: 700;
+      cursor: pointer;
+      line-height: 1;
+    }
+    .close-modal:hover {
+      color: #ef4444;
+    }
+  </style>
+</head>
+<body class="bg-neutral-50 dark:bg-neutral-900 text-neutral-900 dark:text-neutral-100 min-h-screen">
+
+  <!-- Navegacao -->
+  <nav class="sticky top-0 z-50 bg-white/95 dark:bg-neutral-900/95 backdrop-blur-sm border-b border-neutral-200 dark:border-neutral-700">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+      <div class="flex justify-between items-center h-16">
+        <div class="flex items-center space-x-3">
+          <a href="../../index.html" class="text-2xl font-bold bg-gradient-to-r from-blue-600 to-purple-600 bg-clip-text text-transparent">
+            FIA 2026
+          </a>
+          <span class="text-neutral-300 dark:text-neutral-600">|</span>
+          <a href="https://inema.club" target="_blank" class="text-sm text-sky-500 hover:text-sky-400 transition-colors font-medium">inema.club</a>
+        </div>
+
+        <!-- Desktop Menu -->
+        <div class="hidden md:flex items-center space-x-6">
+          <a href="../../index.html#trilhas" class="text-neutral-600 dark:text-neutral-300 hover:text-blue-600 dark:hover:text-blue-400 transition-colors">Inicio</a>
+          <a href="../trilha1/modulos.html" class="text-emerald-600 dark:text-emerald-400 font-semibold border-b-2 border-emerald-500">Trilha 1</a>
+          <a href="../trilha2/modulos.html" class="text-neutral-600 dark:text-neutral-300 hover:text-blue-600 dark:hover:text-blue-400 transition-colors">Trilha 2</a>
+          <a href="../trilha3/modulos.html" class="text-neutral-600 dark:text-neutral-300 hover:text-purple-600 dark:hover:text-purple-400 transition-colors">Trilha 3</a>
+
+          <button id="theme-toggle" class="p-2 rounded-lg bg-neutral-100 dark:bg-neutral-700 hover:bg-neutral-200 dark:hover:bg-neutral-600 transition-colors">
+            <svg id="theme-toggle-dark-icon" class="hidden w-5 h-5 text-neutral-700" fill="currentColor" viewBox="0 0 20 20">
+              <path d="M17.293 13.293A8 8 0 016.707 2.707a8.001 8.001 0 1010.586 10.586z"></path>
+            </svg>
+            <svg id="theme-toggle-light-icon" class="hidden w-5 h-5 text-yellow-400" fill="currentColor" viewBox="0 0 20 20">
+              <path d="M10 2a1 1 0 011 1v1a1 1 0 11-2 0V3a1 1 0 011-1zm4 8a4 4 0 11-8 0 4 4 0 018 0zm-.464 4.95l.707.707a1 1 0 001.414-1.414l-.707-.707a1 1 0 00-1.414 1.414zm2.12-10.607a1 1 0 010 1.414l-.706.707a1 1 0 11-1.414-1.414l.707-.707a1 1 0 011.414 0zM17 11a1 1 0 100-2h-1a1 1 0 100 2h1zm-7 4a1 1 0 011 1v1a1 1 0 11-2 0v-1a1 1 0 011-1zM5.05 6.464A1 1 0 106.465 5.05l-.708-.707a1 1 0 00-1.414 1.414l.707.707zm1.414 8.486l-.707.707a1 1 0 01-1.414-1.414l.707-.707a1 1 0 011.414 1.414zM4 11a1 1 0 100-2H3a1 1 0 000 2h1z" fill-rule="evenodd" clip-rule="evenodd"></path>
+            </svg>
+          </button>
+        </div>
+
+        <!-- Mobile Menu Button -->
+        <div class="md:hidden flex items-center space-x-2">
+          <button id="theme-toggle-mobile" class="p-2 rounded-lg bg-neutral-100 dark:bg-neutral-700">
+            <svg class="w-5 h-5 text-neutral-700 dark:text-yellow-400" fill="currentColor" viewBox="0 0 20 20">
+              <path d="M10 2a1 1 0 011 1v1a1 1 0 11-2 0V3a1 1 0 011-1zm4 8a4 4 0 11-8 0 4 4 0 018 0z"></path>
+            </svg>
+          </button>
+          <button id="mobile-menu-btn" class="p-2 rounded-lg hover:bg-neutral-100 dark:hover:bg-neutral-700">
+            <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16"></path>
+            </svg>
+          </button>
+        </div>
+      </div>
+
+      <!-- Mobile Menu -->
+      <div id="mobile-menu" class="hidden md:hidden pb-4">
+        <div class="flex flex-col space-y-2">
+          <a href="../../index.html" class="px-4 py-2 text-neutral-600 dark:text-neutral-300 hover:bg-neutral-100 dark:hover:bg-neutral-700 rounded-lg">Inicio</a>
+          <a href="../trilha1/modulos.html" class="px-4 py-2 bg-emerald-100 dark:bg-emerald-900/30 text-emerald-700 dark:text-emerald-400 rounded-lg font-semibold">Trilha 1 - Introducao</a>
+          <a href="../trilha2/modulos.html" class="px-4 py-2 text-neutral-600 dark:text-neutral-300 hover:bg-neutral-100 dark:hover:bg-neutral-700 rounded-lg">Trilha 2 - Fundamentos</a>
+          <a href="../trilha3/modulos.html" class="px-4 py-2 text-neutral-600 dark:text-neutral-300 hover:bg-neutral-100 dark:hover:bg-neutral-700 rounded-lg">Trilha 3 - Avancado</a>
+        </div>
+      </div>
+    </div>
+  </nav>
+
+  <!-- Main Content -->
+  <main class="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 py-12">
+
+    <!-- Header -->
+    <div class="text-center mb-12">
+      <span class="inline-block px-4 py-2 bg-emerald-100 dark:bg-emerald-900/30 text-emerald-600 dark:text-emerald-400 rounded-full text-sm font-semibold mb-4">
+        TRILHA 1 - INTRODUCAO
+      </span>
+      <h1 class="text-4xl sm:text-5xl font-bold mb-4">Modulos da Trilha</h1>
+      <p class="text-xl text-neutral-600 dark:text-neutral-400">
+        4 modulos para construir sua base em IA
+      </p>
+    </div>
+
+    <!-- Modulo 1 -->
+    <div class="module-card bg-white dark:bg-neutral-800 rounded-2xl p-6 mb-6 border border-neutral-200 dark:border-neutral-700 shadow-lg">
+      <div class="flex items-center mb-4">
+        <div class="w-14 h-14 bg-emerald-500 rounded-xl flex items-center justify-center text-white font-bold text-xl mr-4">01</div>
+        <div>
+          <h2 class="text-xl font-bold text-neutral-900 dark:text-neutral-100">Alfabetizacao em IA</h2>
+          <p class="text-neutral-500 dark:text-neutral-400 text-sm">O Que Realmente Acontece?</p>
+        </div>
+        <div class="ml-auto flex items-center space-x-2">
+          <span class="px-3 py-1 bg-emerald-100 dark:bg-emerald-900/30 text-emerald-600 dark:text-emerald-400 rounded-full text-xs font-semibold">4 topicos</span>
+        </div>
+      </div>
+
+      <!-- Topicos Expansiveis -->
+      <div class="space-y-2 mb-6">
+        <div class="topic-item">
+          <button class="topic-button w-full flex items-center justify-between px-4 py-3 bg-neutral-50 dark:bg-neutral-700/50 rounded-lg text-left">
+            <span class="font-medium text-neutral-800 dark:text-neutral-200">O que sao LLMs e como funcionam</span>
+            <svg class="topic-arrow w-5 h-5 text-neutral-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"></path>
+            </svg>
+          </button>
+          <div class="topic-content hidden mt-2 ml-4 p-4 bg-emerald-50 dark:bg-emerald-900/20 rounded-lg border-l-4 border-emerald-500">
+            <p class="text-sm text-neutral-700 dark:text-neutral-300 mb-2"><strong class="text-emerald-600">O que e:</strong> Modelos de Linguagem Grandes (LLMs) como GPT-4, Claude 3 e Gemini sao motores de previsao de tokens extremamente sofisticados.</p>
+            <p class="text-sm text-neutral-700 dark:text-neutral-300 mb-2"><strong class="text-emerald-600">Por que importa:</strong> Entender a natureza da ferramenta e essencial antes de automatizar qualquer coisa.</p>
+            <p class="text-sm text-neutral-700 dark:text-neutral-300"><strong class="text-emerald-600">Conceito-chave:</strong> A IA preve a proxima palavra mais provavel, nao possui crencas ou consciencia.</p>
+          </div>
+        </div>
+
+        <div class="topic-item">
+          <button class="topic-button w-full flex items-center justify-between px-4 py-3 bg-neutral-50 dark:bg-neutral-700/50 rounded-lg text-left">
+            <span class="font-medium text-neutral-800 dark:text-neutral-200">Comportamentos tipicos da IA</span>
+            <svg class="topic-arrow w-5 h-5 text-neutral-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"></path>
+            </svg>
+          </button>
+          <div class="topic-content hidden mt-2 ml-4 p-4 bg-emerald-50 dark:bg-emerald-900/20 rounded-lg border-l-4 border-emerald-500">
+            <p class="text-sm text-neutral-700 dark:text-neutral-300 mb-2"><strong class="text-emerald-600">Confiante e Errada:</strong> A IA pode gerar informacoes incorretas com a mesma autoridade de informacoes corretas.</p>
+            <p class="text-sm text-neutral-700 dark:text-neutral-300 mb-2"><strong class="text-emerald-600">Esquecimento de Contexto:</strong> A "memoria" e limitada a janela de contexto da conversa atual.</p>
+            <p class="text-sm text-neutral-700 dark:text-neutral-300"><strong class="text-emerald-600">Alucinacao:</strong> Pode combinar fatos de diferentes fontes de forma incoerente.</p>
+          </div>
+        </div>
+
+        <div class="topic-item">
+          <button class="topic-button w-full flex items-center justify-between px-4 py-3 bg-neutral-50 dark:bg-neutral-700/50 rounded-lg text-left">
+            <span class="font-medium text-neutral-800 dark:text-neutral-200">Limitacoes e riscos</span>
+            <svg class="topic-arrow w-5 h-5 text-neutral-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"></path>
+            </svg>
+          </button>
+          <div class="topic-content hidden mt-2 ml-4 p-4 bg-emerald-50 dark:bg-emerald-900/20 rounded-lg border-l-4 border-emerald-500">
+            <p class="text-sm text-neutral-700 dark:text-neutral-300 mb-2"><strong class="text-emerald-600">Context Rot:</strong> Conforme aumenta o numero de tokens, a capacidade de recall diminui.</p>
+            <p class="text-sm text-neutral-700 dark:text-neutral-300 mb-2"><strong class="text-emerald-600">Attention Budget:</strong> LLMs tem um "orcamento de atencao" limitado que se esgota com mais tokens.</p>
+            <p class="text-sm text-neutral-700 dark:text-neutral-300"><strong class="text-emerald-600">Arquitetura:</strong> Transformers criam n² relacoes para n tokens, criando tensao entre tamanho e foco.</p>
+          </div>
+        </div>
+
+        <div class="topic-item">
+          <button class="topic-button w-full flex items-center justify-between px-4 py-3 bg-neutral-50 dark:bg-neutral-700/50 rounded-lg text-left">
+            <span class="font-medium text-neutral-800 dark:text-neutral-200">Exercicio pratico</span>
+            <svg class="topic-arrow w-5 h-5 text-neutral-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"></path>
+            </svg>
+          </button>
+          <div class="topic-content hidden mt-2 ml-4 p-4 bg-emerald-50 dark:bg-emerald-900/20 rounded-lg border-l-4 border-emerald-500">
+            <p class="text-sm text-neutral-700 dark:text-neutral-300 mb-2"><strong class="text-emerald-600">Passo 1:</strong> Abra seu assistente de IA preferido.</p>
+            <p class="text-sm text-neutral-700 dark:text-neutral-300 mb-2"><strong class="text-emerald-600">Passo 2:</strong> Peca para explicar um topico que voce domina profundamente.</p>
+            <p class="text-sm text-neutral-700 dark:text-neutral-300 mb-2"><strong class="text-emerald-600">Passo 3:</strong> Identifique onde a resposta e generica, onde inventa detalhes.</p>
+            <p class="text-sm text-neutral-700 dark:text-neutral-300"><strong class="text-emerald-600">Reflexao:</strong> "Que contexto faltou para a resposta ser perfeita?"</p>
+          </div>
+        </div>
+      </div>
+
+      <!-- Botoes de Acao -->
+      <div class="flex flex-wrap gap-3">
+        <button onclick="openModal('modal-m1')" class="flex items-center px-4 py-2 bg-emerald-100 dark:bg-emerald-900/30 text-emerald-700 dark:text-emerald-400 rounded-lg font-medium hover:bg-emerald-200 dark:hover:bg-emerald-900/50 transition-colors">
+          <svg class="w-4 h-4 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 12a3 3 0 11-6 0 3 3 0 016 0z"></path>
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M2.458 12C3.732 7.943 7.523 5 12 5c4.478 0 8.268 2.943 9.542 7-1.274 4.057-5.064 7-9.542 7-4.477 0-8.268-2.943-9.542-7z"></path>
+          </svg>
+          Ver em Modal
+        </button>
+        <a href="conteudo/modulo1-alfabetizacao.html" class="flex items-center px-4 py-2 bg-emerald-500 text-white rounded-lg font-medium hover:bg-emerald-600 transition-colors">
+          <svg class="w-4 h-4 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 6H6a2 2 0 00-2 2v10a2 2 0 002 2h10a2 2 0 002-2v-4M14 4h6m0 0v6m0-6L10 14"></path>
+          </svg>
+          Pagina Completa
+        </a>
+      </div>
+    </div>
+
+    <!-- Modulo 2 -->
+    <div class="module-card bg-white dark:bg-neutral-800 rounded-2xl p-6 mb-6 border border-neutral-200 dark:border-neutral-700 shadow-lg">
+      <div class="flex items-center mb-4">
+        <div class="w-14 h-14 bg-emerald-500 rounded-xl flex items-center justify-center text-white font-bold text-xl mr-4">02</div>
+        <div>
+          <h2 class="text-xl font-bold text-neutral-900 dark:text-neutral-100">Pensamento em Sistemas</h2>
+          <p class="text-neutral-500 dark:text-neutral-400 text-sm">A Saida do "Chat"</p>
+        </div>
+        <div class="ml-auto flex items-center space-x-2">
+          <span class="px-3 py-1 bg-emerald-100 dark:bg-emerald-900/30 text-emerald-600 dark:text-emerald-400 rounded-full text-xs font-semibold">3 topicos</span>
+        </div>
+      </div>
+
+      <div class="space-y-2 mb-6">
+        <div class="topic-item">
+          <button class="topic-button w-full flex items-center justify-between px-4 py-3 bg-neutral-50 dark:bg-neutral-700/50 rounded-lg text-left">
+            <span class="font-medium text-neutral-800 dark:text-neutral-200">O modelo Entrada-Processamento-Saida</span>
+            <svg class="topic-arrow w-5 h-5 text-neutral-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"></path>
+            </svg>
+          </button>
+          <div class="topic-content hidden mt-2 ml-4 p-4 bg-emerald-50 dark:bg-emerald-900/20 rounded-lg border-l-4 border-emerald-500">
+            <p class="text-sm text-neutral-700 dark:text-neutral-300 mb-2"><strong class="text-emerald-600">Entrada:</strong> O que inicia o processo? (email, formulario, mensagem WhatsApp)</p>
+            <p class="text-sm text-neutral-700 dark:text-neutral-300 mb-2"><strong class="text-emerald-600">Processamento:</strong> Que decisoes e transformacoes precisam acontecer? (classificar, resumir, extrair)</p>
+            <p class="text-sm text-neutral-700 dark:text-neutral-300"><strong class="text-emerald-600">Saida:</strong> Qual e o resultado final? (resposta enviada, tarefa criada, linha em planilha)</p>
+          </div>
+        </div>
+
+        <div class="topic-item">
+          <button class="topic-button w-full flex items-center justify-between px-4 py-3 bg-neutral-50 dark:bg-neutral-700/50 rounded-lg text-left">
+            <span class="font-medium text-neutral-800 dark:text-neutral-200">Saindo da mentalidade de chat</span>
+            <svg class="topic-arrow w-5 h-5 text-neutral-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"></path>
+            </svg>
+          </button>
+          <div class="topic-content hidden mt-2 ml-4 p-4 bg-emerald-50 dark:bg-emerald-900/20 rounded-lg border-l-4 border-emerald-500">
+            <p class="text-sm text-neutral-700 dark:text-neutral-300 mb-2"><strong class="text-emerald-600">Erro comum:</strong> Ficar preso na interface de chat ao inves de pensar em fluxos.</p>
+            <p class="text-sm text-neutral-700 dark:text-neutral-300 mb-2"><strong class="text-emerald-600">Principio:</strong> Pare de pensar em "conversar com a IA" e comece a pensar em "desenhar um fluxo onde a IA executa uma etapa especifica".</p>
+            <p class="text-sm text-neutral-700 dark:text-neutral-300"><strong class="text-emerald-600">Mudanca:</strong> De interacao manual para automacao sistematica.</p>
+          </div>
+        </div>
+
+        <div class="topic-item">
+          <button class="topic-button w-full flex items-center justify-between px-4 py-3 bg-neutral-50 dark:bg-neutral-700/50 rounded-lg text-left">
+            <span class="font-medium text-neutral-800 dark:text-neutral-200">Exercicio: Mapeie seu processo</span>
+            <svg class="topic-arrow w-5 h-5 text-neutral-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"></path>
+            </svg>
+          </button>
+          <div class="topic-content hidden mt-2 ml-4 p-4 bg-emerald-50 dark:bg-emerald-900/20 rounded-lg border-l-4 border-emerald-500">
+            <p class="text-sm text-neutral-700 dark:text-neutral-300 mb-2"><strong class="text-emerald-600">Passo 1:</strong> Mapeie um processo simples do seu dia a dia (ex: responder orcamento).</p>
+            <p class="text-sm text-neutral-700 dark:text-neutral-300 mb-2"><strong class="text-emerald-600">Passo 2:</strong> Descreva Entrada, Processamento e Saida.</p>
+            <p class="text-sm text-neutral-700 dark:text-neutral-300"><strong class="text-emerald-600">Passo 3:</strong> Identifique o maior Gargalo - onde e mais lento ou propenso a erros?</p>
+          </div>
+        </div>
+      </div>
+
+      <div class="flex flex-wrap gap-3">
+        <button onclick="openModal('modal-m2')" class="flex items-center px-4 py-2 bg-emerald-100 dark:bg-emerald-900/30 text-emerald-700 dark:text-emerald-400 rounded-lg font-medium hover:bg-emerald-200 dark:hover:bg-emerald-900/50 transition-colors">
+          <svg class="w-4 h-4 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 12a3 3 0 11-6 0 3 3 0 016 0z"></path>
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M2.458 12C3.732 7.943 7.523 5 12 5c4.478 0 8.268 2.943 9.542 7-1.274 4.057-5.064 7-9.542 7-4.477 0-8.268-2.943-9.542-7z"></path>
+          </svg>
+          Ver em Modal
+        </button>
+        <a href="conteudo/modulo2-sistemas.html" class="flex items-center px-4 py-2 bg-emerald-500 text-white rounded-lg font-medium hover:bg-emerald-600 transition-colors">
+          <svg class="w-4 h-4 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 6H6a2 2 0 00-2 2v10a2 2 0 002 2h10a2 2 0 002-2v-4M14 4h6m0 0v6m0-6L10 14"></path>
+          </svg>
+          Pagina Completa
+        </a>
+      </div>
+    </div>
+
+    <!-- Modulo 3 -->
+    <div class="module-card bg-white dark:bg-neutral-800 rounded-2xl p-6 mb-6 border border-neutral-200 dark:border-neutral-700 shadow-lg">
+      <div class="flex items-center mb-4">
+        <div class="w-14 h-14 bg-emerald-500 rounded-xl flex items-center justify-center text-white font-bold text-xl mr-4">03</div>
+        <div>
+          <h2 class="text-xl font-bold text-neutral-900 dark:text-neutral-100">Context Engineering</h2>
+          <p class="text-neutral-500 dark:text-neutral-400 text-sm">De Prompt a Context Engineering</p>
+        </div>
+        <div class="ml-auto flex items-center space-x-2">
+          <span class="px-3 py-1 bg-emerald-100 dark:bg-emerald-900/30 text-emerald-600 dark:text-emerald-400 rounded-full text-xs font-semibold">4 topicos</span>
+        </div>
+      </div>
+
+      <div class="space-y-2 mb-6">
+        <div class="topic-item">
+          <button class="topic-button w-full flex items-center justify-between px-4 py-3 bg-neutral-50 dark:bg-neutral-700/50 rounded-lg text-left">
+            <span class="font-medium text-neutral-800 dark:text-neutral-200">Prompt vs Context Engineering</span>
+            <svg class="topic-arrow w-5 h-5 text-neutral-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"></path>
+            </svg>
+          </button>
+          <div class="topic-content hidden mt-2 ml-4 p-4 bg-emerald-50 dark:bg-emerald-900/20 rounded-lg border-l-4 border-emerald-500">
+            <p class="text-sm text-neutral-700 dark:text-neutral-300 mb-2"><strong class="text-emerald-600">Prompt Engineering:</strong> Arte de escrever instrucoes claras para executar uma tarefa unica.</p>
+            <p class="text-sm text-neutral-700 dark:text-neutral-300"><strong class="text-emerald-600">Context Engineering:</strong> Ciencia de projetar sistemas que fornecem a informacao certa, no momento certo, de forma continua.</p>
+          </div>
+        </div>
+
+        <div class="topic-item">
+          <button class="topic-button w-full flex items-center justify-between px-4 py-3 bg-neutral-50 dark:bg-neutral-700/50 rounded-lg text-left">
+            <span class="font-medium text-neutral-800 dark:text-neutral-200">Estrutura de um Prompt Fundamental</span>
+            <svg class="topic-arrow w-5 h-5 text-neutral-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"></path>
+            </svg>
+          </button>
+          <div class="topic-content hidden mt-2 ml-4 p-4 bg-emerald-50 dark:bg-emerald-900/20 rounded-lg border-l-4 border-emerald-500">
+            <p class="text-sm text-neutral-700 dark:text-neutral-300 mb-2"><strong class="text-emerald-600">Papel:</strong> "Voce e um assistente de marketing especializado..."</p>
+            <p class="text-sm text-neutral-700 dark:text-neutral-300 mb-2"><strong class="text-emerald-600">Objetivo:</strong> "Seu objetivo e criar tres opcoes de posts..."</p>
+            <p class="text-sm text-neutral-700 dark:text-neutral-300 mb-2"><strong class="text-emerald-600">Contexto:</strong> "O post e sobre o lancamento de um curso de IA..."</p>
+            <p class="text-sm text-neutral-700 dark:text-neutral-300 mb-2"><strong class="text-emerald-600">Restricoes:</strong> "Nao use girias. Tom profissional. Max 280 caracteres."</p>
+            <p class="text-sm text-neutral-700 dark:text-neutral-300"><strong class="text-emerald-600">Formato:</strong> "Responda com uma lista numerada."</p>
+          </div>
+        </div>
+
+        <div class="topic-item">
+          <button class="topic-button w-full flex items-center justify-between px-4 py-3 bg-neutral-50 dark:bg-neutral-700/50 rounded-lg text-left">
+            <span class="font-medium text-neutral-800 dark:text-neutral-200">Tipos de contexto</span>
+            <svg class="topic-arrow w-5 h-5 text-neutral-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"></path>
+            </svg>
+          </button>
+          <div class="topic-content hidden mt-2 ml-4 p-4 bg-emerald-50 dark:bg-emerald-900/20 rounded-lg border-l-4 border-emerald-500">
+            <p class="text-sm text-neutral-700 dark:text-neutral-300 mb-2"><strong class="text-emerald-600">System Instructions:</strong> Instrucoes de sistema que definem comportamento.</p>
+            <p class="text-sm text-neutral-700 dark:text-neutral-300 mb-2"><strong class="text-emerald-600">Conversation History:</strong> Historico da conversa e preferencias do usuario.</p>
+            <p class="text-sm text-neutral-700 dark:text-neutral-300 mb-2"><strong class="text-emerald-600">Retrieved Information:</strong> Documentos e dados recuperados (RAG).</p>
+            <p class="text-sm text-neutral-700 dark:text-neutral-300"><strong class="text-emerald-600">Available Tools:</strong> Ferramentas e definicoes disponiveis.</p>
+          </div>
+        </div>
+
+        <div class="topic-item">
+          <button class="topic-button w-full flex items-center justify-between px-4 py-3 bg-neutral-50 dark:bg-neutral-700/50 rounded-lg text-left">
+            <span class="font-medium text-neutral-800 dark:text-neutral-200">Exercicio: Crie seu Prompt Mestre</span>
+            <svg class="topic-arrow w-5 h-5 text-neutral-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"></path>
+            </svg>
+          </button>
+          <div class="topic-content hidden mt-2 ml-4 p-4 bg-emerald-50 dark:bg-emerald-900/20 rounded-lg border-l-4 border-emerald-500">
+            <p class="text-sm text-neutral-700 dark:text-neutral-300 mb-2"><strong class="text-emerald-600">Tarefa:</strong> Pegue o processo mapeado no Modulo 2.</p>
+            <p class="text-sm text-neutral-700 dark:text-neutral-300"><strong class="text-emerald-600">Objetivo:</strong> Escreva um "Prompt Mestre" para a etapa de "Processamento" usando a estrutura Papel-Objetivo-Contexto-Restricoes-Formato.</p>
+          </div>
+        </div>
+      </div>
+
+      <div class="flex flex-wrap gap-3">
+        <button onclick="openModal('modal-m3')" class="flex items-center px-4 py-2 bg-emerald-100 dark:bg-emerald-900/30 text-emerald-700 dark:text-emerald-400 rounded-lg font-medium hover:bg-emerald-200 dark:hover:bg-emerald-900/50 transition-colors">
+          <svg class="w-4 h-4 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 12a3 3 0 11-6 0 3 3 0 016 0z"></path>
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M2.458 12C3.732 7.943 7.523 5 12 5c4.478 0 8.268 2.943 9.542 7-1.274 4.057-5.064 7-9.542 7-4.477 0-8.268-2.943-9.542-7z"></path>
+          </svg>
+          Ver em Modal
+        </button>
+        <a href="conteudo/modulo3-context.html" class="flex items-center px-4 py-2 bg-emerald-500 text-white rounded-lg font-medium hover:bg-emerald-600 transition-colors">
+          <svg class="w-4 h-4 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 6H6a2 2 0 00-2 2v10a2 2 0 002 2h10a2 2 0 002-2v-4M14 4h6m0 0v6m0-6L10 14"></path>
+          </svg>
+          Pagina Completa
+        </a>
+      </div>
+    </div>
+
+    <!-- Modulo 4 -->
+    <div class="module-card bg-white dark:bg-neutral-800 rounded-2xl p-6 mb-6 border border-neutral-200 dark:border-neutral-700 shadow-lg">
+      <div class="flex items-center mb-4">
+        <div class="w-14 h-14 bg-emerald-500 rounded-xl flex items-center justify-center text-white font-bold text-xl mr-4">04</div>
+        <div>
+          <h2 class="text-xl font-bold text-neutral-900 dark:text-neutral-100">Memoria e Seguranca</h2>
+          <p class="text-neutral-500 dark:text-neutral-400 text-sm">Os Pilares da Confianca</p>
+        </div>
+        <div class="ml-auto flex items-center space-x-2">
+          <span class="px-3 py-1 bg-emerald-100 dark:bg-emerald-900/30 text-emerald-600 dark:text-emerald-400 rounded-full text-xs font-semibold">4 topicos</span>
+        </div>
+      </div>
+
+      <div class="space-y-2 mb-6">
+        <div class="topic-item">
+          <button class="topic-button w-full flex items-center justify-between px-4 py-3 bg-neutral-50 dark:bg-neutral-700/50 rounded-lg text-left">
+            <span class="font-medium text-neutral-800 dark:text-neutral-200">O conceito de RAG</span>
+            <svg class="topic-arrow w-5 h-5 text-neutral-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"></path>
+            </svg>
+          </button>
+          <div class="topic-content hidden mt-2 ml-4 p-4 bg-emerald-50 dark:bg-emerald-900/20 rounded-lg border-l-4 border-emerald-500">
+            <p class="text-sm text-neutral-700 dark:text-neutral-300 mb-2"><strong class="text-emerald-600">RAG:</strong> Retrieval-Augmented Generation - tecnica para dar "memoria externa" a IA.</p>
+            <p class="text-sm text-neutral-700 dark:text-neutral-300 mb-2"><strong class="text-emerald-600">Como funciona:</strong> A IA consulta uma base de conhecimento confiavel ANTES de responder.</p>
+            <p class="text-sm text-neutral-700 dark:text-neutral-300"><strong class="text-emerald-600">Analogia:</strong> Como ensinar um estagiario a sempre consultar o manual da empresa antes de responder ao cliente.</p>
+          </div>
+        </div>
+
+        <div class="topic-item">
+          <button class="topic-button w-full flex items-center justify-between px-4 py-3 bg-neutral-50 dark:bg-neutral-700/50 rounded-lg text-left">
+            <span class="font-medium text-neutral-800 dark:text-neutral-200">Criando sua Base de Conhecimento</span>
+            <svg class="topic-arrow w-5 h-5 text-neutral-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"></path>
+            </svg>
+          </button>
+          <div class="topic-content hidden mt-2 ml-4 p-4 bg-emerald-50 dark:bg-emerald-900/20 rounded-lg border-l-4 border-emerald-500">
+            <p class="text-sm text-neutral-700 dark:text-neutral-300 mb-2"><strong class="text-emerald-600">Passo 1:</strong> Crie uma pasta chamada BASE_DE_CONHECIMENTO.</p>
+            <p class="text-sm text-neutral-700 dark:text-neutral-300 mb-2"><strong class="text-emerald-600">Passo 2:</strong> Adicione documentos do seu negocio: PDF de precos, descricao de servicos, FAQ.</p>
+            <p class="text-sm text-neutral-700 dark:text-neutral-300"><strong class="text-emerald-600">Regra:</strong> "Para qualquer pergunta sobre o negocio, a IA deve primeiro 'olhar' aqui".</p>
+          </div>
+        </div>
+
+        <div class="topic-item">
+          <button class="topic-button w-full flex items-center justify-between px-4 py-3 bg-neutral-50 dark:bg-neutral-700/50 rounded-lg text-left">
+            <span class="font-medium text-neutral-800 dark:text-neutral-200">Framework de seguranca</span>
+            <svg class="topic-arrow w-5 h-5 text-neutral-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"></path>
+            </svg>
+          </button>
+          <div class="topic-content hidden mt-2 ml-4 p-4 bg-emerald-50 dark:bg-emerald-900/20 rounded-lg border-l-4 border-emerald-500">
+            <p class="text-sm text-neutral-700 dark:text-neutral-300 mb-2"><strong class="text-emerald-600">Principio:</strong> Confianca cega em IA e uma receita para o desastre.</p>
+            <p class="text-sm text-neutral-700 dark:text-neutral-300"><strong class="text-emerald-600">Solucao:</strong> Framework de seguranca desde o primeiro dia com checklist de qualidade.</p>
+          </div>
+        </div>
+
+        <div class="topic-item">
+          <button class="topic-button w-full flex items-center justify-between px-4 py-3 bg-neutral-50 dark:bg-neutral-700/50 rounded-lg text-left">
+            <span class="font-medium text-neutral-800 dark:text-neutral-200">Checklist de Qualidade</span>
+            <svg class="topic-arrow w-5 h-5 text-neutral-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"></path>
+            </svg>
+          </button>
+          <div class="topic-content hidden mt-2 ml-4 p-4 bg-emerald-50 dark:bg-emerald-900/20 rounded-lg border-l-4 border-emerald-500">
+            <p class="text-sm text-neutral-700 dark:text-neutral-300 mb-1">1. A resposta envolve dados sensiveis de clientes?</p>
+            <p class="text-sm text-neutral-700 dark:text-neutral-300 mb-1">2. A informacao precisa ser validada por um humano?</p>
+            <p class="text-sm text-neutral-700 dark:text-neutral-300 mb-1">3. A fonte desta informacao e confiavel?</p>
+            <p class="text-sm text-neutral-700 dark:text-neutral-300 mb-1">4. Qual o impacto se esta informacao estiver errada?</p>
+            <p class="text-sm text-neutral-700 dark:text-neutral-300">5. A resposta esta alinhada com o tom de voz da marca?</p>
+          </div>
+        </div>
+      </div>
+
+      <div class="flex flex-wrap gap-3">
+        <button onclick="openModal('modal-m4')" class="flex items-center px-4 py-2 bg-emerald-100 dark:bg-emerald-900/30 text-emerald-700 dark:text-emerald-400 rounded-lg font-medium hover:bg-emerald-200 dark:hover:bg-emerald-900/50 transition-colors">
+          <svg class="w-4 h-4 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 12a3 3 0 11-6 0 3 3 0 016 0z"></path>
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M2.458 12C3.732 7.943 7.523 5 12 5c4.478 0 8.268 2.943 9.542 7-1.274 4.057-5.064 7-9.542 7-4.477 0-8.268-2.943-9.542-7z"></path>
+          </svg>
+          Ver em Modal
+        </button>
+        <a href="conteudo/modulo4-memoria.html" class="flex items-center px-4 py-2 bg-emerald-500 text-white rounded-lg font-medium hover:bg-emerald-600 transition-colors">
+          <svg class="w-4 h-4 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 6H6a2 2 0 00-2 2v10a2 2 0 002 2h10a2 2 0 002-2v-4M14 4h6m0 0v6m0-6L10 14"></path>
+          </svg>
+          Pagina Completa
+        </a>
+      </div>
+    </div>
+
+    <!-- CTA -->
+    <div class="text-center mt-12">
+      <a href="index.html" class="inline-flex items-center px-6 py-3 bg-emerald-500 text-white rounded-lg font-semibold hover:bg-emerald-600 transition-colors">
+        <svg class="w-5 h-5 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 19l-7-7 7-7"></path>
+        </svg>
+        Voltar para Trilha 1
+      </a>
+    </div>
+
+  </main>
+
+  <!-- MODAIS -->
+
+  <!-- Modal Modulo 1 -->
+  <div id="modal-m1" class="modal">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h2 class="text-2xl font-bold text-neutral-900 dark:text-neutral-100">01 - Alfabetizacao em IA</h2>
+        <button class="close-modal" onclick="closeModal('modal-m1')">&times;</button>
+      </div>
+      <div class="modal-body">
+        <div class="mb-6">
+          <p class="text-lg text-neutral-700 dark:text-neutral-300 mb-4">Antes de automatizar qualquer coisa, precisamos entender a natureza da ferramenta.</p>
+          <div class="flex gap-3 flex-wrap">
+            <span class="px-3 py-1 bg-emerald-100 dark:bg-emerald-900/30 text-emerald-700 dark:text-emerald-400 rounded-full text-sm font-semibold">4 topicos</span>
+            <span class="px-3 py-1 bg-emerald-100 dark:bg-emerald-900/30 text-emerald-700 dark:text-emerald-400 rounded-full text-sm font-semibold">Fundamentos</span>
+          </div>
+        </div>
+
+        <div class="space-y-4">
+          <div class="bg-emerald-50 dark:bg-emerald-900/20 p-4 rounded-lg border-l-4 border-emerald-500">
+            <h4 class="font-bold text-emerald-700 dark:text-emerald-400 mb-2">O que sao LLMs</h4>
+            <p class="text-sm text-neutral-700 dark:text-neutral-300">Modelos de Linguagem Grandes sao motores de previsao de tokens. Eles preveem a proxima palavra mais provavel baseado em padroes aprendidos.</p>
+          </div>
+
+          <div class="bg-red-50 dark:bg-red-900/20 p-4 rounded-lg border-l-4 border-red-500">
+            <h4 class="font-bold text-red-700 dark:text-red-400 mb-2">Comportamentos a Gerenciar</h4>
+            <ul class="text-sm text-neutral-700 dark:text-neutral-300 space-y-1">
+              <li>* Confiante e Errada - gera informacoes incorretas com autoridade</li>
+              <li>* Esquecimento de Contexto - memoria limitada a janela atual</li>
+              <li>* Alucinacao - combina fatos de forma incoerente</li>
+            </ul>
+          </div>
+
+          <div class="bg-blue-50 dark:bg-blue-900/20 p-4 rounded-lg border-l-4 border-blue-500">
+            <h4 class="font-bold text-blue-700 dark:text-blue-400 mb-2">Exercicio</h4>
+            <p class="text-sm text-neutral-700 dark:text-neutral-300">Peca para a IA explicar um topico que voce domina e identifique as falhas. Pergunte-se: "Que contexto faltou?"</p>
+          </div>
+        </div>
+
+        <div class="mt-6 text-center">
+          <a href="conteudo/modulo1-alfabetizacao.html" class="inline-flex items-center px-6 py-3 bg-emerald-500 text-white rounded-lg font-semibold hover:bg-emerald-600 transition-colors">
+            Ver Conteudo Completo
+            <svg class="w-4 h-4 ml-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"></path>
+            </svg>
+          </a>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Modal Modulo 2 -->
+  <div id="modal-m2" class="modal">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h2 class="text-2xl font-bold text-neutral-900 dark:text-neutral-100">02 - Pensamento em Sistemas</h2>
+        <button class="close-modal" onclick="closeModal('modal-m2')">&times;</button>
+      </div>
+      <div class="modal-body">
+        <div class="mb-6">
+          <p class="text-lg text-neutral-700 dark:text-neutral-300 mb-4">O erro mais comum e ficar preso na interface de chat. Para automacao, precisamos pensar em fluxos e sistemas.</p>
+          <div class="flex gap-3 flex-wrap">
+            <span class="px-3 py-1 bg-emerald-100 dark:bg-emerald-900/30 text-emerald-700 dark:text-emerald-400 rounded-full text-sm font-semibold">3 topicos</span>
+            <span class="px-3 py-1 bg-emerald-100 dark:bg-emerald-900/30 text-emerald-700 dark:text-emerald-400 rounded-full text-sm font-semibold">Mental Model</span>
+          </div>
+        </div>
+
+        <div class="space-y-4">
+          <div class="bg-emerald-50 dark:bg-emerald-900/20 p-4 rounded-lg border-l-4 border-emerald-500">
+            <h4 class="font-bold text-emerald-700 dark:text-emerald-400 mb-2">Modelo Entrada-Processamento-Saida</h4>
+            <div class="grid grid-cols-3 gap-2 mt-2">
+              <div class="bg-white dark:bg-neutral-800 p-2 rounded text-center text-xs">
+                <div class="font-bold text-emerald-600">Entrada</div>
+                <div class="text-neutral-600 dark:text-neutral-400">Email, form...</div>
+              </div>
+              <div class="bg-white dark:bg-neutral-800 p-2 rounded text-center text-xs">
+                <div class="font-bold text-blue-600">Processo</div>
+                <div class="text-neutral-600 dark:text-neutral-400">Classificar...</div>
+              </div>
+              <div class="bg-white dark:bg-neutral-800 p-2 rounded text-center text-xs">
+                <div class="font-bold text-purple-600">Saida</div>
+                <div class="text-neutral-600 dark:text-neutral-400">Resposta...</div>
+              </div>
+            </div>
+          </div>
+
+          <div class="bg-blue-50 dark:bg-blue-900/20 p-4 rounded-lg border-l-4 border-blue-500">
+            <h4 class="font-bold text-blue-700 dark:text-blue-400 mb-2">Principio Norteador</h4>
+            <p class="text-sm text-neutral-700 dark:text-neutral-300">Pare de pensar em "conversar com a IA" e comece a pensar em "desenhar um fluxo onde a IA executa uma etapa especifica".</p>
+          </div>
+        </div>
+
+        <div class="mt-6 text-center">
+          <a href="conteudo/modulo2-sistemas.html" class="inline-flex items-center px-6 py-3 bg-emerald-500 text-white rounded-lg font-semibold hover:bg-emerald-600 transition-colors">
+            Ver Conteudo Completo
+            <svg class="w-4 h-4 ml-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"></path>
+            </svg>
+          </a>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Modal Modulo 3 -->
+  <div id="modal-m3" class="modal">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h2 class="text-2xl font-bold text-neutral-900 dark:text-neutral-100">03 - Context Engineering</h2>
+        <button class="close-modal" onclick="closeModal('modal-m3')">&times;</button>
+      </div>
+      <div class="modal-body">
+        <div class="mb-6">
+          <p class="text-lg text-neutral-700 dark:text-neutral-300 mb-4">A evolucao de Prompt para Context Engineering - gerenciando todo o ecossistema de informacoes.</p>
+          <div class="flex gap-3 flex-wrap">
+            <span class="px-3 py-1 bg-emerald-100 dark:bg-emerald-900/30 text-emerald-700 dark:text-emerald-400 rounded-full text-sm font-semibold">4 topicos</span>
+            <span class="px-3 py-1 bg-emerald-100 dark:bg-emerald-900/30 text-emerald-700 dark:text-emerald-400 rounded-full text-sm font-semibold">Core Skill</span>
+          </div>
+        </div>
+
+        <div class="space-y-4">
+          <div class="grid md:grid-cols-2 gap-4">
+            <div class="bg-neutral-100 dark:bg-neutral-700/50 p-4 rounded-lg">
+              <h4 class="font-bold text-neutral-700 dark:text-neutral-300 mb-2">Prompt Engineering</h4>
+              <p class="text-sm text-neutral-600 dark:text-neutral-400">Arte de escrever instrucoes para uma tarefa unica.</p>
+            </div>
+            <div class="bg-emerald-50 dark:bg-emerald-900/20 p-4 rounded-lg border border-emerald-200 dark:border-emerald-700">
+              <h4 class="font-bold text-emerald-700 dark:text-emerald-400 mb-2">Context Engineering</h4>
+              <p class="text-sm text-neutral-600 dark:text-neutral-400">Ciencia de sistemas que fornecem info certa, no momento certo.</p>
+            </div>
+          </div>
+
+          <div class="bg-blue-50 dark:bg-blue-900/20 p-4 rounded-lg border-l-4 border-blue-500">
+            <h4 class="font-bold text-blue-700 dark:text-blue-400 mb-2">Estrutura do Prompt</h4>
+            <p class="text-sm text-neutral-700 dark:text-neutral-300">Papel + Objetivo + Contexto + Restricoes + Formato</p>
+          </div>
+        </div>
+
+        <div class="mt-6 text-center">
+          <a href="conteudo/modulo3-context.html" class="inline-flex items-center px-6 py-3 bg-emerald-500 text-white rounded-lg font-semibold hover:bg-emerald-600 transition-colors">
+            Ver Conteudo Completo
+            <svg class="w-4 h-4 ml-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"></path>
+            </svg>
+          </a>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Modal Modulo 4 -->
+  <div id="modal-m4" class="modal">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h2 class="text-2xl font-bold text-neutral-900 dark:text-neutral-100">04 - Memoria e Seguranca</h2>
+        <button class="close-modal" onclick="closeModal('modal-m4')">&times;</button>
+      </div>
+      <div class="modal-body">
+        <div class="mb-6">
+          <p class="text-lg text-neutral-700 dark:text-neutral-300 mb-4">Os pilares da confianca: RAG para memoria externa e framework de seguranca.</p>
+          <div class="flex gap-3 flex-wrap">
+            <span class="px-3 py-1 bg-emerald-100 dark:bg-emerald-900/30 text-emerald-700 dark:text-emerald-400 rounded-full text-sm font-semibold">4 topicos</span>
+            <span class="px-3 py-1 bg-emerald-100 dark:bg-emerald-900/30 text-emerald-700 dark:text-emerald-400 rounded-full text-sm font-semibold">Seguranca</span>
+          </div>
+        </div>
+
+        <div class="space-y-4">
+          <div class="bg-purple-50 dark:bg-purple-900/20 p-4 rounded-lg border-l-4 border-purple-500">
+            <h4 class="font-bold text-purple-700 dark:text-purple-400 mb-2">RAG - Retrieval-Augmented Generation</h4>
+            <p class="text-sm text-neutral-700 dark:text-neutral-300">Tecnica para dar "memoria externa" a IA. Ela consulta uma base de conhecimento ANTES de responder.</p>
+          </div>
+
+          <div class="bg-red-50 dark:bg-red-900/20 p-4 rounded-lg border-l-4 border-red-500">
+            <h4 class="font-bold text-red-700 dark:text-red-400 mb-2">Checklist de Qualidade</h4>
+            <ul class="text-sm text-neutral-700 dark:text-neutral-300 space-y-1">
+              <li>* Envolve dados sensiveis?</li>
+              <li>* Precisa validacao humana?</li>
+              <li>* Fonte e confiavel?</li>
+              <li>* Qual impacto se errar?</li>
+              <li>* Alinhado com tom da marca?</li>
+            </ul>
+          </div>
+        </div>
+
+        <div class="mt-6 text-center">
+          <a href="conteudo/modulo4-memoria.html" class="inline-flex items-center px-6 py-3 bg-emerald-500 text-white rounded-lg font-semibold hover:bg-emerald-600 transition-colors">
+            Ver Conteudo Completo
+            <svg class="w-4 h-4 ml-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"></path>
+            </svg>
+          </a>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Footer -->
+  <footer class="bg-neutral-100 dark:bg-neutral-800 border-t border-neutral-200 dark:border-neutral-700 py-8 mt-12">
+    <div class="max-w-4xl mx-auto px-4 text-center">
+      <p class="text-neutral-500 dark:text-neutral-400 text-sm">
+        FIA 2026 - Trilha 1: Introducao - Modulos
+      </p>
+      <p class="text-neutral-400 dark:text-neutral-500 text-xs mt-2"><a href="https://inema.club" target="_blank" class="text-sky-400 hover:text-sky-300 transition-colors">inema.club</a></p>
+    </div>
+  </footer>
+
+  <!-- JavaScript -->
+  <script>
+    // Theme Toggle
+    const themeToggleBtn = document.getElementById('theme-toggle');
+    const themeToggleDarkIcon = document.getElementById('theme-toggle-dark-icon');
+    const themeToggleLightIcon = document.getElementById('theme-toggle-light-icon');
+
+    if (localStorage.getItem('color-theme') === 'light' ||
+        (!('color-theme' in localStorage) && !window.matchMedia('(prefers-color-scheme: dark)').matches)) {
+      document.documentElement.classList.remove('dark');
+      themeToggleDarkIcon.classList.remove('hidden');
+    } else {
+      document.documentElement.classList.add('dark');
+      themeToggleLightIcon.classList.remove('hidden');
+    }
+
+    themeToggleBtn.addEventListener('click', function() {
+      themeToggleDarkIcon.classList.toggle('hidden');
+      themeToggleLightIcon.classList.toggle('hidden');
+      if (document.documentElement.classList.contains('dark')) {
+        document.documentElement.classList.remove('dark');
+        localStorage.setItem('color-theme', 'light');
+      } else {
+        document.documentElement.classList.add('dark');
+        localStorage.setItem('color-theme', 'dark');
+      }
+    });
+
+    // Mobile Menu Toggle
+    const mobileMenuBtn = document.getElementById('mobile-menu-btn');
+    const mobileMenu = document.getElementById('mobile-menu');
+    const themeToggleMobile = document.getElementById('theme-toggle-mobile');
+
+    if (mobileMenuBtn && mobileMenu) {
+      mobileMenuBtn.addEventListener('click', function() {
+        mobileMenu.classList.toggle('hidden');
+      });
+    }
+
+    if (themeToggleMobile) {
+      themeToggleMobile.addEventListener('click', function() {
+        if (document.documentElement.classList.contains('dark')) {
+          document.documentElement.classList.remove('dark');
+          localStorage.setItem('color-theme', 'light');
+        } else {
+          document.documentElement.classList.add('dark');
+          localStorage.setItem('color-theme', 'dark');
+        }
+      });
+    }
+
+    // Topic Expansion (Accordion)
+    document.addEventListener('click', function(e) {
+      const topicButton = e.target.closest('.topic-button');
+      if (topicButton) {
+        const topicItem = topicButton.closest('.topic-item');
+        const content = topicItem.querySelector('.topic-content');
+        const arrow = topicButton.querySelector('.topic-arrow');
+        const moduleCard = topicItem.closest('.module-card');
+
+        // Close other topics in same module
+        moduleCard.querySelectorAll('.topic-content').forEach(c => {
+          if (c !== content) {
+            c.classList.add('hidden');
+          }
+        });
+        moduleCard.querySelectorAll('.topic-arrow').forEach(a => {
+          if (a !== arrow) {
+            a.classList.remove('rotate-180');
+          }
+        });
+
+        // Toggle current
+        content.classList.toggle('hidden');
+        arrow.classList.toggle('rotate-180');
+      }
+    });
+
+    // Modal Functions
+    function openModal(modalId) {
+      document.getElementById(modalId).classList.add('active');
+      document.body.style.overflow = 'hidden';
+    }
+
+    function closeModal(modalId) {
+      document.getElementById(modalId).classList.remove('active');
+      document.body.style.overflow = 'auto';
+    }
+
+    // Close modal on backdrop click
+    document.querySelectorAll('.modal').forEach(modal => {
+      modal.addEventListener('click', function(e) {
+        if (e.target === this) {
+          this.classList.remove('active');
+          document.body.style.overflow = 'auto';
+        }
+      });
+    });
+
+    // Close modal on ESC
+    document.addEventListener('keydown', function(e) {
+      if (e.key === 'Escape') {
+        document.querySelectorAll('.modal.active').forEach(modal => {
+          modal.classList.remove('active');
+          document.body.style.overflow = 'auto';
+        });
+      }
+    });
+  </script>
+</body>
+</html>

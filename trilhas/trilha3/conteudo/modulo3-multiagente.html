@@ -1,0 +1,482 @@
+<!DOCTYPE html>
+<html lang="pt-BR" class="dark">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Modulo 3: Orquestracao Multiagente | FIA 2026</title>
+  <meta name="description" content="Orquestracao Multiagente - Quando varios agentes trabalham juntos para resolver problemas complexos.">
+
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script>
+    tailwind.config = {
+      darkMode: 'class',
+      theme: {
+        extend: {
+          colors: {
+            primary: '#8B5CF6',
+            accent: '#A78BFA'
+          }
+        }
+      }
+    }
+  </script>
+
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+
+  <style>
+    body { font-family: 'Inter', sans-serif; }
+    .prose h2 { margin-top: 2rem; margin-bottom: 1rem; }
+    .prose h3 { margin-top: 1.5rem; margin-bottom: 0.75rem; }
+    .prose p { margin-bottom: 1rem; }
+    .prose ul { margin-bottom: 1rem; padding-left: 1.5rem; }
+    .prose li { margin-bottom: 0.5rem; }
+  </style>
+</head>
+<body class="bg-neutral-50 dark:bg-neutral-900 text-neutral-900 dark:text-neutral-100 min-h-screen">
+
+  <!-- Navegacao -->
+  <nav class="sticky top-0 z-50 bg-white/95 dark:bg-neutral-900/95 backdrop-blur-sm border-b border-neutral-200 dark:border-neutral-700">
+    <div class="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8">
+      <div class="flex justify-between items-center h-16">
+        <a href="../modulos.html" class="flex items-center space-x-2 text-neutral-600 dark:text-neutral-400 hover:text-primary transition-colors">
+          <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 19l-7-7 7-7"></path>
+          </svg>
+          <span>Voltar para Modulos</span>
+        </a>
+        <div class="flex items-center space-x-4">
+          <span class="text-purple-500 font-semibold hidden sm:block">Modulo 03</span>
+          <a href="https://inema.club" target="_blank" class="text-xs text-sky-500 hover:text-sky-400 transition-colors hidden sm:block">inema.club</a>
+          <button id="theme-toggle" class="p-2 rounded-lg bg-neutral-100 dark:bg-neutral-700 hover:bg-neutral-200 dark:hover:bg-neutral-600 transition-colors">
+            <svg id="theme-toggle-dark-icon" class="hidden w-5 h-5 text-neutral-700" fill="currentColor" viewBox="0 0 20 20">
+              <path d="M17.293 13.293A8 8 0 016.707 2.707a8.001 8.001 0 1010.586 10.586z"></path>
+            </svg>
+            <svg id="theme-toggle-light-icon" class="hidden w-5 h-5 text-yellow-400" fill="currentColor" viewBox="0 0 20 20">
+              <path d="M10 2a1 1 0 011 1v1a1 1 0 11-2 0V3a1 1 0 011-1zm4 8a4 4 0 11-8 0 4 4 0 018 0zm-.464 4.95l.707.707a1 1 0 001.414-1.414l-.707-.707a1 1 0 00-1.414 1.414zm2.12-10.607a1 1 0 010 1.414l-.706.707a1 1 0 11-1.414-1.414l.707-.707a1 1 0 011.414 0zM17 11a1 1 0 100-2h-1a1 1 0 100 2h1zm-7 4a1 1 0 011 1v1a1 1 0 11-2 0v-1a1 1 0 011-1zM5.05 6.464A1 1 0 106.465 5.05l-.708-.707a1 1 0 00-1.414 1.414l.707.707zm1.414 8.486l-.707.707a1 1 0 01-1.414-1.414l.707-.707a1 1 0 011.414 1.414zM4 11a1 1 0 100-2H3a1 1 0 000 2h1z" fill-rule="evenodd" clip-rule="evenodd"></path>
+            </svg>
+          </button>
+        </div>
+      </div>
+    </div>
+  </nav>
+
+  <!-- Main Content -->
+  <main class="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 py-12">
+
+    <!-- Header -->
+    <div class="mb-12">
+      <div class="flex items-center gap-4 mb-6">
+        <div class="w-16 h-16 bg-purple-500 rounded-2xl flex items-center justify-center text-white font-bold text-2xl shadow-lg">03</div>
+        <div>
+          <span class="text-purple-500 font-semibold text-sm">TRILHA 3 - AUTOMACAO AVANCADA</span>
+          <h1 class="text-3xl sm:text-4xl font-bold">Orquestracao Multiagente</h1>
+        </div>
+      </div>
+      <p class="text-xl text-neutral-600 dark:text-neutral-400">Quando varios agentes especializados trabalham juntos de forma coordenada para resolver problemas complexos.</p>
+    </div>
+
+    <!-- Content -->
+    <article class="prose prose-lg dark:prose-invert max-w-none">
+
+      <!-- Intro Box -->
+      <div class="bg-purple-50 dark:bg-purple-900/20 p-6 rounded-2xl border border-purple-200 dark:border-purple-800 mb-8">
+        <p class="text-lg text-neutral-700 dark:text-neutral-300 m-0">
+          Um unico agente pode resolver tarefas especificas, mas problemas realmente complexos exigem <strong>multiplos agentes especializados</strong> trabalhando em conjunto. E como montar uma equipe: cada agente tem uma especialidade e um papel claro. A orquestracao coordena quem faz o que e em qual ordem.
+        </p>
+      </div>
+
+      <!-- Por que Multiagente -->
+      <section class="mb-10">
+        <h2 class="text-2xl font-bold text-neutral-900 dark:text-neutral-100 flex items-center">
+          <span class="w-8 h-8 bg-purple-500 rounded-lg flex items-center justify-center text-white text-sm font-bold mr-3">1</span>
+          Por que Usar Multiplos Agentes?
+        </h2>
+
+        <div class="bg-white dark:bg-neutral-800 p-6 rounded-xl border border-neutral-200 dark:border-neutral-700 shadow-sm">
+          <div class="bg-purple-100 dark:bg-purple-900/30 p-4 rounded-lg mb-4">
+            <p class="font-semibold text-purple-700 dark:text-purple-400 m-0">Conceito-chave:</p>
+            <p class="text-neutral-700 dark:text-neutral-300 m-0 mt-2">Dividir para conquistar. Cada agente e otimizado para uma tarefa especifica, tornando o sistema mais robusto, escalavel e facil de debugar do que um "super-agente" que faz tudo.</p>
+          </div>
+
+          <p class="text-neutral-600 dark:text-neutral-400 mb-4"><strong>Vantagens do modelo multiagente:</strong></p>
+
+          <div class="space-y-3">
+            <div class="flex items-center">
+              <svg class="w-5 h-5 text-emerald-500 mr-3 flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"></path>
+              </svg>
+              <p class="text-neutral-700 dark:text-neutral-300 m-0"><strong>Especializacao:</strong> Cada agente e expert no que faz (um analisa, outro escreve, outro verifica)</p>
+            </div>
+            <div class="flex items-center">
+              <svg class="w-5 h-5 text-emerald-500 mr-3 flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"></path>
+              </svg>
+              <p class="text-neutral-700 dark:text-neutral-300 m-0"><strong>Escalabilidade:</strong> Adicione novos agentes sem quebrar o sistema existente</p>
+            </div>
+            <div class="flex items-center">
+              <svg class="w-5 h-5 text-emerald-500 mr-3 flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"></path>
+              </svg>
+              <p class="text-neutral-700 dark:text-neutral-300 m-0"><strong>Debugabilidade:</strong> Se algo falha, voce sabe exatamente qual agente causou o problema</p>
+            </div>
+            <div class="flex items-center">
+              <svg class="w-5 h-5 text-emerald-500 mr-3 flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"></path>
+              </svg>
+              <p class="text-neutral-700 dark:text-neutral-300 m-0"><strong>Paralelizacao:</strong> Varios agentes podem trabalhar simultaneamente em partes diferentes</p>
+            </div>
+            <div class="flex items-center">
+              <svg class="w-5 h-5 text-emerald-500 mr-3 flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"></path>
+              </svg>
+              <p class="text-neutral-700 dark:text-neutral-300 m-0"><strong>Qualidade:</strong> Um agente pode revisar o trabalho de outro (QA automatico)</p>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- Padrao Manager-Workers -->
+      <section class="mb-10">
+        <h2 class="text-2xl font-bold text-neutral-900 dark:text-neutral-100 flex items-center">
+          <span class="w-8 h-8 bg-purple-500 rounded-lg flex items-center justify-center text-white text-sm font-bold mr-3">2</span>
+          Padrao Manager → Workers
+        </h2>
+
+        <div class="bg-white dark:bg-neutral-800 p-6 rounded-xl border border-neutral-200 dark:border-neutral-700 shadow-sm mb-6">
+          <div class="bg-blue-100 dark:bg-blue-900/30 p-4 rounded-lg mb-4">
+            <p class="font-semibold text-blue-700 dark:text-blue-400 m-0">Arquitetura mais comum:</p>
+            <p class="text-neutral-700 dark:text-neutral-300 m-0 mt-2">Um <strong>agente gerente</strong> coordena varios <strong>agentes trabalhadores</strong>. O gerente entende a tarefa completa, divide em subtarefas e delega para os trabalhadores especializados.</p>
+          </div>
+
+          <p class="text-neutral-600 dark:text-neutral-400 mb-4"><strong>Exemplo pratico: Sistema de Criacao de Conteudo</strong></p>
+
+          <div class="space-y-4">
+            <div class="bg-purple-50 dark:bg-purple-900/20 p-4 rounded-lg">
+              <h4 class="font-bold text-purple-700 dark:text-purple-400 mb-2">Agente Gerente (Manager)</h4>
+              <p class="text-neutral-700 dark:text-neutral-300 text-sm m-0">Recebe: "Criar post de blog sobre IA para iniciantes"</p>
+              <p class="text-neutral-700 dark:text-neutral-300 text-sm m-0 mt-2">Planeja: "Vou pedir ao Pesquisador para buscar informacoes, depois ao Escritor para redigir, depois ao Revisor para checar qualidade, e finalmente ao Formatador para preparar para publicacao."</p>
+            </div>
+
+            <div class="grid gap-3">
+              <div class="flex items-start">
+                <div class="w-10 h-10 bg-blue-100 dark:bg-blue-900/30 rounded-lg flex items-center justify-center mr-3 flex-shrink-0">
+                  <span class="font-bold text-blue-600 dark:text-blue-400 text-sm">A1</span>
+                </div>
+                <div>
+                  <h5 class="font-semibold text-neutral-900 dark:text-neutral-100">Agente Pesquisador</h5>
+                  <p class="text-neutral-600 dark:text-neutral-400 text-sm m-0">Busca informacoes relevantes em vector DB, APIs, web. Retorna insights estruturados.</p>
+                </div>
+              </div>
+
+              <div class="flex items-start">
+                <div class="w-10 h-10 bg-indigo-100 dark:bg-indigo-900/30 rounded-lg flex items-center justify-center mr-3 flex-shrink-0">
+                  <span class="font-bold text-indigo-600 dark:text-indigo-400 text-sm">A2</span>
+                </div>
+                <div>
+                  <h5 class="font-semibold text-neutral-900 dark:text-neutral-100">Agente Escritor</h5>
+                  <p class="text-neutral-600 dark:text-neutral-400 text-sm m-0">Recebe os insights e redige o conteudo seguindo diretrizes de tom, tamanho e estrutura.</p>
+                </div>
+              </div>
+
+              <div class="flex items-start">
+                <div class="w-10 h-10 bg-violet-100 dark:bg-violet-900/30 rounded-lg flex items-center justify-center mr-3 flex-shrink-0">
+                  <span class="font-bold text-violet-600 dark:text-violet-400 text-sm">A3</span>
+                </div>
+                <div>
+                  <h5 class="font-semibold text-neutral-900 dark:text-neutral-100">Agente Revisor (QA)</h5>
+                  <p class="text-neutral-600 dark:text-neutral-400 text-sm m-0">Verifica factualidade, clareza, tom e coerencia. Pode rejeitar e pedir reescrita.</p>
+                </div>
+              </div>
+
+              <div class="flex items-start">
+                <div class="w-10 h-10 bg-purple-100 dark:bg-purple-900/30 rounded-lg flex items-center justify-center mr-3 flex-shrink-0">
+                  <span class="font-bold text-purple-600 dark:text-purple-400 text-sm">A4</span>
+                </div>
+                <div>
+                  <h5 class="font-semibold text-neutral-900 dark:text-neutral-100">Agente Formatador</h5>
+                  <p class="text-neutral-600 dark:text-neutral-400 text-sm m-0">Converte para HTML/Markdown, adiciona meta tags, otimiza para SEO, prepara para CMS.</p>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- Agente Verificador -->
+      <section class="mb-10">
+        <h2 class="text-2xl font-bold text-neutral-900 dark:text-neutral-100 flex items-center">
+          <span class="w-8 h-8 bg-purple-500 rounded-lg flex items-center justify-center text-white text-sm font-bold mr-3">3</span>
+          Agente Verificador (QA Agent)
+        </h2>
+
+        <div class="bg-white dark:bg-neutral-800 p-6 rounded-xl border border-neutral-200 dark:border-neutral-700 shadow-sm">
+          <div class="bg-orange-100 dark:bg-orange-900/30 p-4 rounded-lg mb-4">
+            <p class="font-semibold text-orange-700 dark:text-orange-400 m-0">Funcao Critica:</p>
+            <p class="text-neutral-700 dark:text-neutral-300 m-0 mt-2">O agente verificador atua como controle de qualidade. Ele <strong>nao executa a tarefa principal</strong>, mas verifica se foi bem feita. Se encontrar problemas, retorna feedback para correcao.</p>
+          </div>
+
+          <p class="text-neutral-600 dark:text-neutral-400 mb-4"><strong>Criterios que um QA Agent pode verificar:</strong></p>
+
+          <div class="space-y-3">
+            <div class="flex items-center">
+              <svg class="w-5 h-5 text-orange-500 mr-3 flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z"></path>
+              </svg>
+              <p class="text-neutral-700 dark:text-neutral-300 m-0"><strong>Factualidade:</strong> As informacoes estao corretas?</p>
+            </div>
+            <div class="flex items-center">
+              <svg class="w-5 h-5 text-orange-500 mr-3 flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z"></path>
+              </svg>
+              <p class="text-neutral-700 dark:text-neutral-300 m-0"><strong>Completude:</strong> Todos os itens solicitados foram entregues?</p>
+            </div>
+            <div class="flex items-center">
+              <svg class="w-5 h-5 text-orange-500 mr-3 flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z"></path>
+              </svg>
+              <p class="text-neutral-700 dark:text-neutral-300 m-0"><strong>Conformidade:</strong> Segue as diretrizes da empresa (tom, formatacao, compliance)?</p>
+            </div>
+            <div class="flex items-center">
+              <svg class="w-5 h-5 text-orange-500 mr-3 flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z"></path>
+              </svg>
+              <p class="text-neutral-700 dark:text-neutral-300 m-0"><strong>Logica:</strong> A resposta faz sentido? Ha contradicoes?</p>
+            </div>
+            <div class="flex items-center">
+              <svg class="w-5 h-5 text-orange-500 mr-3 flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z"></path>
+              </svg>
+              <p class="text-neutral-700 dark:text-neutral-300 m-0"><strong>Seguranca:</strong> Nao ha vazamento de dados sensiveis ou riscos de compliance?</p>
+            </div>
+          </div>
+
+          <div class="mt-4 p-4 bg-red-50 dark:bg-red-900/20 rounded-lg">
+            <p class="text-sm text-red-700 dark:text-red-400 m-0"><strong>Loop de Feedback:</strong> Se o verificador reprova, o trabalho volta para o agente responsavel com feedback especifico. Isso pode iterar ate 3-5 vezes antes de escalar para humano.</p>
+          </div>
+        </div>
+      </section>
+
+      <!-- Agente Roteador -->
+      <section class="mb-10">
+        <h2 class="text-2xl font-bold text-neutral-900 dark:text-neutral-100 flex items-center">
+          <span class="w-8 h-8 bg-purple-500 rounded-lg flex items-center justify-center text-white text-sm font-bold mr-3">4</span>
+          Agente Roteador (Router Agent)
+        </h2>
+
+        <div class="bg-white dark:bg-neutral-800 p-6 rounded-xl border border-neutral-200 dark:border-neutral-700 shadow-sm">
+          <div class="bg-teal-100 dark:bg-teal-900/30 p-4 rounded-lg mb-4">
+            <p class="font-semibold text-teal-700 dark:text-teal-400 m-0">Funcao:</p>
+            <p class="text-neutral-700 dark:text-neutral-300 m-0 mt-2">O agente roteador analisa a entrada e decide <strong>para qual agente especializado</strong> ela deve ser enviada. E como um triador inteligente que classifica e encaminha.</p>
+          </div>
+
+          <p class="text-neutral-600 dark:text-neutral-400 mb-4"><strong>Exemplo pratico: Sistema de Atendimento ao Cliente</strong></p>
+
+          <div class="bg-neutral-50 dark:bg-neutral-700/50 p-4 rounded-lg mb-4">
+            <p class="text-sm text-neutral-600 dark:text-neutral-400 m-0 mb-2"><strong>Cliente envia:</strong> "Meu pedido 12345 nao chegou e quero cancelar"</p>
+
+            <div class="mt-3 space-y-2">
+              <div class="flex items-start">
+                <span class="text-teal-600 dark:text-teal-400 font-bold mr-2">→</span>
+                <p class="text-sm text-neutral-700 dark:text-neutral-300 m-0"><strong>Roteador analisa:</strong> Identifica 2 intencoes: rastreamento de pedido + cancelamento</p>
+              </div>
+              <div class="flex items-start">
+                <span class="text-teal-600 dark:text-teal-400 font-bold mr-2">→</span>
+                <p class="text-sm text-neutral-700 dark:text-neutral-300 m-0"><strong>Decisao:</strong> Encaminha para "Agente de Pedidos" (nao para FAQ ou Vendas)</p>
+              </div>
+              <div class="flex items-start">
+                <span class="text-teal-600 dark:text-teal-400 font-bold mr-2">→</span>
+                <p class="text-sm text-neutral-700 dark:text-neutral-300 m-0"><strong>Agente de Pedidos:</strong> Busca status do pedido, verifica politica de cancelamento, executa acao ou escala</p>
+              </div>
+            </div>
+          </div>
+
+          <p class="text-neutral-600 dark:text-neutral-400 mb-3"><strong>Outros agentes que poderiam existir no sistema:</strong></p>
+
+          <div class="grid gap-2">
+            <div class="flex items-center">
+              <div class="w-2 h-2 bg-teal-500 rounded-full mr-3"></div>
+              <p class="text-neutral-700 dark:text-neutral-300 text-sm m-0">Agente de FAQ (responde duvidas comuns)</p>
+            </div>
+            <div class="flex items-center">
+              <div class="w-2 h-2 bg-teal-500 rounded-full mr-3"></div>
+              <p class="text-neutral-700 dark:text-neutral-300 text-sm m-0">Agente de Vendas (oferece produtos, negocia)</p>
+            </div>
+            <div class="flex items-center">
+              <div class="w-2 h-2 bg-teal-500 rounded-full mr-3"></div>
+              <p class="text-neutral-700 dark:text-neutral-300 text-sm m-0">Agente de Suporte Tecnico (resolve problemas tecnicos)</p>
+            </div>
+            <div class="flex items-center">
+              <div class="w-2 h-2 bg-teal-500 rounded-full mr-3"></div>
+              <p class="text-neutral-700 dark:text-neutral-300 text-sm m-0">Agente de Reclamacoes (lida com insatisfacao, compensa)</p>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- Exercicio Pratico -->
+      <section class="mb-10">
+        <h2 class="text-2xl font-bold text-neutral-900 dark:text-neutral-100 flex items-center">
+          <span class="w-8 h-8 bg-purple-500 rounded-lg flex items-center justify-center text-white text-sm font-bold mr-3">5</span>
+          Exercicio Pratico
+        </h2>
+
+        <div class="bg-gradient-to-br from-purple-500 to-violet-600 p-6 rounded-2xl text-white shadow-xl">
+          <h3 class="text-xl font-bold mb-4 text-white">Fluxo de Criacao de Proposta de Venda</h3>
+
+          <p class="mb-4 text-white/90">Desenhe o fluxo multiagente para automatizar a criacao de propostas comerciais personalizadas:</p>
+
+          <div class="space-y-4">
+            <div class="flex items-start">
+              <span class="w-8 h-8 bg-white/20 rounded-full flex items-center justify-center text-sm font-bold mr-3 flex-shrink-0">1</span>
+              <div>
+                <p class="m-0 font-semibold">Agente Gerente</p>
+                <p class="text-sm text-white/80 m-0 mt-1">Qual e a missao dele? Coordenar todo o processo de criacao da proposta.</p>
+              </div>
+            </div>
+
+            <div class="flex items-start">
+              <span class="w-8 h-8 bg-white/20 rounded-full flex items-center justify-center text-sm font-bold mr-3 flex-shrink-0">2</span>
+              <div>
+                <p class="m-0 font-semibold">Agente de Analise de Cliente</p>
+                <p class="text-sm text-white/80 m-0 mt-1">Busca informacoes sobre a empresa-alvo (CRM, LinkedIn, web). Identifica dores, orcamento, decisores.</p>
+              </div>
+            </div>
+
+            <div class="flex items-start">
+              <span class="w-8 h-8 bg-white/20 rounded-full flex items-center justify-center text-sm font-bold mr-3 flex-shrink-0">3</span>
+              <div>
+                <p class="m-0 font-semibold">Agente de Precificacao</p>
+                <p class="text-sm text-white/80 m-0 mt-1">Com base no perfil do cliente e solucao proposta, calcula preco adequado (custo base + margem + descontos estrategicos).</p>
+              </div>
+            </div>
+
+            <div class="flex items-start">
+              <span class="w-8 h-8 bg-white/20 rounded-full flex items-center justify-center text-sm font-bold mr-3 flex-shrink-0">4</span>
+              <div>
+                <p class="m-0 font-semibold">Agente Escritor de Propostas</p>
+                <p class="text-sm text-white/80 m-0 mt-1">Redige a proposta personalizada destacando como a solucao resolve as dores especificas do cliente.</p>
+              </div>
+            </div>
+
+            <div class="flex items-start">
+              <span class="w-8 h-8 bg-white/20 rounded-full flex items-center justify-center text-sm font-bold mr-3 flex-shrink-0">5</span>
+              <div>
+                <p class="m-0 font-semibold">Agente Verificador de Compliance</p>
+                <p class="text-sm text-white/80 m-0 mt-1">Verifica se a proposta segue politicas da empresa (margens minimas, clausulas obrigatorias, aprovacoes necessarias).</p>
+              </div>
+            </div>
+
+            <div class="flex items-start">
+              <span class="w-8 h-8 bg-white/20 rounded-full flex items-center justify-center text-sm font-bold mr-3 flex-shrink-0">6</span>
+              <div>
+                <p class="m-0 font-semibold">Escalacao Humana</p>
+                <p class="text-sm text-white/80 m-0 mt-1">Se proposta > R$ 100k ou cliente estrategico, escala para diretor comercial revisar antes de enviar.</p>
+              </div>
+            </div>
+          </div>
+
+          <div class="mt-6 p-4 bg-white/10 rounded-xl">
+            <p class="text-sm m-0"><strong>Tarefa:</strong> Desenhe um diagrama de fluxo mostrando como esses agentes se comunicam. Quem chama quem? Onde ha loops de feedback? Quando escala para humano?</p>
+          </div>
+        </div>
+      </section>
+
+      <!-- Resumo -->
+      <section class="mb-10">
+        <div class="bg-neutral-100 dark:bg-neutral-800 p-6 rounded-2xl">
+          <h3 class="text-xl font-bold mb-4 text-neutral-900 dark:text-neutral-100">Resumo do Modulo</h3>
+          <ul class="space-y-2 m-0 p-0 list-none">
+            <li class="flex items-center text-neutral-700 dark:text-neutral-300">
+              <svg class="w-5 h-5 text-purple-500 mr-3 flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"></path>
+              </svg>
+              Sistemas complexos exigem multiplos agentes especializados
+            </li>
+            <li class="flex items-center text-neutral-700 dark:text-neutral-300">
+              <svg class="w-5 h-5 text-purple-500 mr-3 flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"></path>
+              </svg>
+              Padrao Manager-Workers: gerente coordena, trabalhadores executam
+            </li>
+            <li class="flex items-center text-neutral-700 dark:text-neutral-300">
+              <svg class="w-5 h-5 text-purple-500 mr-3 flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"></path>
+              </svg>
+              Agente Verificador (QA) garante qualidade e pode rejeitar trabalho
+            </li>
+            <li class="flex items-center text-neutral-700 dark:text-neutral-300">
+              <svg class="w-5 h-5 text-purple-500 mr-3 flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"></path>
+              </svg>
+              Agente Roteador classifica e encaminha para especialista certo
+            </li>
+            <li class="flex items-center text-neutral-700 dark:text-neutral-300">
+              <svg class="w-5 h-5 text-purple-500 mr-3 flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"></path>
+              </svg>
+              Multiagente aumenta qualidade, escalabilidade e manutenibilidade
+            </li>
+          </ul>
+        </div>
+      </section>
+
+    </article>
+
+    <!-- Navigation -->
+    <div class="flex justify-between items-center mt-12 pt-8 border-t border-neutral-200 dark:border-neutral-700">
+      <a href="modulo2-agentes.html" class="flex items-center text-neutral-600 dark:text-neutral-400 hover:text-purple-500 transition-colors">
+        <svg class="w-5 h-5 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 19l-7-7 7-7"></path>
+        </svg>
+        Modulo Anterior
+      </a>
+      <a href="modulo4-ativo.html" class="flex items-center px-6 py-3 bg-purple-500 text-white rounded-lg font-semibold hover:bg-purple-600 transition-colors">
+        Proximo Modulo
+        <svg class="w-5 h-5 ml-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"></path>
+        </svg>
+      </a>
+    </div>
+
+  </main>
+
+  <!-- Footer -->
+  <footer class="bg-neutral-100 dark:bg-neutral-800 border-t border-neutral-200 dark:border-neutral-700 py-8 mt-12">
+    <div class="max-w-4xl mx-auto px-4 text-center">
+      <p class="text-neutral-500 dark:text-neutral-400 text-sm">
+        FIA 2026 - Trilha 3: Automacao Avancada - Modulo 3: Orquestracao Multiagente
+      </p>
+      <p class="text-neutral-400 dark:text-neutral-500 text-xs mt-2"><a href="https://inema.club" target="_blank" class="text-sky-400 hover:text-sky-300 transition-colors">inema.club</a></p>
+    </div>
+  </footer>
+
+  <!-- JavaScript -->
+  <script>
+    // Theme Toggle
+    const themeToggleBtn = document.getElementById('theme-toggle');
+    const themeToggleDarkIcon = document.getElementById('theme-toggle-dark-icon');
+    const themeToggleLightIcon = document.getElementById('theme-toggle-light-icon');
+
+    if (localStorage.getItem('color-theme') === 'light' ||
+        (!('color-theme' in localStorage) && !window.matchMedia('(prefers-color-scheme: dark)').matches)) {
+      document.documentElement.classList.remove('dark');
+      themeToggleDarkIcon.classList.remove('hidden');
+    } else {
+      document.documentElement.classList.add('dark');
+      themeToggleLightIcon.classList.remove('hidden');
+    }
+
+    themeToggleBtn.addEventListener('click', function() {
+      themeToggleDarkIcon.classList.toggle('hidden');
+      themeToggleLightIcon.classList.toggle('hidden');
+      if (document.documentElement.classList.contains('dark')) {
+        document.documentElement.classList.remove('dark');
+        localStorage.setItem('color-theme', 'light');
+      } else {
+        document.documentElement.classList.add('dark');
+        localStorage.setItem('color-theme', 'dark');
+      }
+    });
+  </script>
+</body>
+</html>

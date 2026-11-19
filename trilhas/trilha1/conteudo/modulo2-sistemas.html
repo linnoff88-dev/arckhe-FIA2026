@@ -1,0 +1,364 @@
+<!DOCTYPE html>
+<html lang="pt-BR" class="dark">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Modulo 2: Pensamento em Sistemas | FIA 2026</title>
+  <meta name="description" content="Pensamento em Sistemas - A Saida do Chat. Aprenda a pensar em fluxos e sistemas.">
+
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script>
+    tailwind.config = {
+      darkMode: 'class',
+      theme: {
+        extend: {
+          colors: {
+            primary: '#10B981',
+            accent: '#34D399'
+          }
+        }
+      }
+    }
+  </script>
+
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+
+  <style>
+    body { font-family: 'Inter', sans-serif; }
+    .prose h2 { margin-top: 2rem; margin-bottom: 1rem; }
+    .prose h3 { margin-top: 1.5rem; margin-bottom: 0.75rem; }
+    .prose p { margin-bottom: 1rem; }
+    .prose ul { margin-bottom: 1rem; padding-left: 1.5rem; }
+    .prose li { margin-bottom: 0.5rem; }
+  </style>
+</head>
+<body class="bg-neutral-50 dark:bg-neutral-900 text-neutral-900 dark:text-neutral-100 min-h-screen">
+
+  <!-- Navegacao -->
+  <nav class="sticky top-0 z-50 bg-white/95 dark:bg-neutral-900/95 backdrop-blur-sm border-b border-neutral-200 dark:border-neutral-700">
+    <div class="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8">
+      <div class="flex justify-between items-center h-16">
+        <a href="../modulos.html" class="flex items-center space-x-2 text-neutral-600 dark:text-neutral-400 hover:text-primary transition-colors">
+          <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 19l-7-7 7-7"></path>
+          </svg>
+          <span>Voltar para Modulos</span>
+        </a>
+        <div class="flex items-center space-x-4">
+          <span class="text-emerald-500 font-semibold hidden sm:block">Modulo 02</span>
+          <a href="https://inema.club" target="_blank" class="text-xs text-sky-500 hover:text-sky-400 transition-colors hidden sm:block">inema.club</a>
+          <button id="theme-toggle" class="p-2 rounded-lg bg-neutral-100 dark:bg-neutral-700 hover:bg-neutral-200 dark:hover:bg-neutral-600 transition-colors">
+            <svg id="theme-toggle-dark-icon" class="hidden w-5 h-5 text-neutral-700" fill="currentColor" viewBox="0 0 20 20">
+              <path d="M17.293 13.293A8 8 0 016.707 2.707a8.001 8.001 0 1010.586 10.586z"></path>
+            </svg>
+            <svg id="theme-toggle-light-icon" class="hidden w-5 h-5 text-yellow-400" fill="currentColor" viewBox="0 0 20 20">
+              <path d="M10 2a1 1 0 011 1v1a1 1 0 11-2 0V3a1 1 0 011-1zm4 8a4 4 0 11-8 0 4 4 0 018 0zm-.464 4.95l.707.707a1 1 0 001.414-1.414l-.707-.707a1 1 0 00-1.414 1.414zm2.12-10.607a1 1 0 010 1.414l-.706.707a1 1 0 11-1.414-1.414l.707-.707a1 1 0 011.414 0zM17 11a1 1 0 100-2h-1a1 1 0 100 2h1zm-7 4a1 1 0 011 1v1a1 1 0 11-2 0v-1a1 1 0 011-1zM5.05 6.464A1 1 0 106.465 5.05l-.708-.707a1 1 0 00-1.414 1.414l.707.707zm1.414 8.486l-.707.707a1 1 0 01-1.414-1.414l.707-.707a1 1 0 011.414 1.414zM4 11a1 1 0 100-2H3a1 1 0 000 2h1z" fill-rule="evenodd" clip-rule="evenodd"></path>
+            </svg>
+          </button>
+        </div>
+      </div>
+    </div>
+  </nav>
+
+  <!-- Main Content -->
+  <main class="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 py-12">
+
+    <!-- Header -->
+    <div class="mb-12">
+      <div class="flex items-center gap-4 mb-6">
+        <div class="w-16 h-16 bg-emerald-500 rounded-2xl flex items-center justify-center text-white font-bold text-2xl shadow-lg">02</div>
+        <div>
+          <span class="text-emerald-500 font-semibold text-sm">TRILHA 1 - INTRODUCAO</span>
+          <h1 class="text-3xl sm:text-4xl font-bold">Pensamento em Sistemas</h1>
+        </div>
+      </div>
+      <p class="text-xl text-neutral-600 dark:text-neutral-400">A Saida do "Chat" - Pare de conversar e comece a construir fluxos.</p>
+    </div>
+
+    <!-- Content -->
+    <article class="prose prose-lg dark:prose-invert max-w-none">
+
+      <!-- Intro Box -->
+      <div class="bg-emerald-50 dark:bg-emerald-900/20 p-6 rounded-2xl border border-emerald-200 dark:border-emerald-800 mb-8">
+        <p class="text-lg text-neutral-700 dark:text-neutral-300 m-0">
+          O erro mais comum de quem comeca em IA e ficar preso na interface de chat. Para automacao, precisamos pensar em <strong>fluxos e sistemas</strong>. Quase todo processo de negocio pode ser decomposto em um modelo simples, que e a base de toda automacao.
+        </p>
+      </div>
+
+      <!-- Modelo Mental -->
+      <section class="mb-10">
+        <h2 class="text-2xl font-bold text-neutral-900 dark:text-neutral-100 flex items-center">
+          <span class="w-8 h-8 bg-emerald-500 rounded-lg flex items-center justify-center text-white text-sm font-bold mr-3">1</span>
+          O Modelo Entrada-Processamento-Saida
+        </h2>
+
+        <p class="text-neutral-600 dark:text-neutral-400 mb-6">O modelo mental que usaremos em todo o curso e simples e poderoso:</p>
+
+        <!-- Visual Flow -->
+        <div class="bg-white dark:bg-neutral-800 p-6 rounded-2xl border border-neutral-200 dark:border-neutral-700 shadow-sm mb-6">
+          <div class="grid md:grid-cols-3 gap-4">
+            <div class="text-center">
+              <div class="w-20 h-20 bg-blue-100 dark:bg-blue-900/30 rounded-2xl flex items-center justify-center mx-auto mb-3">
+                <svg class="w-10 h-10 text-blue-600 dark:text-blue-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M11 16l-4-4m0 0l4-4m-4 4h14m-5 4v1a3 3 0 01-3 3H6a3 3 0 01-3-3V7a3 3 0 013-3h7a3 3 0 013 3v1"></path>
+                </svg>
+              </div>
+              <h4 class="font-bold text-blue-600 dark:text-blue-400 mb-2">ENTRADA</h4>
+              <p class="text-sm text-neutral-600 dark:text-neutral-400 m-0">O que inicia o processo?</p>
+              <p class="text-xs text-neutral-500 dark:text-neutral-500 mt-1 m-0">Email, formulario, mensagem WhatsApp</p>
+            </div>
+
+            <div class="text-center relative">
+              <div class="hidden md:block absolute top-10 -left-4 w-8">
+                <svg class="w-8 h-8 text-neutral-300 dark:text-neutral-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"></path>
+                </svg>
+              </div>
+              <div class="w-20 h-20 bg-emerald-100 dark:bg-emerald-900/30 rounded-2xl flex items-center justify-center mx-auto mb-3">
+                <svg class="w-10 h-10 text-emerald-600 dark:text-emerald-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10.325 4.317c.426-1.756 2.924-1.756 3.35 0a1.724 1.724 0 002.573 1.066c1.543-.94 3.31.826 2.37 2.37a1.724 1.724 0 001.065 2.572c1.756.426 1.756 2.924 0 3.35a1.724 1.724 0 00-1.066 2.573c.94 1.543-.826 3.31-2.37 2.37a1.724 1.724 0 00-2.572 1.065c-.426 1.756-2.924 1.756-3.35 0a1.724 1.724 0 00-2.573-1.066c-1.543.94-3.31-.826-2.37-2.37a1.724 1.724 0 00-1.065-2.572c-1.756-.426-1.756-2.924 0-3.35a1.724 1.724 0 001.066-2.573c-.94-1.543.826-3.31 2.37-2.37.996.608 2.296.07 2.572-1.065z"></path>
+                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 12a3 3 0 11-6 0 3 3 0 016 0z"></path>
+                </svg>
+              </div>
+              <h4 class="font-bold text-emerald-600 dark:text-emerald-400 mb-2">PROCESSAMENTO</h4>
+              <p class="text-sm text-neutral-600 dark:text-neutral-400 m-0">Que decisoes e transformacoes?</p>
+              <p class="text-xs text-neutral-500 dark:text-neutral-500 mt-1 m-0">Classificar, resumir, extrair dados</p>
+              <div class="hidden md:block absolute top-10 -right-4 w-8">
+                <svg class="w-8 h-8 text-neutral-300 dark:text-neutral-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"></path>
+                </svg>
+              </div>
+            </div>
+
+            <div class="text-center">
+              <div class="w-20 h-20 bg-purple-100 dark:bg-purple-900/30 rounded-2xl flex items-center justify-center mx-auto mb-3">
+                <svg class="w-10 h-10 text-purple-600 dark:text-purple-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 16l4-4m0 0l-4-4m4 4H7m6 4v1a3 3 0 01-3 3H6a3 3 0 01-3-3V7a3 3 0 013-3h4a3 3 0 013 3v1"></path>
+                </svg>
+              </div>
+              <h4 class="font-bold text-purple-600 dark:text-purple-400 mb-2">SAIDA</h4>
+              <p class="text-sm text-neutral-600 dark:text-neutral-400 m-0">Qual e o resultado final?</p>
+              <p class="text-xs text-neutral-500 dark:text-neutral-500 mt-1 m-0">Resposta enviada, tarefa criada, planilha atualizada</p>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- Mudanca de Mentalidade -->
+      <section class="mb-10">
+        <h2 class="text-2xl font-bold text-neutral-900 dark:text-neutral-100 flex items-center">
+          <span class="w-8 h-8 bg-emerald-500 rounded-lg flex items-center justify-center text-white text-sm font-bold mr-3">2</span>
+          Saindo da Mentalidade de Chat
+        </h2>
+
+        <div class="bg-gradient-to-r from-red-50 to-emerald-50 dark:from-red-900/20 dark:to-emerald-900/20 p-6 rounded-2xl mb-6">
+          <div class="grid md:grid-cols-2 gap-6">
+            <div class="text-center">
+              <div class="w-12 h-12 bg-red-200 dark:bg-red-800 rounded-full flex items-center justify-center mx-auto mb-3">
+                <svg class="w-6 h-6 text-red-600 dark:text-red-300" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"></path>
+                </svg>
+              </div>
+              <h4 class="font-bold text-red-600 dark:text-red-400 mb-2">Mentalidade de Chat</h4>
+              <p class="text-sm text-neutral-600 dark:text-neutral-400 m-0">"Vou conversar com a IA e ver o que ela me diz"</p>
+              <p class="text-xs text-neutral-500 dark:text-neutral-500 mt-2 m-0">Manual, inconsistente, demorado</p>
+            </div>
+
+            <div class="text-center">
+              <div class="w-12 h-12 bg-emerald-200 dark:bg-emerald-800 rounded-full flex items-center justify-center mx-auto mb-3">
+                <svg class="w-6 h-6 text-emerald-600 dark:text-emerald-300" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"></path>
+                </svg>
+              </div>
+              <h4 class="font-bold text-emerald-600 dark:text-emerald-400 mb-2">Mentalidade de Sistema</h4>
+              <p class="text-sm text-neutral-600 dark:text-neutral-400 m-0">"Vou desenhar um fluxo onde a IA executa uma etapa especifica"</p>
+              <p class="text-xs text-neutral-500 dark:text-neutral-500 mt-2 m-0">Automatico, consistente, escalavel</p>
+            </div>
+          </div>
+        </div>
+
+        <div class="bg-emerald-100 dark:bg-emerald-900/30 p-5 rounded-xl border-l-4 border-emerald-500">
+          <p class="font-semibold text-emerald-700 dark:text-emerald-400 m-0">Principio Norteador:</p>
+          <p class="text-neutral-700 dark:text-neutral-300 m-0 mt-2">Pare de pensar em "conversar com a IA" e comece a pensar em "desenhar um fluxo onde a IA executa uma etapa especifica".</p>
+        </div>
+      </section>
+
+      <!-- Exemplo Pratico -->
+      <section class="mb-10">
+        <h2 class="text-2xl font-bold text-neutral-900 dark:text-neutral-100 flex items-center">
+          <span class="w-8 h-8 bg-emerald-500 rounded-lg flex items-center justify-center text-white text-sm font-bold mr-3">3</span>
+          Exemplo: Resposta a Orcamentos
+        </h2>
+
+        <div class="bg-white dark:bg-neutral-800 p-6 rounded-xl border border-neutral-200 dark:border-neutral-700 shadow-sm">
+          <h4 class="font-bold text-neutral-900 dark:text-neutral-100 mb-4">Processo: Responder pedidos de orcamento</h4>
+
+          <div class="space-y-4">
+            <div class="flex items-start">
+              <div class="w-10 h-10 bg-blue-100 dark:bg-blue-900/30 rounded-lg flex items-center justify-center mr-4 flex-shrink-0">
+                <span class="font-bold text-blue-600 dark:text-blue-400">E</span>
+              </div>
+              <div>
+                <h5 class="font-semibold text-neutral-900 dark:text-neutral-100">Entrada</h5>
+                <p class="text-neutral-600 dark:text-neutral-400 m-0">Email do cliente pedindo orcamento para servico X</p>
+              </div>
+            </div>
+
+            <div class="flex items-start">
+              <div class="w-10 h-10 bg-emerald-100 dark:bg-emerald-900/30 rounded-lg flex items-center justify-center mr-4 flex-shrink-0">
+                <span class="font-bold text-emerald-600 dark:text-emerald-400">P</span>
+              </div>
+              <div>
+                <h5 class="font-semibold text-neutral-900 dark:text-neutral-100">Processamento</h5>
+                <ul class="text-neutral-600 dark:text-neutral-400 m-0 pl-4">
+                  <li>Extrair informacoes do email (servico, quantidade, prazo)</li>
+                  <li>Consultar tabela de precos</li>
+                  <li>Gerar proposta personalizada</li>
+                </ul>
+              </div>
+            </div>
+
+            <div class="flex items-start">
+              <div class="w-10 h-10 bg-purple-100 dark:bg-purple-900/30 rounded-lg flex items-center justify-center mr-4 flex-shrink-0">
+                <span class="font-bold text-purple-600 dark:text-purple-400">S</span>
+              </div>
+              <div>
+                <h5 class="font-semibold text-neutral-900 dark:text-neutral-100">Saida</h5>
+                <p class="text-neutral-600 dark:text-neutral-400 m-0">Email de resposta com orcamento formatado + registro na planilha de leads</p>
+              </div>
+            </div>
+          </div>
+
+          <div class="mt-6 p-4 bg-amber-50 dark:bg-amber-900/20 rounded-lg border-l-4 border-amber-500">
+            <p class="font-semibold text-amber-700 dark:text-amber-400 m-0">Gargalo Identificado:</p>
+            <p class="text-neutral-700 dark:text-neutral-300 m-0 mt-1">O processamento manual e lento e propenso a erros de calculo ou esquecimento de detalhes.</p>
+          </div>
+        </div>
+      </section>
+
+      <!-- Exercicio Pratico -->
+      <section class="mb-10">
+        <h2 class="text-2xl font-bold text-neutral-900 dark:text-neutral-100 flex items-center">
+          <span class="w-8 h-8 bg-emerald-500 rounded-lg flex items-center justify-center text-white text-sm font-bold mr-3">4</span>
+          Exercicio Pratico
+        </h2>
+
+        <div class="bg-gradient-to-br from-emerald-500 to-teal-600 p-6 rounded-2xl text-white shadow-xl">
+          <h3 class="text-xl font-bold mb-4 text-white">Mapeie seu proprio processo</h3>
+
+          <div class="space-y-4">
+            <div class="flex items-start">
+              <span class="w-8 h-8 bg-white/20 rounded-full flex items-center justify-center text-sm font-bold mr-3 flex-shrink-0">1</span>
+              <p class="m-0">Escolha um processo simples do seu dia a dia (ex: responder a um pedido de orcamento, agendar uma reuniao, processar um pedido).</p>
+            </div>
+
+            <div class="flex items-start">
+              <span class="w-8 h-8 bg-white/20 rounded-full flex items-center justify-center text-sm font-bold mr-3 flex-shrink-0">2</span>
+              <p class="m-0">Descreva em bullets: Qual e a <strong>Entrada</strong>? Quais sao as etapas do <strong>Processamento</strong>? Qual e a <strong>Saida</strong> esperada?</p>
+            </div>
+
+            <div class="flex items-start">
+              <span class="w-8 h-8 bg-white/20 rounded-full flex items-center justify-center text-sm font-bold mr-3 flex-shrink-0">3</span>
+              <p class="m-0">Identifique o maior <strong>Gargalo</strong>: Onde o processo e mais lento ou mais propenso a erros?</p>
+            </div>
+          </div>
+
+          <div class="mt-6 p-4 bg-white/10 rounded-xl">
+            <p class="text-sm m-0"><strong>Objetivo:</strong> Este exercicio ajuda voce a ver seu trabalho como um sistema de fluxos, preparando o terreno para automacao.</p>
+          </div>
+        </div>
+      </section>
+
+      <!-- Resumo -->
+      <section class="mb-10">
+        <div class="bg-neutral-100 dark:bg-neutral-800 p-6 rounded-2xl">
+          <h3 class="text-xl font-bold mb-4 text-neutral-900 dark:text-neutral-100">Resumo do Modulo</h3>
+          <ul class="space-y-2 m-0 p-0 list-none">
+            <li class="flex items-center text-neutral-700 dark:text-neutral-300">
+              <svg class="w-5 h-5 text-emerald-500 mr-3 flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"></path>
+              </svg>
+              Todo processo pode ser decomposto em Entrada-Processamento-Saida
+            </li>
+            <li class="flex items-center text-neutral-700 dark:text-neutral-300">
+              <svg class="w-5 h-5 text-emerald-500 mr-3 flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"></path>
+              </svg>
+              Saia da mentalidade de chat para a mentalidade de sistemas
+            </li>
+            <li class="flex items-center text-neutral-700 dark:text-neutral-300">
+              <svg class="w-5 h-5 text-emerald-500 mr-3 flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"></path>
+              </svg>
+              Identifique gargalos - onde a automacao tera maior impacto
+            </li>
+            <li class="flex items-center text-neutral-700 dark:text-neutral-300">
+              <svg class="w-5 h-5 text-emerald-500 mr-3 flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"></path>
+              </svg>
+              A IA deve executar etapas especificas, nao conversas abertas
+            </li>
+          </ul>
+        </div>
+      </section>
+
+    </article>
+
+    <!-- Navigation -->
+    <div class="flex justify-between items-center mt-12 pt-8 border-t border-neutral-200 dark:border-neutral-700">
+      <a href="modulo1-alfabetizacao.html" class="flex items-center text-neutral-600 dark:text-neutral-400 hover:text-emerald-500 transition-colors">
+        <svg class="w-5 h-5 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 19l-7-7 7-7"></path>
+        </svg>
+        Modulo Anterior
+      </a>
+      <a href="modulo3-context.html" class="flex items-center px-6 py-3 bg-emerald-500 text-white rounded-lg font-semibold hover:bg-emerald-600 transition-colors">
+        Proximo Modulo
+        <svg class="w-5 h-5 ml-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"></path>
+        </svg>
+      </a>
+    </div>
+
+  </main>
+
+  <!-- Footer -->
+  <footer class="bg-neutral-100 dark:bg-neutral-800 border-t border-neutral-200 dark:border-neutral-700 py-8 mt-12">
+    <div class="max-w-4xl mx-auto px-4 text-center">
+      <p class="text-neutral-500 dark:text-neutral-400 text-sm">
+        FIA 2026 - Trilha 1: Introducao - Modulo 2: Pensamento em Sistemas
+      </p>
+      <p class="text-neutral-400 dark:text-neutral-500 text-xs mt-2"><a href="https://inema.club" target="_blank" class="text-sky-400 hover:text-sky-300 transition-colors">inema.club</a></p>
+    </div>
+  </footer>
+
+  <!-- JavaScript -->
+  <script>
+    // Theme Toggle
+    const themeToggleBtn = document.getElementById('theme-toggle');
+    const themeToggleDarkIcon = document.getElementById('theme-toggle-dark-icon');
+    const themeToggleLightIcon = document.getElementById('theme-toggle-light-icon');
+
+    if (localStorage.getItem('color-theme') === 'light' ||
+        (!('color-theme' in localStorage) && !window.matchMedia('(prefers-color-scheme: dark)').matches)) {
+      document.documentElement.classList.remove('dark');
+      themeToggleDarkIcon.classList.remove('hidden');
+    } else {
+      document.documentElement.classList.add('dark');
+      themeToggleLightIcon.classList.remove('hidden');
+    }
+
+    themeToggleBtn.addEventListener('click', function() {
+      themeToggleDarkIcon.classList.toggle('hidden');
+      themeToggleLightIcon.classList.toggle('hidden');
+      if (document.documentElement.classList.contains('dark')) {
+        document.documentElement.classList.remove('dark');
+        localStorage.setItem('color-theme', 'light');
+      } else {
+        document.documentElement.classList.add('dark');
+        localStorage.setItem('color-theme', 'dark');
+      }
+    });
+  </script>
+</body>
+</html>

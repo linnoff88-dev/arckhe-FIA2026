@@ -1,0 +1,378 @@
+<!DOCTYPE html>
+<html lang="pt-BR" class="dark">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Modulo 1: Context Engineering na Pratica | FIA 2026</title>
+  <meta name="description" content="Context Engineering na Pratica - Aprenda a estruturar contexto global, de funcao e de tarefa.">
+
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script>
+    tailwind.config = {
+      darkMode: 'class',
+      theme: {
+        extend: {
+          colors: {
+            primary: '#3B82F6',
+            accent: '#60A5FA'
+          }
+        }
+      }
+    }
+  </script>
+
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+
+  <style>
+    body { font-family: 'Inter', sans-serif; }
+    .prose h2 { margin-top: 2rem; margin-bottom: 1rem; }
+    .prose h3 { margin-top: 1.5rem; margin-bottom: 0.75rem; }
+    .prose p { margin-bottom: 1rem; }
+    .prose ul { margin-bottom: 1rem; padding-left: 1.5rem; }
+    .prose li { margin-bottom: 0.5rem; }
+  </style>
+</head>
+<body class="bg-neutral-50 dark:bg-neutral-900 text-neutral-900 dark:text-neutral-100 min-h-screen">
+
+  <!-- Navegacao -->
+  <nav class="sticky top-0 z-50 bg-white/95 dark:bg-neutral-900/95 backdrop-blur-sm border-b border-neutral-200 dark:border-neutral-700">
+    <div class="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8">
+      <div class="flex justify-between items-center h-16">
+        <a href="../modulos.html" class="flex items-center space-x-2 text-neutral-600 dark:text-neutral-400 hover:text-primary transition-colors">
+          <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 19l-7-7 7-7"></path>
+          </svg>
+          <span>Voltar para Modulos</span>
+        </a>
+        <div class="flex items-center space-x-4">
+          <span class="text-blue-500 font-semibold hidden sm:block">Modulo 01</span>
+          <a href="https://inema.club" target="_blank" class="text-xs text-sky-500 hover:text-sky-400 transition-colors hidden sm:block">inema.club</a>
+          <button id="theme-toggle" class="p-2 rounded-lg bg-neutral-100 dark:bg-neutral-700 hover:bg-neutral-200 dark:hover:bg-neutral-600 transition-colors">
+            <svg id="theme-toggle-dark-icon" class="hidden w-5 h-5 text-neutral-700" fill="currentColor" viewBox="0 0 20 20">
+              <path d="M17.293 13.293A8 8 0 016.707 2.707a8.001 8.001 0 1010.586 10.586z"></path>
+            </svg>
+            <svg id="theme-toggle-light-icon" class="hidden w-5 h-5 text-yellow-400" fill="currentColor" viewBox="0 0 20 20">
+              <path d="M10 2a1 1 0 011 1v1a1 1 0 11-2 0V3a1 1 0 011-1zm4 8a4 4 0 11-8 0 4 4 0 018 0zm-.464 4.95l.707.707a1 1 0 001.414-1.414l-.707-.707a1 1 0 00-1.414 1.414zm2.12-10.607a1 1 0 010 1.414l-.706.707a1 1 0 11-1.414-1.414l.707-.707a1 1 0 011.414 0zM17 11a1 1 0 100-2h-1a1 1 0 100 2h1zm-7 4a1 1 0 011 1v1a1 1 0 11-2 0v-1a1 1 0 011-1zM5.05 6.464A1 1 0 106.465 5.05l-.708-.707a1 1 0 00-1.414 1.414l.707.707zm1.414 8.486l-.707.707a1 1 0 01-1.414-1.414l.707-.707a1 1 0 011.414 1.414zM4 11a1 1 0 100-2H3a1 1 0 000 2h1z" fill-rule="evenodd" clip-rule="evenodd"></path>
+            </svg>
+          </button>
+        </div>
+      </div>
+    </div>
+  </nav>
+
+  <!-- Main Content -->
+  <main class="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 py-12">
+
+    <!-- Header -->
+    <div class="mb-12">
+      <div class="flex items-center gap-4 mb-6">
+        <div class="w-16 h-16 bg-blue-500 rounded-2xl flex items-center justify-center text-white font-bold text-2xl shadow-lg">01</div>
+        <div>
+          <span class="text-blue-500 font-semibold text-sm">TRILHA 2 - IMPLEMENTACAO</span>
+          <h1 class="text-3xl sm:text-4xl font-bold">Context Engineering na Pratica</h1>
+        </div>
+      </div>
+      <p class="text-xl text-neutral-600 dark:text-neutral-400">Estruture contexto em 3 camadas: Global, Funcao e Tarefa para resultados consistentes.</p>
+    </div>
+
+    <!-- Content -->
+    <article class="prose prose-lg dark:prose-invert max-w-none">
+
+      <!-- Intro Box -->
+      <div class="bg-blue-50 dark:bg-blue-900/20 p-6 rounded-2xl border border-blue-200 dark:border-blue-800 mb-8">
+        <p class="text-lg text-neutral-700 dark:text-neutral-300 m-0">
+          Context Engineering e a arte de estruturar o contexto em camadas logicas. Em vez de jogar tudo em um prompt gigante, organizamos o contexto em tres niveis hierarquicos: <strong>Contexto Global</strong> (quem somos), <strong>Contexto de Funcao</strong> (papel da IA) e <strong>Contexto de Tarefa</strong> (objetivo imediato).
+        </p>
+      </div>
+
+      <!-- Camada 1: Contexto Global -->
+      <section class="mb-10">
+        <h2 class="text-2xl font-bold text-neutral-900 dark:text-neutral-100 flex items-center">
+          <span class="w-8 h-8 bg-blue-500 rounded-lg flex items-center justify-center text-white text-sm font-bold mr-3">1</span>
+          Contexto Global: Quem Somos
+        </h2>
+
+        <div class="bg-white dark:bg-neutral-800 p-6 rounded-xl border border-neutral-200 dark:border-neutral-700 shadow-sm">
+          <div class="bg-blue-100 dark:bg-blue-900/30 p-4 rounded-lg mb-4">
+            <p class="font-semibold text-blue-700 dark:text-blue-400 m-0">Conceito-chave:</p>
+            <p class="text-neutral-700 dark:text-neutral-300 m-0 mt-2">O Contexto Global define a identidade permanente da sua organizacao na perspectiva da IA. Inclui informacoes sobre a empresa, produtos, valores, tom de voz e diretrizes que nunca mudam.</p>
+          </div>
+
+          <p class="text-neutral-600 dark:text-neutral-400 mb-4">
+            <strong>O que incluir no Contexto Global:</strong>
+          </p>
+
+          <div class="space-y-3">
+            <div class="flex items-start">
+              <div class="w-8 h-8 bg-blue-100 dark:bg-blue-900/30 rounded-lg flex items-center justify-center mr-3 flex-shrink-0">
+                <svg class="w-4 h-4 text-blue-600 dark:text-blue-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 21V5a2 2 0 00-2-2H7a2 2 0 00-2 2v16m14 0h2m-2 0h-5m-9 0H3m2 0h5M9 7h1m-1 4h1m4-4h1m-1 4h1m-5 10v-5a1 1 0 011-1h2a1 1 0 011 1v5m-4 0h4"></path>
+                </svg>
+              </div>
+              <div>
+                <h4 class="font-semibold text-neutral-900 dark:text-neutral-100 mb-1">Identidade da Empresa</h4>
+                <p class="text-neutral-600 dark:text-neutral-400 text-sm m-0">Nome, setor, missao, valores e posicionamento de marca.</p>
+              </div>
+            </div>
+
+            <div class="flex items-start">
+              <div class="w-8 h-8 bg-blue-100 dark:bg-blue-900/30 rounded-lg flex items-center justify-center mr-3 flex-shrink-0">
+                <svg class="w-4 h-4 text-blue-600 dark:text-blue-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M20 7l-8-4-8 4m16 0l-8 4m8-4v10l-8 4m0-10L4 7m8 4v10M4 7v10l8 4"></path>
+                </svg>
+              </div>
+              <div>
+                <h4 class="font-semibold text-neutral-900 dark:text-neutral-100 mb-1">Produtos/Servicos</h4>
+                <p class="text-neutral-600 dark:text-neutral-400 text-sm m-0">Catalogo completo, diferenciais, pricing e publico-alvo.</p>
+              </div>
+            </div>
+
+            <div class="flex items-start">
+              <div class="w-8 h-8 bg-blue-100 dark:bg-blue-900/30 rounded-lg flex items-center justify-center mr-3 flex-shrink-0">
+                <svg class="w-4 h-4 text-blue-600 dark:text-blue-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M7 8h10M7 12h4m1 8l-4-4H5a2 2 0 01-2-2V6a2 2 0 012-2h14a2 2 0 012 2v8a2 2 0 01-2 2h-3l-4 4z"></path>
+                </svg>
+              </div>
+              <div>
+                <h4 class="font-semibold text-neutral-900 dark:text-neutral-100 mb-1">Tom de Voz</h4>
+                <p class="text-neutral-600 dark:text-neutral-400 text-sm m-0">Como a empresa se comunica: formal/informal, tecnico/acessivel, serio/divertido.</p>
+              </div>
+            </div>
+
+            <div class="flex items-start">
+              <div class="w-8 h-8 bg-blue-100 dark:bg-blue-900/30 rounded-lg flex items-center justify-center mr-3 flex-shrink-0">
+                <svg class="w-4 h-4 text-blue-600 dark:text-blue-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 15v2m-6 4h12a2 2 0 002-2v-6a2 2 0 00-2-2H6a2 2 0 00-2 2v6a2 2 0 002 2zm10-10V7a4 4 0 00-8 0v4h8z"></path>
+                </svg>
+              </div>
+              <div>
+                <h4 class="font-semibold text-neutral-900 dark:text-neutral-100 mb-1">Regras de Compliance</h4>
+                <p class="text-neutral-600 dark:text-neutral-400 text-sm m-0">O que a IA nunca deve fazer ou dizer (questoes legais, eticas, privacidade).</p>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- Camada 2: Contexto de Funcao -->
+      <section class="mb-10">
+        <h2 class="text-2xl font-bold text-neutral-900 dark:text-neutral-100 flex items-center">
+          <span class="w-8 h-8 bg-blue-500 rounded-lg flex items-center justify-center text-white text-sm font-bold mr-3">2</span>
+          Contexto de Funcao: Papel Especifico
+        </h2>
+
+        <div class="bg-white dark:bg-neutral-800 p-6 rounded-xl border border-neutral-200 dark:border-neutral-700 shadow-sm">
+          <p class="text-neutral-600 dark:text-neutral-400 mb-4">
+            O Contexto de Funcao define o papel especifico que a IA assume em uma automacao ou sistema. E o "chapeu" que ela veste para aquela tarefa particular.
+          </p>
+
+          <div class="grid gap-4">
+            <div class="bg-purple-50 dark:bg-purple-900/20 p-5 rounded-xl border-l-4 border-purple-500">
+              <h4 class="font-bold text-purple-700 dark:text-purple-400 mb-2">Exemplo: Assistente de Vendas</h4>
+              <p class="text-neutral-700 dark:text-neutral-300 text-sm m-0">"Voce e um assistente de vendas especializado em qualificar leads B2B. Seu objetivo e identificar se o lead tem fit com nosso ICP (Ideal Customer Profile): empresas de tecnologia com 50+ funcionarios que ja usam CRM."</p>
+            </div>
+
+            <div class="bg-green-50 dark:bg-green-900/20 p-5 rounded-xl border-l-4 border-green-500">
+              <h4 class="font-bold text-green-700 dark:text-green-400 mb-2">Exemplo: Analisador de Suporte</h4>
+              <p class="text-neutral-700 dark:text-neutral-300 text-sm m-0">"Voce e um analista de tickets de suporte. Classifique cada ticket em: BUG, DUVIDA, FEATURE REQUEST ou RECLAMACAO. Extraia o nivel de urgencia (BAIXA, MEDIA, ALTA, CRITICA) baseado em palavras-chave e tom emocional."</p>
+            </div>
+
+            <div class="bg-amber-50 dark:bg-amber-900/20 p-5 rounded-xl border-l-4 border-amber-500">
+              <h4 class="font-bold text-amber-700 dark:text-amber-400 mb-2">Exemplo: Gerador de Conteudo</h4>
+              <p class="text-neutral-700 dark:text-neutral-300 text-sm m-0">"Voce e um redator de conteudo educacional para LinkedIn. Escreva posts de 150-200 palavras que ensinem um conceito pratico sobre IA. Use linguagem acessivel, inclua um exemplo real e termine com uma pergunta para engajamento."</p>
+            </div>
+          </div>
+
+          <div class="mt-4 p-4 bg-blue-50 dark:bg-blue-900/20 rounded-lg">
+            <p class="text-sm text-neutral-700 dark:text-neutral-300 m-0"><strong>Dica:</strong> O Contexto de Funcao e reutilizavel. Uma vez definido, pode ser usado em multiplas tarefas do mesmo tipo.</p>
+          </div>
+        </div>
+      </section>
+
+      <!-- Camada 3: Contexto de Tarefa -->
+      <section class="mb-10">
+        <h2 class="text-2xl font-bold text-neutral-900 dark:text-neutral-100 flex items-center">
+          <span class="w-8 h-8 bg-blue-500 rounded-lg flex items-center justify-center text-white text-sm font-bold mr-3">3</span>
+          Contexto de Tarefa: Objetivo Imediato
+        </h2>
+
+        <div class="bg-white dark:bg-neutral-800 p-6 rounded-xl border border-neutral-200 dark:border-neutral-700 shadow-sm">
+          <p class="text-neutral-600 dark:text-neutral-400 mb-4">
+            O Contexto de Tarefa e o input especifico e unico de cada execucao. E a informacao variavel que muda a cada chamada da IA.
+          </p>
+
+          <div class="space-y-4">
+            <div class="flex items-start">
+              <div class="w-10 h-10 bg-blue-100 dark:bg-blue-900/30 rounded-lg flex items-center justify-center mr-4 flex-shrink-0">
+                <span class="font-bold text-blue-600 dark:text-blue-400">1</span>
+              </div>
+              <div>
+                <h4 class="font-semibold text-neutral-900 dark:text-neutral-100">Dados do Usuario/Cliente</h4>
+                <p class="text-neutral-600 dark:text-neutral-400 text-sm m-0">Nome, empresa, cargo, historico de interacoes, preferencias.</p>
+              </div>
+            </div>
+
+            <div class="flex items-start">
+              <div class="w-10 h-10 bg-blue-100 dark:bg-blue-900/30 rounded-lg flex items-center justify-center mr-4 flex-shrink-0">
+                <span class="font-bold text-blue-600 dark:text-blue-400">2</span>
+              </div>
+              <div>
+                <h4 class="font-semibold text-neutral-900 dark:text-neutral-100">Input Especifico</h4>
+                <p class="text-neutral-600 dark:text-neutral-400 text-sm m-0">O email recebido, o formulario preenchido, a pergunta do chat.</p>
+              </div>
+            </div>
+
+            <div class="flex items-start">
+              <div class="w-10 h-10 bg-blue-100 dark:bg-blue-900/30 rounded-lg flex items-center justify-center mr-4 flex-shrink-0">
+                <span class="font-bold text-blue-600 dark:text-blue-400">3</span>
+              </div>
+              <div>
+                <h4 class="font-semibold text-neutral-900 dark:text-neutral-100">Contexto Temporal</h4>
+                <p class="text-neutral-600 dark:text-neutral-400 text-sm m-0">Data/hora, sazonalidade, eventos relevantes acontecendo agora.</p>
+              </div>
+            </div>
+
+            <div class="flex items-start">
+              <div class="w-10 h-10 bg-blue-100 dark:bg-blue-900/30 rounded-lg flex items-center justify-center mr-4 flex-shrink-0">
+                <span class="font-bold text-blue-600 dark:text-blue-400">4</span>
+              </div>
+              <div>
+                <h4 class="font-semibold text-neutral-900 dark:text-neutral-100">Instrucoes Especificas</h4>
+                <p class="text-neutral-600 dark:text-neutral-400 text-sm m-0">O que fazer com este input especifico agora.</p>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- Exercicio Pratico -->
+      <section class="mb-10">
+        <h2 class="text-2xl font-bold text-neutral-900 dark:text-neutral-100 flex items-center">
+          <span class="w-8 h-8 bg-blue-500 rounded-lg flex items-center justify-center text-white text-sm font-bold mr-3">4</span>
+          Exercicio Pratico
+        </h2>
+
+        <div class="bg-gradient-to-br from-blue-500 to-indigo-600 p-6 rounded-2xl text-white shadow-xl">
+          <h3 class="text-xl font-bold mb-4 text-white">Crie seu CONTEXTO_GLOBAL.md</h3>
+
+          <div class="space-y-4">
+            <div class="flex items-start">
+              <span class="w-8 h-8 bg-white/20 rounded-full flex items-center justify-center text-sm font-bold mr-3 flex-shrink-0">1</span>
+              <p class="m-0">Abra um editor de texto ou notion e crie um arquivo chamado CONTEXTO_GLOBAL.md</p>
+            </div>
+
+            <div class="flex items-start">
+              <span class="w-8 h-8 bg-white/20 rounded-full flex items-center justify-center text-sm font-bold mr-3 flex-shrink-0">2</span>
+              <p class="m-0">Documente 4 secoes: (1) Identidade da Empresa, (2) Produtos/Servicos, (3) Tom de Voz, (4) Regras de Compliance</p>
+            </div>
+
+            <div class="flex items-start">
+              <span class="w-8 h-8 bg-white/20 rounded-full flex items-center justify-center text-sm font-bold mr-3 flex-shrink-0">3</span>
+              <p class="m-0">Seja especifico e objetivo. Use bullets, nao paragrafo. A IA precisa scanear rapido.</p>
+            </div>
+
+            <div class="flex items-start">
+              <span class="w-8 h-8 bg-white/20 rounded-full flex items-center justify-center text-sm font-bold mr-3 flex-shrink-0">4</span>
+              <p class="m-0">Teste: Cole esse contexto no ChatGPT/Claude e peca para ele responder uma pergunta de cliente. Veja se a resposta reflete sua marca.</p>
+            </div>
+          </div>
+
+          <div class="mt-6 p-4 bg-white/10 rounded-xl">
+            <p class="text-sm m-0"><strong>Objetivo:</strong> Este arquivo sera a base de todas as suas automacoes. Voce vai incluir ele em cada prompt master que criar.</p>
+          </div>
+        </div>
+      </section>
+
+      <!-- Resumo -->
+      <section class="mb-10">
+        <div class="bg-neutral-100 dark:bg-neutral-800 p-6 rounded-2xl">
+          <h3 class="text-xl font-bold mb-4 text-neutral-900 dark:text-neutral-100">Resumo do Modulo</h3>
+          <ul class="space-y-2 m-0 p-0 list-none">
+            <li class="flex items-center text-neutral-700 dark:text-neutral-300">
+              <svg class="w-5 h-5 text-blue-500 mr-3 flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"></path>
+              </svg>
+              Contexto Global: identidade permanente da empresa
+            </li>
+            <li class="flex items-center text-neutral-700 dark:text-neutral-300">
+              <svg class="w-5 h-5 text-blue-500 mr-3 flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"></path>
+              </svg>
+              Contexto de Funcao: papel especifico da IA na automacao
+            </li>
+            <li class="flex items-center text-neutral-700 dark:text-neutral-300">
+              <svg class="w-5 h-5 text-blue-500 mr-3 flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"></path>
+              </svg>
+              Contexto de Tarefa: input especifico de cada execucao
+            </li>
+            <li class="flex items-center text-neutral-700 dark:text-neutral-300">
+              <svg class="w-5 h-5 text-blue-500 mr-3 flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"></path>
+              </svg>
+              CONTEXTO_GLOBAL.md e a fundacao de todas as automacoes
+            </li>
+          </ul>
+        </div>
+      </section>
+
+    </article>
+
+    <!-- Navigation -->
+    <div class="flex justify-between items-center mt-12 pt-8 border-t border-neutral-200 dark:border-neutral-700">
+      <a href="../modulos.html" class="flex items-center text-neutral-600 dark:text-neutral-400 hover:text-blue-500 transition-colors">
+        <svg class="w-5 h-5 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 19l-7-7 7-7"></path>
+        </svg>
+        Voltar para Modulos
+      </a>
+      <a href="modulo2-rag-pratico.html" class="flex items-center px-6 py-3 bg-blue-500 text-white rounded-lg font-semibold hover:bg-blue-600 transition-colors">
+        Proximo Modulo
+        <svg class="w-5 h-5 ml-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"></path>
+        </svg>
+      </a>
+    </div>
+
+  </main>
+
+  <!-- Footer -->
+  <footer class="bg-neutral-100 dark:bg-neutral-800 border-t border-neutral-200 dark:border-neutral-700 py-8 mt-12">
+    <div class="max-w-4xl mx-auto px-4 text-center">
+      <p class="text-neutral-500 dark:text-neutral-400 text-sm">
+        FIA 2026 - Trilha 2: Implementacao - Modulo 1: Context Engineering na Pratica
+      </p>
+      <p class="text-neutral-400 dark:text-neutral-500 text-xs mt-2"><a href="https://inema.club" target="_blank" class="text-sky-400 hover:text-sky-300 transition-colors">inema.club</a></p>
+    </div>
+  </footer>
+
+  <!-- JavaScript -->
+  <script>
+    // Theme Toggle
+    const themeToggleBtn = document.getElementById('theme-toggle');
+    const themeToggleDarkIcon = document.getElementById('theme-toggle-dark-icon');
+    const themeToggleLightIcon = document.getElementById('theme-toggle-light-icon');
+
+    if (localStorage.getItem('color-theme') === 'light' ||
+        (!('color-theme' in localStorage) && !window.matchMedia('(prefers-color-scheme: dark)').matches)) {
+      document.documentElement.classList.remove('dark');
+      themeToggleDarkIcon.classList.remove('hidden');
+    } else {
+      document.documentElement.classList.add('dark');
+      themeToggleLightIcon.classList.remove('hidden');
+    }
+
+    themeToggleBtn.addEventListener('click', function() {
+      themeToggleDarkIcon.classList.toggle('hidden');
+      themeToggleLightIcon.classList.toggle('hidden');
+      if (document.documentElement.classList.contains('dark')) {
+        document.documentElement.classList.remove('dark');
+        localStorage.setItem('color-theme', 'light');
+      } else {
+        document.documentElement.classList.add('dark');
+        localStorage.setItem('color-theme', 'dark');
+      }
+    });
+  </script>
+</body>
+</html>
